@@ -1,0 +1,84 @@
+# Общие системные файлы
+.DS_Store
+*.swp
+*.swo
+*~
+Thumbs.db
+
+# Логи и временные файлы
+*.log
+*.tmp
+*.temp
+
+# IDE и редакторы
+.idea/
+.vscode/
+*.code-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Зависимости
+node_modules/
+**/node_modules/
+bower_components/
+jspm_packages/
+.pnp
+.pnp.js
+
+# Кеш и артефакты сборки
+.cache/
+.turbo/
+dist/
+**/dist/
+build/
+**/build/
+out/
+.next/
+.nuxt/
+
+# Файлы окружения
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env*.local
+
+# Vite специфика
+*.env
+.history/
+
+# Тестовые покрытия
+coverage/
+.nyc_output/
+
+# Отладочные файлы
+debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Системные зависимости
+jspm_packages/
+
+# Опционально для бэкенда (если Node.js)
+# Раскомментируйте если нужно
+# server/node_modules/
+# server/dist/
+
+# Опционально для TypeScript
+*.tsbuildinfo
+
+# Пакетные менеджеры
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Опционально: если используете pnpm
+.pnpm-store/
+
+# Для React/Vite
+**/public/env.js
