@@ -1,0 +1,15 @@
+export const PATHS = {
+    HOME: '/',
+    PROJECTS: '/projects',
+    ARRIVED: '/arrived',
+    DROPPED: '/dropped',
+    VACANCY: '/vacancy',
+    NEWS: '/news',
+    TAKE_CAT: '/take-cat',
+    HISTORY: 'history',
+    ARTICLES: '/articles',
+    HELP: '/help',
+    FAQ: '/faq',
+    ABOUT: '/about',
+    CONTACTS: '/contacts',
+};

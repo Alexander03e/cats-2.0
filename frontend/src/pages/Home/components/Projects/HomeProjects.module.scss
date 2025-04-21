@@ -1,0 +1,10 @@
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+
+    .cards {
+        display: flex;
+        gap: 20px;
+    }
+}

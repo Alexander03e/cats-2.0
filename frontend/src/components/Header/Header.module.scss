@@ -1,0 +1,36 @@
+.wrapper {
+    padding: 14px 24px;
+
+    display: grid;
+    grid-template-columns: 1fr 204px;
+    align-items: center;
+
+    background: var(--secondary-color);
+    border-radius: 40px;
+    gap: 20px;
+
+    .navigation {
+        overflow: auto;
+        display: flex;
+        align-items: center;
+        gap: 33px;
+        scrollbar-width: none;
+
+        a {
+            text-decoration: none;
+            color: var(--dark-color);
+            white-space: nowrap;
+            font-size: 16px;
+            font-weight: 400;
+            transition: 0.3s ease;
+        }
+    }
+
+    .logo {
+        margin-inline: 12px;
+    }
+
+    .headerBtn {
+        color: var(--light-text-color);
+    }
+}

@@ -1,0 +1,25 @@
+.wrapper {
+    padding-block: 50px;
+
+    .inner {
+        display: flex;
+        flex-direction: column;
+        gap: 60px;
+        align-items: center;
+
+        .title {
+            font-size: 72px;
+            font-weight: 700;
+
+            span[data-accent="true"] {
+                color: var(--accent-color)
+            }
+
+            color: var(--dark-color)
+        }
+
+        .content {
+            width: 100%;
+        }
+    }
+}

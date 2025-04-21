@@ -1,0 +1,25 @@
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+body {
+    font-family: Montserrat, sans-serif;
+    color: var(--dark-color);
+    background-color: var(--layout-color);
+}
+
+// INPUT AUTOFILL FIX
+input, textarea {
+    &:-webkit-autofill {
+        &, &:focus, &:active, &:hover {
+            color: inherit !important;
+
+            background-color: initial !important;
+            background-image: none !important;
+            box-shadow: none !important;
+
+            transition: background-color 99999s ease-in-out 0s !important;
+        }
+    }
+}
