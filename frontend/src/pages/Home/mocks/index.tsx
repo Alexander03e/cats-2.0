@@ -1,5 +1,6 @@
 import { ICatCardProps } from '@/Components/CatCard';
 import { IMediaCardProps } from '@/Components/MediaCard';
+import { ISlide } from '@/Pages/Home/components/Slider';
 
 export const mockCatCards = [
     {
@@ -37,3 +38,21 @@ export const mockNews = [
             'Семилетнюю Трейси нашли в переноске у магазина, вот так решили избавиться от чудесной кошечки. В приюте сразу разглядели в Трейси её деликатность и чуткость, бережно заботились и делали всё, чтобы малышка воспряла духом. Трейси отвечала на окружающую её любовь и стала поглядывать на гостей приюта.',
     },
 ] as IMediaCardProps[];
+
+export const mockSlides = [
+    {
+        title: 'подарите дом котику',
+        description: 'Спасая одну жизнь, \n' + 'вы спасаете целый мир!',
+        bgImage: '/images/mock-cat.png',
+    },
+    {
+        title: 'подарите дом котику',
+        description: 'Спасая одну жизнь, \n' + 'вы спасаете целый мир!',
+        bgImage: '/images/mock-cat.png',
+    },
+    {
+        title: 'подарите дом котику',
+        description: 'Спасая одну жизнь, \n' + 'вы спасаете целый мир!',
+        bgImage: '/images/mock-cat.png',
+    },
+] as ISlide[];
