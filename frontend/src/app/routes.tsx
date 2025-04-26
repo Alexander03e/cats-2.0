@@ -4,21 +4,28 @@ import { PATHS } from '@/Shared/consts';
 import { HomePage } from '@/Pages/Home';
 import { ProjectsPage } from '@/Pages/Projects';
 import { ContactsPage } from '@/Pages/Contacts';
+import { VacanciesPage } from '@/Pages/Vacancies';
+import { CatsPage } from '@/Pages/Cats';
+import { CatDetails } from '@/Pages/CatDetails';
 
 export const AppRoutes = () => {
     // Роутинг приложения
     return (
         <Routes>
             <Route element={<Layout />}>
-                <Route path={PATHS.HELP} element={<HomePage />} />
+                <Route path={PATHS.HELP} element={<div>Помощь</div>} />
                 <Route path={PATHS.HOME} element={<HomePage />} />
                 <Route path={PATHS.PROJECTS} element={<ProjectsPage />} />
                 <Route path={PATHS.ARRIVED} element={<div>Прибыло</div>} />
                 <Route path={PATHS.DROPPED} element={<div>Сброшено</div>} />
-                <Route path={PATHS.VACANCY} element={<div>Вакансии</div>} />
+                <Route path={PATHS.VACANCY} element={<VacanciesPage />} />
                 <Route path={PATHS.NEWS} element={<div>Новости</div>} />
                 <Route path={PATHS.ARTICLES} element={<div>Статьи</div>} />
                 <Route path={PATHS.CONTACTS} element={<ContactsPage />} />
+
+                {/* Коты */}
+                <Route path={PATHS.CATS} element={<CatsPage />}></Route>
+                <Route path={PATHS.CATS_DETAILS.INDEX} element={<CatDetails />} />
             </Route>
         </Routes>
     );

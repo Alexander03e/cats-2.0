@@ -1,0 +1,120 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    height: 100%;
+    padding-top: 20px;
+    //margin-top: var(--container-padding);
+    grid-template-rows: auto auto;
+}
+
+.formWrapper {
+    grid-column: 1/3;
+
+    border-radius: 40px;
+    height: 100%;
+    width: 100%;
+    border: 3px solid var(--accent-color);
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    .title {
+        color: var(--accent-color);
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 100%;
+        margin-bottom: 12px;
+        text-align: center;
+    }
+
+    .subtitle {
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 100%;
+        text-align: center;
+        margin-bottom: 38px;
+    }
+}
+
+.infoWrapper {
+    background: var(--secondary-color);
+    padding: 40px 30px;
+    border-radius: 40px;
+
+    .title {
+        color: var(--accent-color);
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.imageWrapper {
+    height: 590px;
+    overflow: hidden;
+    &:has(.onlyImage) {
+        height: 485px;
+    }
+
+    .onlyImage {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        border-radius: 40px;
+
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .arrayImage {
+        display: grid;
+        grid-template-rows: 1fr 85px;
+        gap: 20px;
+        height: 100%;
+
+        .scrollWrapper {
+            overflow: scroll;
+            scrollbar-width: none;
+        }
+
+        .mainImage {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+            overflow: hidden;
+
+            img {
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .restImages {
+            display: flex;
+            width: fit-content;
+            gap: 20px;
+
+            .imgButton {
+                width: 100px;
+                overflow: hidden;
+                height: 85px;
+
+                border-radius: 6px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+}

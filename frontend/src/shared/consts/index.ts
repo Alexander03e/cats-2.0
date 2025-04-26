@@ -12,4 +12,9 @@ export const PATHS = {
     FAQ: '/faq',
     ABOUT: '/about',
     CONTACTS: '/contacts',
+    CATS: '/cats',
+    CATS_DETAILS: {
+        INDEX: '/cats/:catId',
+        ABSOLUTE: (id: string | number) => `/cats/${id}`,
+    },
 };

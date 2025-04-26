@@ -1,7 +1,12 @@
 .layout {
     display: flex;
     flex-direction: column;
-    padding: var(--container-padding);
+    padding: var(--container-padding) var(--container-padding) 0;
     max-width: 1980px;
     margin: 0 auto;
+    height: 100vh;
+
+    .content {
+        flex: 1 0 auto;
+    }
 }

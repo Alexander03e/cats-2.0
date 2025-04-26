@@ -19,6 +19,14 @@ export const mockCatCards = [
         title: 'Кот 4',
         description: 'test test test',
     },
+    {
+        title: 'Кот 5',
+        description: 'test test test',
+    },
+    {
+        title: 'Кот 6',
+        description: 'test test test',
+    },
 ] as ICatCardProps[];
 
 export const mockNews = [
