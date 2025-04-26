@@ -16,10 +16,12 @@
     width: 100%;
     border: 3px solid var(--accent-color);
 
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+    &:not(:has(.noStyle)) {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        justify-content: center;
+    }
 
     .title {
         color: var(--accent-color);

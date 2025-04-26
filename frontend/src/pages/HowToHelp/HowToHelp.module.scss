@@ -1,0 +1,27 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+    background-color: rgba(220, 218, 255, 1);
+    padding: 32px 24px;
+    border-radius: 25px;
+    min-height: 376px;
+
+    h6 {
+        color: var(--accent-color);
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 100%;
+    }
+
+    p {
+        flex: 1 0 auto;
+    }
+}
+
+.content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+}

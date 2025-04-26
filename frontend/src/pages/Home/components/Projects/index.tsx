@@ -11,13 +11,14 @@ import { PATHS } from '@/Shared/consts';
 
 export const HomeProjects = () => {
     const title = 'Наши <span data-accent="true">проекты</span>';
-
     const navigate = useNavigate();
+
     return (
         <Section contentClass={styles.wrapper} title={title}>
             <div className={styles.cards}>
                 {map(slice(mockCatCards, 0, 3), (item, index) => (
                     <CatCard
+                        onClick={() => navigate(PATHS.PROJECTS_DETAILS.ABSOLUTE(1))}
                         bottomSlot={<Progress current={80} total={120} suffix={'₽'} />}
                         key={`project-card-${index}`}
                         {...item}

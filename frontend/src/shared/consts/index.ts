@@ -1,6 +1,5 @@
 export const PATHS = {
     HOME: '/',
-    PROJECTS: '/projects',
     ARRIVED: '/arrived',
     DROPPED: '/dropped',
     VACANCY: '/vacancy',
@@ -12,6 +11,11 @@ export const PATHS = {
     FAQ: '/faq',
     ABOUT: '/about',
     CONTACTS: '/contacts',
+    PROJECTS: '/projects',
+    PROJECTS_DETAILS: {
+        INDEX: '/projects/:projectId',
+        ABSOLUTE: (id: string | number) => `/projects/${id}`,
+    },
     CATS: '/cats',
     CATS_DETAILS: {
         INDEX: '/cats/:catId',

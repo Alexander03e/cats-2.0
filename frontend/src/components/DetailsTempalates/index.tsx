@@ -32,11 +32,15 @@ Details.Info = ({ title, children, className, ...props }: IInfoProps) => {
 interface IFormProps extends TProps {
     title?: string;
     subtitle?: string;
+    noStyle?: boolean;
 }
 
-Details.Bottom = ({ title, subtitle, children, className, ...props }: IFormProps) => {
+Details.Bottom = ({ title, noStyle, subtitle, children, className, ...props }: IFormProps) => {
     return (
-        <div className={cn(styles.formWrapper, className)} {...props}>
+        <div
+            className={cn(styles.formWrapper, className, { [styles.noStyle]: noStyle })}
+            {...props}
+        >
             <div className={styles.top}>
                 {!!title && <h6 className={styles.title}>{title}</h6>}
                 {!!subtitle && <p className={styles.subtitle}>{subtitle}</p>}

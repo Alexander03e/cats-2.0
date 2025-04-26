@@ -1,0 +1,16 @@
+.content {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+
+    .card {
+        height: 590px;
+    }
+    .cardContent {
+        padding-bottom: 24px;
+    }
+    .cardBottom {
+        padding-block: 48px 0!important;
+    }
+}

@@ -36,6 +36,8 @@ export interface ICatCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
     status?: ECatStatus;
     hoverable?: boolean;
     hoverStateRender?: ReactNode;
+    contentClass?: string;
+    bottomClass?: string;
 }
 
 export const CatCard = ({
@@ -43,10 +45,12 @@ export const CatCard = ({
     title,
     status,
     description,
+    contentClass,
     onClick,
     hoverable,
     bottomSlot,
     hoverStateRender,
+    bottomClass,
     img,
     ...props
 }: ICatCardProps) => {
@@ -75,39 +79,37 @@ export const CatCard = ({
             })}
             {...props}
         >
-            <div className={styles.container}>
-                <motion.div
-                    className={styles.inner}
-                    initial={{ x: 0 }}
-                    animate={mainControls}
-                    transition={{ duration: 0.2, ease: 'easeInOut' }}
-                >
-                    <div className={styles.img}>
-                        <img src={getImage(img)} />
+            <motion.div
+                className={styles.inner}
+                initial={{ x: 0 }}
+                animate={mainControls}
+                transition={{ duration: 0.2, ease: 'easeInOut' }}
+            >
+                <div className={styles.img}>
+                    <img src={getImage(img)} />
+                </div>
+                <div className={cn(styles.content, contentClass)}>
+                    <div className={styles.top}>
+                        <h5 className={styles.title}>{title}</h5>
+                        <Status status={status} />
                     </div>
-                    <div className={styles.content}>
-                        <div className={styles.top}>
-                            <h5 className={styles.title}>{title}</h5>
-                            <Status status={status} />
-                        </div>
-                        {!!description && <p className={styles.description}>{description}</p>}
-                        {isValidElement(bottomSlot) && (
-                            <div className={styles.bottomSlot}>{bottomSlot}</div>
-                        )}
-                    </div>
-                </motion.div>
+                    {!!description && <p className={styles.description}>{description}</p>}
+                    {isValidElement(bottomSlot) && (
+                        <div className={cn(styles.bottomSlot, bottomClass)}>{bottomSlot}</div>
+                    )}
+                </div>
+            </motion.div>
 
-                {hoverable && (
-                    <motion.div
-                        initial={{ x: '100%' }}
-                        animate={hoverControls}
-                        transition={{ duration: 0.2, ease: 'easeInOut' }}
-                        className={styles.hoverContainer}
-                    >
-                        {hoverStateRender || <DefaultHoverState />}
-                    </motion.div>
-                )}
-            </div>
+            {hoverable && (
+                <motion.div
+                    initial={{ x: '100%' }}
+                    animate={hoverControls}
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                    className={styles.hoverContainer}
+                >
+                    {hoverStateRender || <DefaultHoverState />}
+                </motion.div>
+            )}
         </div>
     );
 };
