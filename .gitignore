@@ -82,3 +82,8 @@ pnpm-lock.yaml
 
 # Для React/Vite
 **/public/env.js
+
+.venv
+__pycache__
+migrations
+db.sqlite3
