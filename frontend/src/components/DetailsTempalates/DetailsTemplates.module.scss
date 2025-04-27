@@ -16,15 +16,23 @@
     width: 100%;
     border: 3px solid var(--accent-color);
 
-    &:not(:has(.noStyle)) {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
-        padding-block: 60px 80px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 60px 80px;
+
+    .inner {
+        width: 560px;
+        height: 100%;
+    }
+
+    &.noStyle {
+        display: block;
+        padding-block: 0;
 
         .inner {
-            width: 560px;
+            width: 100%;
         }
     }
 
@@ -45,10 +53,7 @@
         margin-bottom: 38px;
     }
 
-    .inner {
-        width: 100%;
-        height: 100%;
-    }
+
 
 }
 

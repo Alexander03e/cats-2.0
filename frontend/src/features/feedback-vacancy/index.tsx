@@ -3,7 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Input } from '@/Components/Input';
 import styles from './FeedbackVacancy.module.scss';
 import { Button } from '@/Components/Button';
-import { formSchema, TForm } from '@/Features/take-cat/scheme.ts';
+import { formSchema, type TForm } from './scheme';
 
 export const FeedbackVacancy = () => {
     const {
