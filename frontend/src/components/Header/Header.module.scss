@@ -2,12 +2,16 @@
     padding: 14px 24px;
 
     display: grid;
-    grid-template-columns: 1fr 204px;
+    grid-template-columns: 64px 1fr 204px;
     align-items: center;
 
     background: var(--secondary-color);
     border-radius: 40px;
     gap: 20px;
+
+    .helpLink {
+        text-decoration: none!important;
+    }
 
     .navigation {
         overflow: auto;
@@ -24,10 +28,6 @@
             font-weight: 400;
             transition: 0.3s ease;
         }
-    }
-
-    .logo {
-        margin-inline: 12px;
     }
 
     .headerBtn {

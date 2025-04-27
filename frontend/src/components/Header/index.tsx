@@ -7,28 +7,30 @@ import { Link } from '@/Components/Link';
 
 export const Header = () => {
     return (
-        <div className={styles.wrapper}>
+        <header className={styles.wrapper}>
+            <div className={styles.logo}>
+                <NavLink to={PATHS.HOME}>
+                    <SVG src={'/icons/logo.svg'} />
+                </NavLink>
+            </div>
             <div className={styles.navigation}>
-                <Link mode={'hash'} href={`/#${ANCHORS.HELP}`}>
+                <Link mode={'hash'} href={ANCHORS.HELP}>
                     Как помочь
                 </Link>
                 <NavLink to={PATHS.PROJECTS}>Проекты</NavLink>
                 <NavLink to={PATHS.CATS}>Взять котика</NavLink>
                 <NavLink to={PATHS.HISTORY}>Истории успеха</NavLink>
                 <NavLink to={PATHS.ABOUT}>О приюте</NavLink>
-                <div className={styles.logo}>
-                    <NavLink to={PATHS.HOME}>
-                        <SVG src={'/icons/logo.svg'} />
-                    </NavLink>
-                </div>
                 <NavLink to={PATHS.ARTICLES}>Полезные статьи</NavLink>
-                <Link mode={'hash'} href={`/#${ANCHORS.FAQ}`}>
+                <Link mode={'hash'} href={ANCHORS.FAQ}>
                     FAQ
                 </Link>
                 <NavLink to={PATHS.CONTACTS}>Контакты</NavLink>
             </div>
 
-            <Button className={styles.headerBtn}>Хочу помочь!</Button>
-        </div>
+            <Link className={styles.helpLink} mode={'hash'} href={ANCHORS.HELP}>
+                <Button className={styles.headerBtn}>Хочу помочь!</Button>
+            </Link>
+        </header>
     );
 };

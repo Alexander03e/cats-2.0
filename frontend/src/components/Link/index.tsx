@@ -37,7 +37,7 @@ export const Link = ({
 
     if (mode === 'hash') {
         return (
-            <HashLink to={href || ''} className={classNames} {...props}>
+            <HashLink to={href ? `/#${href}` : ''} className={classNames} {...props}>
                 {content}
             </HashLink>
         );
