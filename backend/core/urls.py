@@ -17,9 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from authentication.urls import router as authRouter
+from cats.urls import router as catsRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('', include(authRouter.urls)),
+    path('cats/', include(catsRouter.urls)),
 ]
