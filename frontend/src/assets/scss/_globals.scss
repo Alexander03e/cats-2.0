@@ -9,6 +9,10 @@ body {
     background-color: var(--layout-color);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 // INPUT AUTOFILL FIX
 input, textarea {
     &:-webkit-autofill {

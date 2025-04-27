@@ -2,12 +2,13 @@ import styles from './Help.module.scss';
 import { Section } from '@/Components/Section';
 import cn from 'classnames';
 import { Button } from '@/Components/Button';
+import { ANCHORS } from '@/Shared/consts';
 
 export const Help = () => {
     const title = 'Как нам можно <span data-accent="true">помочь?</span>';
 
     return (
-        <Section contentClass={styles.grid} title={title}>
+        <Section id={ANCHORS.HELP} contentClass={styles.grid} title={title}>
             <div className={styles.mainImg}>
                 <img src={'/images/kitty-flower.png'} />
             </div>

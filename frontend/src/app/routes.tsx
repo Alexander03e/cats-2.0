@@ -10,6 +10,7 @@ import { CatDetails } from '@/Pages/CatDetails';
 import { ProjectDetails } from '@/Pages/ProjectDetails';
 import { HowToHelp } from '@/Pages/HowToHelp';
 import { NewsPage } from '@/Pages/News';
+import { VacancyDetails } from '@/Pages/VacancyDetails';
 
 export const AppRoutes = () => {
     // Роутинг приложения
@@ -21,10 +22,12 @@ export const AppRoutes = () => {
                 <Route path={PATHS.ARTICLES} element={<div>Статьи</div>} />
 
                 <Route path={PATHS.NEWS} element={<NewsPage />} />
-                <Route path={PATHS.VACANCY} element={<VacanciesPage />} />
                 <Route path={PATHS.HOME} element={<HomePage />} />
                 <Route path={PATHS.CONTACTS} element={<ContactsPage />} />
                 <Route path={PATHS.HELP} element={<HowToHelp />} />
+                {/* Вакансии */}
+                <Route path={PATHS.VACANCY_DETAILS.INDEX} element={<VacancyDetails />} />
+                <Route path={PATHS.VACANCY} element={<VacanciesPage />} />
                 {/* Проекты /*/}
                 <Route path={PATHS.PROJECTS_DETAILS.INDEX} element={<ProjectDetails />} />
                 <Route path={PATHS.PROJECTS} element={<ProjectsPage />} />

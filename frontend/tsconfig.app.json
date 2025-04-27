@@ -39,6 +39,9 @@
       "@/Components/*": [
         "src/components/*"
       ],
+      "@/Features/*": [
+        "src/features/*"
+      ],
       "@scss/*": [
         "src/assets/scss/*"
       ]
