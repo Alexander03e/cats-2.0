@@ -16,11 +16,24 @@
     width: 100%;
     border: 3px solid var(--accent-color);
 
-    &:not(:has(.noStyle)) {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding-block: 60px 80px;
+
+    .inner {
+        width: 560px;
+        height: 100%;
+    }
+
+    &.noStyle {
+        display: block;
+        padding-block: 0;
+
+        .inner {
+            width: 100%;
+        }
     }
 
     .title {
@@ -39,6 +52,9 @@
         text-align: center;
         margin-bottom: 38px;
     }
+
+
+
 }
 
 .infoWrapper {

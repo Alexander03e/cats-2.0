@@ -41,11 +41,13 @@ Details.Bottom = ({ title, noStyle, subtitle, children, className, ...props }: I
             className={cn(styles.formWrapper, className, { [styles.noStyle]: noStyle })}
             {...props}
         >
-            <div className={styles.top}>
-                {!!title && <h6 className={styles.title}>{title}</h6>}
-                {!!subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+            <div className={styles.inner}>
+                <div className={styles.top}>
+                    {!!title && <h6 className={styles.title}>{title}</h6>}
+                    {!!subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+                </div>
+                <div className={styles.content}>{children}</div>
             </div>
-            <div className={styles.content}>{children}</div>
         </div>
     );
 };

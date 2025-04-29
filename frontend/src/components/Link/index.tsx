@@ -2,11 +2,12 @@ import { AnchorHTMLAttributes, ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './Link.module.scss';
 import cn from 'classnames';
+import { HashLink } from 'react-router-hash-link';
 
 interface IProps extends AnchorHTMLAttributes<HTMLAnchorElement> {
     icon?: ReactNode;
     iconPosition?: 'start' | 'end';
-    mode?: 'react' | 'html';
+    mode?: 'react' | 'html' | 'hash';
 }
 export const Link = ({
     mode = 'html',
@@ -17,6 +18,7 @@ export const Link = ({
     children,
     ...props
 }: IProps) => {
+    const classNames = cn(styles.wrapper, className);
     const content = (
         <>
             {iconPosition === 'start' && icon}
@@ -27,14 +29,22 @@ export const Link = ({
 
     if (mode === 'react') {
         return (
-            <NavLink className={cn(styles.wrapper, className)} to={href || '#'} {...props}>
+            <NavLink className={classNames} to={href || '#'} {...props}>
                 {content}
             </NavLink>
         );
     }
 
+    if (mode === 'hash') {
+        return (
+            <HashLink to={href ? `/#${href}` : ''} className={classNames} {...props}>
+                {content}
+            </HashLink>
+        );
+    }
+
     return (
-        <a className={cn(styles.wrapper, className)} href={href} {...props}>
+        <a className={classNames} href={href} {...props}>
             {content}
         </a>
     );

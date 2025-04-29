@@ -3,14 +3,16 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
 
+    width: 100%;
+    margin-bottom: 16px;
 
-    .card {
-        height: 590px;
-    }
+
     .cardContent {
         padding-bottom: 24px;
     }
+
     .cardBottom {
         padding-block: 48px 0!important;
     }
+
 }
