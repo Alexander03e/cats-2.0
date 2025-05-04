@@ -10,6 +10,10 @@ class Vacancy(models.Model):
     description = models.TextField("Описание")
     status = models.CharField("Статус", max_length=20, choices=STATUS_CHOICES, default='open')
     created_at = models.DateTimeField("Дата создания", auto_now_add=True)
+    
+    class Meta:
+        verbose_name = "Вакансия"
+        verbose_name_plural = "Вакансии"
 
     def __str__(self):
         return self.title
@@ -31,6 +35,10 @@ class Application(models.Model):
     status = models.CharField("Статус", max_length=20, choices=STATUS_CHOICES, default='new')
     phone = models.CharField("Телефон", max_length=20)
     date = models.DateTimeField("Дата подачи", auto_now_add=True)
+    
+    class Meta:
+        verbose_name = "Заявка"
+        verbose_name_plural = "Заявки"
 
     def __str__(self):
         return f"Заявка {self.id} на {self.vacancy.title}"

@@ -31,6 +31,10 @@ class Cat(models.Model):
     status = models.CharField(max_length=15, choices=STATUS_CHOICES, default='QUARANTINE')
     description = models.TextField()
     photo = models.ImageField(upload_to='cats_photos/', blank=True, null=True)
+    
+    class Meta:
+        verbose_name = "Кошачья особь"
+        verbose_name_plural = "Кошачьи особи"
 
     def __str__(self):
         return self.name

@@ -16,9 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
+from django.conf.urls.static import static
 from authentication.urls import router as authRouter
 from cats.urls import router as catsRouter
 from stories.urls import router as storiesRouter
+from news.urls import router as newsRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +29,10 @@ urlpatterns = [
     path('', include(authRouter.urls)),
     path('cats/', include(catsRouter.urls)),
     path('stories/', include(storiesRouter.urls)),
+    path('news/', include(newsRouter.urls)),
     path('projects/', include("projects.urls")),
     path('vacancies/', include("vacancies.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
