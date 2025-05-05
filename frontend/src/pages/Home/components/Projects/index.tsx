@@ -4,24 +4,34 @@ import slice from 'lodash/slice';
 import { CatCard } from '@/Components/CatCard';
 import { Button } from '@/Components/Button';
 import { Section } from '@/Components/Section';
-import { mockCatCards } from '@/Pages/Home/mocks';
 import { Progress } from '@/Components/Progress';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '@/Shared/consts';
+import { useQuery } from '@tanstack/react-query';
+import { projectQueries } from '@/Shared/api/projects.ts';
 
 export const HomeProjects = () => {
+    const { data } = useQuery(projectQueries.list());
+
     const title = 'Наши <span data-accent="true">проекты</span>';
     const navigate = useNavigate();
 
     return (
         <Section contentClass={styles.wrapper} title={title}>
             <div className={styles.cards}>
-                {map(slice(mockCatCards, 0, 3), (item, index) => (
+                {map(slice(data, 0, 3), (item, index) => (
                     <CatCard
-                        onClick={() => navigate(PATHS.PROJECTS_DETAILS.ABSOLUTE(1))}
-                        bottomSlot={<Progress current={80} total={120} suffix={'₽'} />}
+                        title={item.title}
+                        description={item.description}
+                        onClick={() => navigate(PATHS.PROJECTS_DETAILS.ABSOLUTE(item.id))}
+                        bottomSlot={
+                            <Progress
+                                suffix={'₽'}
+                                total={parseFloat(item.goal_amount)}
+                                current={parseFloat(item.current_amount)}
+                            />
+                        }
                         key={`project-card-${index}`}
-                        {...item}
                     />
                 ))}
             </div>

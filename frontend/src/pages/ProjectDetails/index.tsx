@@ -1,35 +1,37 @@
 import { Details } from '@/Components/DetailsTempalates';
 import styles from './ProjectDetails.module.scss';
 import { Progress } from '@/Components/Progress';
+import { useQuery } from '@tanstack/react-query';
+import { projectQueries } from '@/Shared/api/projects.ts';
+import { useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 export const ProjectDetails = () => {
+    const { projectId } = useParams();
+
+    const { data } = useQuery(projectQueries.detail(projectId!));
+
     return (
         <Details>
             <Details.Image images={['/images/mock-cat.png']} />
-            <Details.Info className={styles.info} title={'Project name'}>
+            <Details.Info className={styles.info} title={data?.title}>
                 <div className={styles.content}>
-                    <p>
-                        Красота — сиюминутная вечность. Но красотой Рири вы будете наслаждаться не
-                        одно мгновение, а всю жизнь! Каждое утро, просыпаясь, видеть пушистые щёчки
-                        и огненные глазки, а ложась в постель, слышать тёплое мурчание. Вы будете
-                        объяты красотой и любовью! Приезжайте, знакомьтесь с Рири и забирайте её
-                        домой
-                    </p>
+                    <p>{data?.description}</p>
 
                     <div className={styles.progress}>
                         <Progress
                             size={'large'}
                             suffix={'₽'}
-                            total={100000}
-                            current={60000}
+                            total={parseFloat(String(data?.goal_amount))}
+                            current={parseFloat(String(data?.current_amount))}
                             bottomSlot={
                                 <div className={styles.progressBottom}>
+                                    {/*<div className={styles.date}>*/}
+                                    {/*    <h6>xx.xx.xxxx</h6>*/}
+                                    {/*    <p>Опубликован</p>*/}
+                                    {/*</div>*/}
                                     <div className={styles.date}>
-                                        <h6>xx.xx.xxxx</h6>
-                                        <p>Опубликован</p>
-                                    </div>
-                                    <div className={styles.date}>
-                                        <h6>xx.xx.xxxx</h6>
+                                        <h6>{dayjs(data?.created_at).format('DD.MM.YYYY')}</h6>
                                         <p>Опубликован</p>
                                     </div>
                                 </div>

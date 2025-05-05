@@ -2,11 +2,13 @@ import styles from './Help.module.scss';
 import { Section } from '@/Components/Section';
 import cn from 'classnames';
 import { Button } from '@/Components/Button';
-import { ANCHORS } from '@/Shared/consts';
+import { ANCHORS, PATHS } from '@/Shared/consts';
+import { useNavigate } from 'react-router-dom';
 
 export const Help = () => {
     const title = 'Как нам можно <span data-accent="true">помочь?</span>';
 
+    const navigate = useNavigate();
     return (
         <Section id={ANCHORS.HELP} contentClass={styles.grid} title={title}>
             <div className={styles.mainImg}>
@@ -18,7 +20,7 @@ export const Help = () => {
                         <h5>Забрать питомца домой</h5>
                         <p>Стать хозяином и открыть свой дом для четвероногого друга</p>
                     </div>
-                    <Button variant={'blue'} size={'small'}>
+                    <Button onClick={() => navigate(PATHS.CATS)} variant={'blue'} size={'small'}>
                         Выбрать питомца
                     </Button>
                 </div>
@@ -46,7 +48,9 @@ export const Help = () => {
                         <h5>У вас есть вопрос?</h5>
                         <p>Стать хозяином и открыть свой дом для четвероногого друга</p>
                     </div>
-                    <Button size={'small'}>Связаться</Button>
+                    <Button onClick={() => navigate(PATHS.CONTACTS)} size={'small'}>
+                        Связаться
+                    </Button>
                 </div>
             </div>
         </Section>

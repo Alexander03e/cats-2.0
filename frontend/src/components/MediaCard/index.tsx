@@ -3,6 +3,7 @@ import { HTMLAttributes, ReactNode } from 'react';
 import { getImage } from '@/Shared/utils/getImage.ts';
 import { Button } from '@/Components/Button';
 import cn from 'classnames';
+import parse from 'html-react-parser';
 
 export interface IMediaCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
     title?: string;
@@ -28,7 +29,7 @@ export const MediaCard = ({
             <div className={styles.content}>
                 <div className={styles.top}>
                     <h5>{title}</h5>
-                    <p>{description}</p>
+                    <p>{description ? parse(description) : ''}</p>
                 </div>
                 {renderButton || (
                     <Button variant={'light'} size={'small'} onClick={onButton}>

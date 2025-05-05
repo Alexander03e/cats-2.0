@@ -5,6 +5,7 @@ import isString from 'lodash/isString';
 import isArray from 'lodash/isArray';
 import size from 'lodash/size';
 import map from 'lodash/map';
+import { getImage } from '@/Shared/utils/getImage.ts';
 
 type TProps = HTMLAttributes<HTMLDivElement>;
 
@@ -65,7 +66,7 @@ Details.Image = ({ images }: IImageProps) => {
 
     const getCurrentImage = () => {
         if (imagesIsArray) {
-            return images[activeIndex];
+            return images?.[activeIndex];
         }
 
         if (imagesIsString) {
@@ -73,7 +74,7 @@ Details.Image = ({ images }: IImageProps) => {
         }
 
         if (size(images) === 1) {
-            return images[0];
+            return images?.[0];
         }
     };
 
@@ -85,7 +86,7 @@ Details.Image = ({ images }: IImageProps) => {
         <div className={styles.imageWrapper}>
             {(imagesIsString || size(images) === 1) && (
                 <div className={styles.onlyImage}>
-                    <img src={currentImage} />
+                    <img src={getImage(currentImage)} />
                 </div>
             )}
             {imagesIsArray && (

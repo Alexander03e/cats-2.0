@@ -1,7 +1,7 @@
 import styles from './CatCatd.module.scss';
 import { HTMLAttributes, isValidElement, ReactNode, useEffect } from 'react';
 import cn from 'classnames';
-import { ECatStatus } from '@/Shared/types';
+import { ECatStatus } from '@/Shared/types/cats';
 import { Status } from '@/Components/Status';
 import { getImage } from '@/Shared/utils/getImage.ts';
 import { useHover } from '@uidotdev/usehooks';

@@ -1,12 +1,13 @@
 import { Section } from '@/Components/Section';
 import map from 'lodash/map';
-import { mockCatCards } from '@/Pages/Home/mocks';
 import { CatCard } from '@/Components/CatCard';
 import styles from './OurCats.module.scss';
 import slice from 'lodash/slice';
 import { useNavigate } from 'react-router-dom';
 import { PATHS } from '@/Shared/consts';
 import { Button } from '@/Components/Button';
+import { useQuery } from '@tanstack/react-query';
+import { catsQueries } from '@/Shared/api/cats.ts';
 
 const LastItem = () => {
     const navigate = useNavigate();
@@ -27,17 +28,23 @@ const LastItem = () => {
 };
 
 export const OurCats = () => {
+    const { data } = useQuery(catsQueries.list());
+
     const title = 'Наши <span data-accent="true">подопечные</span>';
 
     const navigate = useNavigate();
     return (
         <Section title={title}>
             <div className={styles.cards}>
-                {map(slice(mockCatCards, 0, 3), (item, index) => (
+                {map(slice(data, 0, 3), (item, index) => (
                     <CatCard
-                        onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(1))}
+                        onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
+                        status={item.status}
+                        className={styles.card}
+                        title={item.name}
+                        description={item.description}
+                        img={item?.photo}
                         key={`our-cats-item-${index}`}
-                        {...item}
                     />
                 ))}
                 <LastItem />
