@@ -2,8 +2,9 @@ module.exports = {
   apps: [
     {
       name: 'backend-cats',
-      script: './manage.py',
+      script: 'manage.py',
       args: 'runserver 0.0.0.0:8000',
+      interpreter: "python3",
       instances: 1,
       autorestart: true,
       watch: false,
