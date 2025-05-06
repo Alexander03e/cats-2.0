@@ -1,8 +1,9 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
+from rest_framework.decorators import action
 from .models import Cat
 from .filters import CatFilter
-from .serializers import CatSerializer
+from .serializers import CatSerializer, AdoptionApplicationSerializer
 import django_filters
 
 class CatViewSet(viewsets.ModelViewSet):
@@ -39,3 +40,25 @@ class CatViewSet(viewsets.ModelViewSet):
             'filters': filters
         })
         
+    @action(
+        methods=['post'], 
+        detail=True, 
+        url_path='adopt',
+        serializer_class=AdoptionApplicationSerializer,
+        permission_classes=[permissions.AllowAny],
+    )
+    def adopt(self, request, pk=None):
+        cat = self.get_object()
+        serializer = AdoptionApplicationSerializer(data=request.data)
+        
+        if serializer.is_valid():
+            # Создаем заявку и привязываем к кошке
+            application = serializer.save(cat=cat)
+            
+            # Обновляем статус кошки 
+            cat.status = 'RESERVED'  
+            cat.save()
+            
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)

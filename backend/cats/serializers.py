@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Cat, CatPhoto, CatAttribute
+from .models import Cat, AdoptionApplication, CatAttribute
 
 class CatAttributeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,3 +20,17 @@ class CatSerializer(serializers.ModelSerializer):
     def get_attributes(self, obj):
         return [attribute.name for attribute in obj.attributes.all()]
         
+        
+class AdoptionApplicationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AdoptionApplication
+        fields = ['first_name', 'last_name', 'phone', 'email', 'consent']
+        extra_kwargs = {
+            'cat': {'read_only': True},
+            'status': {'read_only': True}
+        }
+        
+    def validate_consent(self, value):
+        if not value:
+            raise serializers.ValidationError("Необходимо дать согласие на обработку данных")
+        return value

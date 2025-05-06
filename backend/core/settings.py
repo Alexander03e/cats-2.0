@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'stories',
     'vacancies',
     'news',
+    'common',
     # Third
     'rest_framework',
     'rest_framework.authtoken',
@@ -59,7 +60,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_FILTER_BACKENDS': [
         'django_filters.rest_framework.DjangoFilterBackend'
-    ]
+    ],
     # 'DEFAULT_PERMISSION_CLASSES': [
     #     'rest_framework.permissions.IsAuthenticated',
     # ]
