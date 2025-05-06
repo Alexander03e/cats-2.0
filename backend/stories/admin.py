@@ -1,4 +1,28 @@
 from django.contrib import admin
-from .models import SuccessStory
+from django.utils.html import mark_safe
+from .models import SuccessStory, Category
 
-admin.site.register(SuccessStory)
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug')
+    prepopulated_fields = {'slug': ('name',)}
+
+@admin.register(SuccessStory)
+class SuccessStoryAdmin(admin.ModelAdmin):
+    list_display = ('title', 'category', 'date')
+    readonly_fields = ('content_preview',)
+    list_filter = ('category',)
+    search_fields = ('title', 'description')
+    fieldsets = (
+        (None, {
+            'fields': ('title', 'photo', 'description')
+        }),
+        ('Контент', {
+            'fields': ('content', 'content_preview'),
+            'classes': ('wide',)
+        }),
+    )
+    
+    def content_preview(self, obj):
+        return mark_safe(obj.content)
+    content_preview.short_description = "Предпросмотр контента"

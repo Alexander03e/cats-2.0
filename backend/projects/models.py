@@ -1,4 +1,5 @@
 from django.db import models
+import json
 
 class Project(models.Model):
     STATUS_CHOICES = [
@@ -13,6 +14,28 @@ class Project(models.Model):
     current_amount = models.DecimalField("Собрано", max_digits=12, decimal_places=2, default=0)
     status = models.CharField("Статус", max_length=10, choices=STATUS_CHOICES, default='ACTIVE')
     created_at = models.DateTimeField("Дата создания", auto_now_add=True)
+    cover_image = models.ImageField(
+        "Обложка", 
+        upload_to='project_covers/',
+        blank=True,
+        null=True
+    )
+    for_what = models.CharField("Для чего нужны (1 подзаголовок)", max_length=255)
+    money_spend = models.TextField(
+        "На что пойдут деньги",
+        blank=True,
+        null=True,
+        help_text="Введите каждый пункт с новой строки или в JSON-формате"
+    )
+    
+    def get_spending_list(self):
+        try:
+            return json.loads(self.money_spend)
+        except:
+            return self.money_spend.split('\n') if self.money_spend else []
+
+    def set_spending_list(self, items):
+        self.money_spend = json.dumps(items, ensure_ascii=False)
     
     class Meta:
         verbose_name = "Проект"

@@ -6,7 +6,7 @@ class NewsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = News
-        fields = ['id', 'title', 'content', 'date', 'cover_image', 'cover_image_url']
+        fields = ['id', 'title', 'description', 'content', 'date', 'cover_image', 'cover_image_url']
         read_only_fields = ('date', 'id')
         
     def get_cover_image_url(self, obj):

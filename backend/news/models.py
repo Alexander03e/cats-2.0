@@ -10,6 +10,7 @@ class News(models.Model):
         blank=True,
         null=True
     )
+    description = models.CharField("Краткое описание", max_length=255, blank=True)
     
     class Meta:
         verbose_name = "Новость"

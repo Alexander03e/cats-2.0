@@ -2,6 +2,11 @@ from rest_framework import serializers
 from .models import Project, Donation
 
 class ProjectSerializer(serializers.ModelSerializer):
+    spending_list = serializers.SerializerMethodField()
+    
+    def get_spending_list(self, obj):
+        return obj.get_spending_list()
+    
     class Meta:
         model = Project
         fields = '__all__'
