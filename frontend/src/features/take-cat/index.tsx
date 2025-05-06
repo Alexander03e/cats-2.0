@@ -4,11 +4,14 @@ import { Input } from '@/Components/Input';
 import styles from './TakeCat.module.scss';
 import { Button } from '@/Components/Button';
 import { formSchema, TForm } from '@/Features/take-cat/scheme.ts';
+import { useTakeCat } from '@/Shared/api/cats.ts';
+import { asyncHandle } from '@/Shared/utils/async.ts';
 
-export const TakeCatForm = () => {
+export const TakeCatForm = ({ id }: { id: string }) => {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors, isSubmitting },
     } = useForm<TForm>({
         resolver: zodResolver(formSchema),
@@ -20,8 +23,29 @@ export const TakeCatForm = () => {
         },
     });
 
-    const onSubmit = (data: TForm) => {
-        console.log(data);
+    const { mutateAsync } = useTakeCat();
+    const onSubmit = async (data: TForm) => {
+        try {
+            await asyncHandle(
+                mutateAsync.bind(null, {
+                    id,
+                    data: {
+                        consent: true,
+                        email: data.email,
+                        phone: data.phone,
+                        first_name: data.firstName,
+                        last_name: data.lastName,
+                    },
+                }),
+                {
+                    successMsg: 'Заявка отправлена',
+                    errorMsg: 'Не удалось отправить заявку',
+                },
+            );
+            reset();
+        } catch {
+            console.log('error');
+        }
     };
 
     return (

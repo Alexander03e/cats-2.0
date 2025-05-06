@@ -8,6 +8,7 @@ import { PATHS } from '@/Shared/consts';
 import { Button } from '@/Components/Button';
 import { useQuery } from '@tanstack/react-query';
 import { catsQueries } from '@/Shared/api/cats.ts';
+import { getBackendImage } from '@/Shared/utils/getImage.ts';
 
 const LastItem = () => {
     const navigate = useNavigate();
@@ -36,14 +37,14 @@ export const OurCats = () => {
     return (
         <Section title={title}>
             <div className={styles.cards}>
-                {map(slice(data, 0, 3), (item, index) => (
+                {map(slice(data?.results, 0, 3), (item, index) => (
                     <CatCard
                         onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
                         status={item.status}
                         className={styles.card}
                         title={item.name}
                         description={item.description}
-                        img={item?.photo}
+                        img={getBackendImage(item?.photos?.[0])}
                         key={`our-cats-item-${index}`}
                     />
                 ))}

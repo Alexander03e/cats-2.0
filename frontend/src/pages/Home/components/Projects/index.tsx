@@ -22,6 +22,7 @@ export const HomeProjects = () => {
                 {map(slice(data, 0, 3), (item, index) => (
                     <CatCard
                         title={item.title}
+                        img={item?.cover_image}
                         description={item.description}
                         onClick={() => navigate(PATHS.PROJECTS_DETAILS.ABSOLUTE(item.id))}
                         bottomSlot={

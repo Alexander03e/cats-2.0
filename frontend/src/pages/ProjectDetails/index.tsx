@@ -5,15 +5,23 @@ import { useQuery } from '@tanstack/react-query';
 import { projectQueries } from '@/Shared/api/projects.ts';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
+import { Loader } from '@/Components/Loader';
+import map from 'lodash/map';
 
 export const ProjectDetails = () => {
     const { projectId } = useParams();
 
-    const { data } = useQuery(projectQueries.detail(projectId!));
+    const { data, isLoading } = useQuery(projectQueries.detail(projectId!));
+
+    if (isLoading) {
+        return <Loader />;
+    }
+
+    if (!data) return null;
 
     return (
         <Details>
-            <Details.Image images={['/images/mock-cat.png']} />
+            <Details.Image images={[data?.cover_image || '/images/mock-cat.png']} />
             <Details.Info className={styles.info} title={data?.title}>
                 <div className={styles.content}>
                     <p>{data?.description}</p>
@@ -54,6 +62,11 @@ export const ProjectDetails = () => {
 
                     <div className={styles.group}>
                         <h6>На что пойдут средства</h6>
+                        <div className={styles.spending}>
+                            {map(data?.spending_list, item => {
+                                return <p key={item}>{item}</p>;
+                            })}
+                        </div>
                     </div>
                     <div className={styles.group}>
                         <h6>Как поддержать проект</h6>

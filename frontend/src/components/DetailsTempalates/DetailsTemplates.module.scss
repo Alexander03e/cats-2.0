@@ -54,7 +54,6 @@
     }
 
 
-
 }
 
 .infoWrapper {
@@ -74,8 +73,15 @@
 .imageWrapper {
     height: 590px;
     overflow: hidden;
+
     &:has(.onlyImage) {
         height: 485px;
+    }
+
+    &.onlyImage {
+        img {
+            object-fit: cover !important;
+        }
     }
 
     .onlyImage {
@@ -85,7 +91,7 @@
         border-radius: 40px;
 
         img {
-            object-fit: cover;
+            object-fit: contain;
             width: 100%;
             height: 100%;
         }
@@ -109,7 +115,7 @@
             overflow: hidden;
 
             img {
-                object-fit: cover;
+                object-fit: contain;
                 width: 100%;
                 height: 100%;
             }

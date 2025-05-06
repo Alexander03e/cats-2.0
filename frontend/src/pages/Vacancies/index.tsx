@@ -13,14 +13,19 @@ import { useState } from 'react';
 import slice from 'lodash/slice';
 import { PATHS } from '@/Shared/consts';
 import dayjs from 'dayjs';
+import { Loader } from '@/Components/Loader';
 
 export const VacanciesPage = () => {
-    const { data } = useQuery(vacancyQueries.list());
+    const { data, isLoading } = useQuery(vacancyQueries.list());
     const title = '<span data-accent="true">Вакансии</span>';
     const navigate = useNavigate();
     const [all, setAll] = useState(false);
 
     const filtered = filter(data, { status: EVacancyStatus.OPEN });
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     if (!filtered || size(filtered) < 0) return;
 
