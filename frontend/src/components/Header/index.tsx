@@ -4,6 +4,7 @@ import { ANCHORS, PATHS } from '@/Shared/consts';
 import SVG from 'react-inlinesvg';
 import { Button } from '@/Components/Button';
 import { Link } from '@/Components/Link';
+import { Dropdown } from '@/Components/Dropdown';
 
 export const Header = () => {
     return (
@@ -20,7 +21,18 @@ export const Header = () => {
                 <NavLink to={PATHS.PROJECTS}>Проекты</NavLink>
                 <NavLink to={PATHS.CATS}>Взять котика</NavLink>
                 <NavLink to={PATHS.HISTORY}>Истории успеха</NavLink>
-                <NavLink to={PATHS.ABOUT}>О приюте</NavLink>
+                <Dropdown
+                    overlay={
+                        <div className={styles.about}>
+                            <Link mode={'react'} href={PATHS.VACANCY}>
+                                Вакансии
+                            </Link>
+                            <Link mode={'hash'}>О приюте</Link>
+                        </div>
+                    }
+                >
+                    <p style={{ cursor: 'pointer' }}>О приюте</p>
+                </Dropdown>
                 <NavLink to={PATHS.ARTICLES}>Полезные статьи</NavLink>
                 <Link mode={'hash'} href={ANCHORS.FAQ}>
                     FAQ

@@ -7,3 +7,14 @@ export interface IHistoryItem {
     category?: null;
     content: string;
 }
+
+export interface ICategory {
+    id: number;
+    name: string;
+    slug: string;
+}
+
+export interface IHistoryData {
+    results: IHistoryItem[];
+    categories: ICategory[];
+}

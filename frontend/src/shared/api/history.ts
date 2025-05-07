@@ -1,11 +1,11 @@
 import { queryOptions } from '@tanstack/react-query';
 
 import { $api } from '@/Shared/api/index.ts';
-import { IHistoryItem } from '@/Shared/types/history.ts';
+import { IHistoryData, IHistoryItem } from '@/Shared/types/history.ts';
 
 export const historyQueries = {
     list: () =>
-        queryOptions<IHistoryItem[]>({
+        queryOptions<IHistoryData>({
             queryKey: ['history'],
             queryFn: async () => (await $api.get('stories')).data,
         }),

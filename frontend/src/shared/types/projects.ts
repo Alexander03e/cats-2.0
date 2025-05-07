@@ -8,6 +8,7 @@ export interface IProjectItem {
     id: number;
     title: string;
     description: string;
+    for_what?: string;
     goal_amount: string;
     current_amount: string;
     status: EProjectStatus;

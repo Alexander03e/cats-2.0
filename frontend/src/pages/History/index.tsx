@@ -30,7 +30,7 @@ export const HistoryPage = () => {
                 {size(filteredData) === 0 && <p style={{ margin: '0 auto' }}>Тут пока пусто</p>}
                 {map(filteredData, (item, index) => (
                     <CatCard
-                        onClick={() => navigate(PATHS.HISTORY_DETAILS.ABSOLUTE(item.id))}
+                        onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
                         status={ECatStatus.AVAILABLE}
                         className={styles.card}
                         key={`history-cat-item-${index}`}

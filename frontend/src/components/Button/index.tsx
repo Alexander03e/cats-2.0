@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes } from 'react';
 import cn from 'classnames';
 
 interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-    variant?: 'blue' | 'yellow' | 'default' | 'light';
+    variant?: 'blue' | 'yellow' | 'default' | 'light' | 'tab';
     size?: 'small' | 'medium';
     isActive?: boolean;
     fullWidth?: boolean;

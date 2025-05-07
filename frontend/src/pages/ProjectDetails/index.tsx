@@ -7,6 +7,8 @@ import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { Loader } from '@/Components/Loader';
 import map from 'lodash/map';
+import QRCode from 'react-qr-code';
+import size from 'lodash/size';
 
 const howToDonate = [
     '1. переведи по номеру ххххххххххх (Фамилия И.О.)',
@@ -57,30 +59,47 @@ export const ProjectDetails = () => {
             </Details.Info>
             <Details.Bottom noStyle>
                 <div className={styles.bottomContent}>
-                    <div className={styles.group}>
-                        <h6>Для чего нужен кабинет</h6>
-                        <p>
-                            Кабинет необходим для животных с кожными заболеваниями. К сожалению,
-                            животные с ослабленным иммунитетом часто им подвержены. Любой пациент
-                            должен находиться в отдельной клетке, но сейчас у каждого есть минимум 3
-                            соседа. И это усложняет процесс выздоровления.
-                        </p>
-                    </div>
-
-                    <div className={styles.group}>
-                        <h6>На что пойдут средства</h6>
-                        <div className={styles.spending}>
-                            {map(data?.spending_list, item => {
-                                return <p key={item}>{item}</p>;
-                            })}
+                    {!!data?.for_what && (
+                        <div className={styles.group}>
+                            <h6>Для чего нужен кабинет</h6>
+                            <p>{data?.for_what}</p>
                         </div>
-                    </div>
-                    <div className={styles.group}>
-                        <h6>Как поддержать проект</h6>
-                        <div className={styles.spending}>
-                            {map(howToDonate, item => {
-                                return <p key={item}>{item}</p>;
-                            })}
+                    )}
+
+                    <div className={styles.body}>
+                        <div className={styles.left}>
+                            {size(data?.spending_list) > 0 && (
+                                <div className={styles.group}>
+                                    <h6>На что пойдут средства</h6>
+                                    <div className={styles.spending}>
+                                        {map(data?.spending_list, item => {
+                                            return <p key={item}>{item}</p>;
+                                        })}
+                                    </div>
+                                </div>
+                            )}
+                            <div className={styles.group}>
+                                <h6>Как поддержать проект</h6>
+                                <div className={styles.spending}>
+                                    {map(howToDonate, item => {
+                                        return <p key={item}>{item}</p>;
+                                    })}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className={styles.right}>
+                            <div className={styles.qr}>
+                                <QRCode
+                                    bgColor={'transparent'}
+                                    fgColor={'rgba(103, 97, 205, 1)'}
+                                    value={'qr'}
+                                />
+                            </div>
+                            <p className={styles.qrText}>
+                                Мы создали отдельный счет для проекта. Отсканируйте QR код и
+                                переведите удобную для вас сумму
+                            </p>
                         </div>
                     </div>
                 </div>
