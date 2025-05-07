@@ -20,6 +20,6 @@ export const catsQueries = {
 export const useTakeCat = () => {
     return useMutation({
         mutationFn: async ({ id, data }: { id: string; data: ITakeCat }): Promise<void> =>
-            (await $api.post(`/cats/${id}`, data)).data,
+            (await $api.post(`/cats/${id}/adopt/`, data)).data,
     });
 };

@@ -24,6 +24,7 @@ export const TakeCatForm = ({ id }: { id: string }) => {
     });
 
     const { mutateAsync } = useTakeCat();
+
     const onSubmit = async (data: TForm) => {
         try {
             await asyncHandle(
@@ -56,11 +57,18 @@ export const TakeCatForm = ({ id }: { id: string }) => {
                 {...register('lastName')}
                 error={errors.lastName?.message}
             />
-            <Input placeholder='Телефон' {...register('phone')} error={errors.phone?.message} />
+            <Input
+                maskProps={{
+                    mask: '+79999999999',
+                }}
+                placeholder='Телефон'
+                {...register('phone')}
+                error={errors.phone?.message}
+            />
             <Input placeholder='E-mail' {...register('email')} error={errors.email?.message} />
 
             <label className={styles.checkbox}>
-                <input type='checkbox' {...register('agree')} />
+                <Input type='checkbox' {...register('agree')} />
                 <div className={styles.checkmark} />
                 <p>
                     Я подтверждаю Согласие на обработку персональных данных и принимаю Политику

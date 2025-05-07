@@ -8,6 +8,13 @@ import dayjs from 'dayjs';
 import { Loader } from '@/Components/Loader';
 import map from 'lodash/map';
 
+const howToDonate = [
+    '1. переведи по номеру ххххххххххх (Фамилия И.О.)',
+    '2. нажми кнопку "Пожертвовать" в начале страницы',
+    '3. отсканируй QR код и переведи удобную сумму',
+    '4. мы с радостью примем строительные материалы',
+];
+
 export const ProjectDetails = () => {
     const { projectId } = useParams();
 
@@ -70,6 +77,11 @@ export const ProjectDetails = () => {
                     </div>
                     <div className={styles.group}>
                         <h6>Как поддержать проект</h6>
+                        <div className={styles.spending}>
+                            {map(howToDonate, item => {
+                                return <p key={item}>{item}</p>;
+                            })}
+                        </div>
                     </div>
                 </div>
             </Details.Bottom>

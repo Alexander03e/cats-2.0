@@ -11,6 +11,7 @@ import filter from 'lodash/filter';
 import { getBackendImage } from '@/Shared/utils/getImage.ts';
 import size from 'lodash/size';
 import { Loader } from '@/Components/Loader';
+import dayjs from 'dayjs';
 
 export const HistoryPage = () => {
     const title = 'Уже <span data-accent="true">дома</span>';
@@ -34,7 +35,11 @@ export const HistoryPage = () => {
                         className={styles.card}
                         key={`history-cat-item-${index}`}
                         img={getBackendImage(item?.photos?.[0])}
-                        description={item.description}
+                        description={
+                            item?.left_at
+                                ? `Выбыл: ${dayjs(item?.left_at).format('DD.MM.YYYY')}`
+                                : item?.description
+                        }
                         title={item.name}
                     />
                 ))}

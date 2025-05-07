@@ -50,7 +50,15 @@ export const FeedbackVacancy = ({ id }: { id: string }) => {
                 {...register('lastName')}
                 error={errors.lastName?.message}
             />
-            <Input placeholder='Телефон' {...register('phone')} error={errors.phone?.message} />
+            <Input
+                maskProps={{
+                    mask: '+79999999999',
+                }}
+                type={'tel'}
+                placeholder='Телефон'
+                {...register('phone')}
+                error={errors.phone?.message}
+            />
             <Input placeholder='E-mail' {...register('email')} error={errors.email?.message} />
 
             <label className={styles.checkbox}>

@@ -78,7 +78,6 @@ export const CatCard = ({
                 [styles.clickable]: !!onClick,
             })}
             {...props}
-            s
         >
             <motion.div
                 className={styles.inner}

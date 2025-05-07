@@ -20,7 +20,7 @@ export const vacancyQueries = {
 export const useFeedbackVacancy = () => {
     return useMutation({
         mutationFn: async ({ data, id }: { data: IFeedbackVacancy; id: string }) => {
-            const response = await $api.post(`/vacancies/${id}/applications`, data);
+            const response = await $api.post(`/vacancies/${id}/applications/`, data);
             return response.data;
         },
     });
