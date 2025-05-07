@@ -35,7 +35,7 @@ class ProjectAdmin(admin.ModelAdmin):
             'fields': ('title', 'description', 'cover_image')
         }),
         ('Финансы', {
-            'fields': ('goal_amount', 'current_amount', 'status')
+            'fields': ('for_what', 'goal_amount', 'current_amount', 'status')
         }),
         ('Детали расходов', {
             'fields': ('spending_items',),

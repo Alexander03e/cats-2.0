@@ -9,7 +9,7 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=['post'], serializer_class=DonationSerializer)
     def donate(self, request, pk=None):
         project = self.get_object()
         serializer = DonationSerializer(data=request.data, context={'request': request})
