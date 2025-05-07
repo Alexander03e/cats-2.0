@@ -15,13 +15,14 @@ class SuccessStoryAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description')
     fieldsets = (
         (None, {
-            'fields': ('title', 'photo', 'description')
+            'fields': ('title', 'category', 'photo', 'description')
         }),
         ('Контент', {
             'fields': ('content', 'content_preview'),
             'classes': ('wide',)
         }),
     )
+    raw_id_fields=('category',)
     
     def content_preview(self, obj):
         return mark_safe(obj.content)

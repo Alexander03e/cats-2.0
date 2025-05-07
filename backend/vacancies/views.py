@@ -1,4 +1,4 @@
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Vacancy, Application
@@ -7,7 +7,6 @@ from .serializers import VacancySerializer, ApplicationSerializer
 class VacancyViewSet(viewsets.ModelViewSet):
     queryset = Vacancy.objects.all().order_by('-created_at')
     serializer_class = VacancySerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     @action(detail=True, methods=['post'])
     def apply(self, request, pk=None):
@@ -21,7 +20,6 @@ class VacancyViewSet(viewsets.ModelViewSet):
 
 class ApplicationViewSet(viewsets.ModelViewSet):
     serializer_class = ApplicationSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     
     def get_queryset(self):
         return Application.objects.filter(vacancy=self.kwargs.get('vacancy_pk'))
