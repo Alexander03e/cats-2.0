@@ -4,8 +4,12 @@ import { Input } from '@/Components/Input';
 import styles from './FeedbackVacancy.module.scss';
 import { Button } from '@/Components/Button';
 import { formSchema, type TForm } from './scheme';
+import { useFeedbackVacancy } from '@/Shared/api/vacancies.ts';
+import { asyncHandle } from '@/Shared/utils/async.ts';
+import { EVacancyType, IFeedbackVacancy } from '@/Shared/types/vacancies.ts';
 
-export const FeedbackVacancy = () => {
+export const FeedbackVacancy = ({ id }: { id: string }) => {
+    const { mutateAsync } = useFeedbackVacancy();
     const {
         register,
         handleSubmit,
@@ -20,8 +24,22 @@ export const FeedbackVacancy = () => {
         },
     });
 
-    const onSubmit = (data: TForm) => {
-        console.log(data);
+    const onSubmit = async (data: TForm) => {
+        asyncHandle(
+            mutateAsync.bind(null, {
+                id,
+                data: {
+                    vacancy: Number(id),
+                    type: EVacancyType.VOLUNTEER,
+                    phone: data?.phone,
+                    applicant_name: `${data.lastName} ${data.firstName}`,
+                } as IFeedbackVacancy,
+            }),
+            {
+                errorMsg: 'Не удалось отправить заявку',
+                successMsg: 'Заявка успешно отправлена',
+            },
+        );
     };
 
     return (
@@ -32,7 +50,15 @@ export const FeedbackVacancy = () => {
                 {...register('lastName')}
                 error={errors.lastName?.message}
             />
-            <Input placeholder='Телефон' {...register('phone')} error={errors.phone?.message} />
+            <Input
+                maskProps={{
+                    mask: '+79999999999',
+                }}
+                type={'tel'}
+                placeholder='Телефон'
+                {...register('phone')}
+                error={errors.phone?.message}
+            />
             <Input placeholder='E-mail' {...register('email')} error={errors.email?.message} />
 
             <label className={styles.checkbox}>

@@ -4,4 +4,6 @@ export interface IHistoryItem {
     photo: string;
     description: string;
     date: string;
+    category?: null;
+    content: string;
 }

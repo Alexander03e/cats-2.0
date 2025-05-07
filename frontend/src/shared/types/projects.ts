@@ -11,5 +11,7 @@ export interface IProjectItem {
     goal_amount: string;
     current_amount: string;
     status: EProjectStatus;
+    cover_image?: string;
     created_at: string;
+    spending_list?: string[];
 }

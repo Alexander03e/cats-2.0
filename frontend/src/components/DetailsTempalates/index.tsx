@@ -5,7 +5,7 @@ import isString from 'lodash/isString';
 import isArray from 'lodash/isArray';
 import size from 'lodash/size';
 import map from 'lodash/map';
-import { getImage } from '@/Shared/utils/getImage.ts';
+import { getBackendImage, getImage } from '@/Shared/utils/getImage.ts';
 
 type TProps = HTMLAttributes<HTMLDivElement>;
 
@@ -55,9 +55,10 @@ Details.Bottom = ({ title, noStyle, subtitle, children, className, ...props }: I
 
 interface IImageProps extends TProps {
     images: string[] | string;
+    needBackendSuffixImg?: boolean;
 }
 
-Details.Image = ({ images }: IImageProps) => {
+Details.Image = ({ images, needBackendSuffixImg }: IImageProps) => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const [activeIndex, setActiveIndex] = useState(0);
 
@@ -78,28 +79,46 @@ Details.Image = ({ images }: IImageProps) => {
         }
     };
 
-    const currentImage = getCurrentImage();
+    const getImgEl = (img?: string) => {
+        if (needBackendSuffixImg) {
+            return getBackendImage(img);
+        }
 
-    console.log(currentImage);
+        return img;
+    };
+
+    const currentImage = getImgEl(getCurrentImage());
 
     return (
-        <div className={styles.imageWrapper}>
+        <div
+            className={cn(styles.imageWrapper, {
+                [styles.onlyImage]: imagesIsString || size(images) === 1,
+            })}
+        >
+            {size(images) === 0 && (
+                <div className={styles.onlyImage}>
+                    <img style={{ objectFit: 'cover' }} src={'/images/placeholder-cat.webp'} />
+                </div>
+            )}
             {(imagesIsString || size(images) === 1) && (
                 <div className={styles.onlyImage}>
-                    <img src={getImage(currentImage)} />
+                    <img style={{ objectFit: 'contain' }} src={getImage(currentImage)} />
                 </div>
             )}
             {imagesIsArray && (
                 <div className={styles.arrayImage}>
                     <div className={styles.mainImage}>
-                        <img src={currentImage} />
+                        <img style={{ objectFit: 'contain' }} src={currentImage} />
                     </div>
 
                     <div className={styles.scrollWrapper}>
                         <div className={styles.restImages}>
                             {map(images, (item, index) => (
                                 <button className={styles.imgButton}>
-                                    <img onClick={setActiveIndex.bind(null, index)} src={item} />
+                                    <img
+                                        onClick={setActiveIndex.bind(null, index)}
+                                        src={getImgEl(item)}
+                                    />
                                 </button>
                             ))}
                         </div>

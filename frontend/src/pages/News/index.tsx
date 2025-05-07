@@ -8,17 +8,33 @@ import { PATHS } from '@/Shared/consts';
 import { useQuery } from '@tanstack/react-query';
 import { newsQueries } from '@/Shared/api/news.ts';
 import size from 'lodash/size';
+import { Loader } from '@/Components/Loader';
+import { useState } from 'react';
 
 export const NewsPage = () => {
     const title = '<span data-accent="true">Новости</span> приюта';
-    const { data } = useQuery(newsQueries.list());
-
+    const { data, isLoading } = useQuery(newsQueries.list());
     const navigate = useNavigate();
+    const [visibleCount, setVisibleCount] = useState(3);
+
+    if (isLoading) {
+        return <Loader />;
+    }
+
+    if (!data) {
+        return null;
+    }
+
+    const handleShowMore = () => {
+        setVisibleCount(prev => prev + 3);
+    };
+
+    const visibleItems = data.slice(0, visibleCount);
 
     return (
         <Section title={title} className={styles.wrapper}>
             <div className={styles.content}>
-                {map(data, (item, index) => (
+                {map(visibleItems, (item, index) => (
                     <CatCard
                         title={item.title}
                         img={item.cover_image}
@@ -39,7 +55,11 @@ export const NewsPage = () => {
                     />
                 ))}
             </div>
-            {size(data) > 3 && <Button fullWidth>Показать больше</Button>}
+            {size(data) > visibleCount && (
+                <Button fullWidth onClick={handleShowMore}>
+                    Показать больше
+                </Button>
+            )}
         </Section>
     );
 };

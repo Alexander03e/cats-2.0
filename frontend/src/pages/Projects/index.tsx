@@ -7,11 +7,16 @@ import { projectQueries } from '@/Shared/api/projects.ts';
 import { Progress } from '@/Components/Progress';
 import { PATHS } from '@/Shared/consts';
 import { useNavigate } from 'react-router-dom';
+import { Loader } from '@/Components/Loader';
 
 export const ProjectsPage = () => {
     const title = 'Наши <span data-accent="true">проекты</span>';
-    const { data } = useQuery(projectQueries.list());
+    const { data, isLoading } = useQuery(projectQueries.list());
     const navigate = useNavigate();
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     return (
         <Section title={title}>
@@ -23,6 +28,7 @@ export const ProjectsPage = () => {
                         title={item.title}
                         onClick={() => navigate(PATHS.PROJECTS_DETAILS.ABSOLUTE(item.id))}
                         description={item.description}
+                        img={item?.cover_image}
                         bottomSlot={
                             <Progress
                                 suffix={'₽'}

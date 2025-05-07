@@ -5,10 +5,15 @@ import { useQuery } from '@tanstack/react-query';
 import { vacancyQueries } from '@/Shared/api/vacancies.ts';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
+import { Loader } from '@/Components/Loader';
 
 export const VacancyDetails = () => {
     const { vacancyId } = useParams();
-    const { data } = useQuery(vacancyQueries.detail(vacancyId!));
+    const { data, isLoading } = useQuery(vacancyQueries.detail(vacancyId!));
+
+    if (isLoading) {
+        return <Loader />;
+    }
 
     if (!data) return null;
 
@@ -26,7 +31,7 @@ export const VacancyDetails = () => {
                 }
             >
                 <div className={styles.form}>
-                    <FeedbackVacancy />
+                    <FeedbackVacancy id={vacancyId!} />
                 </div>
             </Details.Bottom>
         </Details>
