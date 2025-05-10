@@ -14,6 +14,7 @@ import slice from 'lodash/slice';
 import { PATHS } from '@/Shared/consts';
 import dayjs from 'dayjs';
 import { Loader } from '@/Components/Loader';
+import { Empty } from '@/Components/Empty';
 
 export const VacanciesPage = () => {
     const { data, isLoading } = useQuery(vacancyQueries.list());
@@ -27,8 +28,13 @@ export const VacanciesPage = () => {
         return <Loader />;
     }
 
-    if (!filtered || size(filtered) < 0) return;
-
+    if (!filtered || size(filtered) < 0) {
+        return (
+            <Section title={title}>
+                <Empty />;
+            </Section>
+        );
+    }
     const vacancies = all ? filtered : slice(filtered, 0, 3);
 
     return (

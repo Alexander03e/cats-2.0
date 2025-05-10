@@ -13,6 +13,8 @@ import { useMemo, useState } from 'react';
 import { clearObj } from '@/Shared/utils/common.ts';
 import { Error } from '@/Components/Error';
 import filter from 'lodash/filter';
+import size from 'lodash/size';
+import { Empty } from '@/Components/Empty';
 
 export const CatsPage = () => {
     const [searchValue, setSearchValue] = useState('');
@@ -56,17 +58,21 @@ export const CatsPage = () => {
                 filters={data?.filters}
             />
             <div className={styles.content}>
-                {map(searchedValues, (item, index) => (
-                    <CatCard
-                        onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
-                        status={item.status}
-                        className={styles.card}
-                        title={item.name}
-                        description={item.description}
-                        img={getBackendImage(item?.photos?.[0])}
-                        key={`our-cats-item-${index}`}
-                    />
-                ))}
+                {size(searchedValues) > 0 ? (
+                    map(searchedValues, (item, index) => (
+                        <CatCard
+                            onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
+                            status={item.status}
+                            className={styles.card}
+                            title={item.name}
+                            description={item.description}
+                            img={getBackendImage(item?.photos?.[0])}
+                            key={`our-cats-item-${index}`}
+                        />
+                    ))
+                ) : (
+                    <Empty />
+                )}
             </div>
         </Section>
     );

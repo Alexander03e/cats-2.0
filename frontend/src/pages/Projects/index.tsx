@@ -8,6 +8,8 @@ import { Progress } from '@/Components/Progress';
 import { PATHS } from '@/Shared/consts';
 import { useNavigate } from 'react-router-dom';
 import { Loader } from '@/Components/Loader';
+import size from 'lodash/size';
+import { Empty } from '@/Components/Empty';
 
 export const ProjectsPage = () => {
     const title = 'Наши <span data-accent="true">проекты</span>';
@@ -16,6 +18,14 @@ export const ProjectsPage = () => {
 
     if (isLoading) {
         return <Loader />;
+    }
+
+    if (size(data) === 0) {
+        return (
+            <Section title={title}>
+                <Empty />
+            </Section>
+        );
     }
 
     return (

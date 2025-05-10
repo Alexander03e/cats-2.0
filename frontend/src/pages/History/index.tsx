@@ -12,6 +12,7 @@ import { getBackendImage } from '@/Shared/utils/getImage.ts';
 import size from 'lodash/size';
 import { Loader } from '@/Components/Loader';
 import dayjs from 'dayjs';
+import { Empty } from '@/Components/Empty';
 
 export const HistoryPage = () => {
     const title = 'Уже <span data-accent="true">дома</span>';
@@ -24,10 +25,17 @@ export const HistoryPage = () => {
         return <Loader />;
     }
 
+    if (size(filteredData) === 0) {
+        return (
+            <Section title={title}>
+                <Empty />
+            </Section>
+        );
+    }
+
     return (
         <Section title={title}>
             <div className={styles.content}>
-                {size(filteredData) === 0 && <p style={{ margin: '0 auto' }}>Тут пока пусто</p>}
                 {map(filteredData, (item, index) => (
                     <CatCard
                         onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}

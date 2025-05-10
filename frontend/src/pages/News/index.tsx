@@ -10,6 +10,7 @@ import { newsQueries } from '@/Shared/api/news.ts';
 import size from 'lodash/size';
 import { Loader } from '@/Components/Loader';
 import { useState } from 'react';
+import { Empty } from '@/Components/Empty';
 
 export const NewsPage = () => {
     const title = '<span data-accent="true">Новости</span> приюта';
@@ -33,28 +34,32 @@ export const NewsPage = () => {
 
     return (
         <Section title={title} className={styles.wrapper}>
-            <div className={styles.content}>
-                {map(visibleItems, (item, index) => (
-                    <CatCard
-                        title={item.title}
-                        img={item.cover_image}
-                        description={item.content}
-                        className={styles.card}
-                        bottomClass={styles.cardBottom}
-                        contentClass={styles.cardContent}
-                        key={`news-card-${index}`}
-                        bottomSlot={
-                            <Button
-                                onClick={() => navigate(PATHS.NEWS_DETAILS.ABSOLUTE(item.id))}
-                                fullWidth
-                                variant={'light'}
-                            >
-                                Читать
-                            </Button>
-                        }
-                    />
-                ))}
-            </div>
+            {size(visibleItems) === 0 ? (
+                <Empty />
+            ) : (
+                <div className={styles.content}>
+                    {map(visibleItems, (item, index) => (
+                        <CatCard
+                            title={item.title}
+                            img={item.cover_image}
+                            description={item.content}
+                            className={styles.card}
+                            bottomClass={styles.cardBottom}
+                            contentClass={styles.cardContent}
+                            key={`news-card-${index}`}
+                            bottomSlot={
+                                <Button
+                                    onClick={() => navigate(PATHS.NEWS_DETAILS.ABSOLUTE(item.id))}
+                                    fullWidth
+                                    variant={'light'}
+                                >
+                                    Читать
+                                </Button>
+                            }
+                        />
+                    ))}
+                </div>
+            )}
             {size(data) > visibleCount && (
                 <Button fullWidth onClick={handleShowMore}>
                     Показать больше
