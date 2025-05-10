@@ -1,3 +1,5 @@
+import { IFilterItem } from '@/Components/Filters';
+
 export enum EHealthStatus {
     HEALTHY = 'HEALTHY',
     SICK = 'SICK',
@@ -35,6 +37,7 @@ export interface ICatListItem {
 
 export interface ICatsData {
     results: ICatListItem[];
+    filters: Record<string, IFilterItem>;
 }
 
 export interface ITakeCat {

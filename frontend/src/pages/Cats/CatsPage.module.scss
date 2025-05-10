@@ -1,8 +1,28 @@
+.section {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+
+    .filters {
+        height: fit-content;
+        width: 350px;
+        min-width: 350px;
+    }
+}
+
+.inner {
+    & > h2 {
+        width: 100%;
+        text-align: left !important;
+        padding-left: 350px;
+    }
+}
+
 .content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+    //justify-content: center;
+    //align-items: center;
     gap: 20px;
 
     .card {

@@ -8,22 +8,55 @@ import { useQuery } from '@tanstack/react-query';
 import { catsQueries } from '@/Shared/api/cats.ts';
 import { getBackendImage } from '@/Shared/utils/getImage.ts';
 import { Loader } from '@/Components/Loader';
+import { Filters } from '@/Components/Filters';
+import { useMemo, useState } from 'react';
+import { clearObj } from '@/Shared/utils/common.ts';
+import { Error } from '@/Components/Error';
+import filter from 'lodash/filter';
 
 export const CatsPage = () => {
-    const { data, isLoading } = useQuery(catsQueries.list());
+    const [searchValue, setSearchValue] = useState('');
     const title = 'Наши <span data-accent="true">подопечные</span>';
+
+    const [filters, setFilters] = useState<Record<string, string>>({});
+
+    const params = clearObj(filters);
+    const { data, isLoading, isFetching, isError } = useQuery(catsQueries.list(params));
+
+    const handleFiltersChange = (obj: Record<string, string>) => {
+        console.log(obj);
+        console.log(searchValue);
+        setFilters(obj);
+    };
     const navigate = useNavigate();
 
-    if (isLoading) {
+    const searchedValues = useMemo(() => {
+        const items = data?.results;
+        if (!searchValue) return items;
+
+        return filter(items, item => item.name.toLowerCase()?.includes(searchValue.toLowerCase()));
+    }, [data, searchValue]);
+
+    if (isError) {
+        return <Error />;
+    }
+
+    if (isLoading && !isFetching) {
         return <Loader />;
     }
 
-    if (!data) return null;
-
     return (
-        <Section title={title}>
+        <Section innerClass={styles.inner} contentClass={styles.section} title={title}>
+            <Filters
+                loading={isFetching}
+                onFilter={handleFiltersChange}
+                onSearch={setSearchValue}
+                className={styles.filters}
+                title={'Поиск по кличке'}
+                filters={data?.filters}
+            />
             <div className={styles.content}>
-                {map(data?.results, (item, index) => (
+                {map(searchedValues, (item, index) => (
                     <CatCard
                         onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
                         status={item.status}

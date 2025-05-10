@@ -68,7 +68,7 @@ export const TakeCatForm = ({ id }: { id: string }) => {
             <Input placeholder='E-mail' {...register('email')} error={errors.email?.message} />
 
             <label className={styles.checkbox}>
-                <Input type='checkbox' {...register('agree')} />
+                <input type='checkbox' {...register('agree')} />
                 <div className={styles.checkmark} />
                 <p>
                     Я подтверждаю Согласие на обработку персональных данных и принимаю Политику
