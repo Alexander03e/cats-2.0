@@ -1,0 +1,58 @@
+.button {
+    font-size: 20px;
+    font-weight: bold;
+    white-space: nowrap;
+
+    &.small {
+        padding: 8px 24px;
+        line-height: 1;
+    }
+
+    &.medium {
+        padding: 13px 24px;
+    }
+
+    transition: 0.3s ease;
+
+    &.default {
+        color: white;
+        background-color: var(--accent-color);
+        border-radius: 36px;
+    }
+
+    &.light, &.tab {
+        border-radius: 25px;
+        color: var(--accent-color);
+        background-color: var(--light-accent-color);
+
+        &.active {
+            color: white;
+            background-color: var(--accent-color);
+            border-radius: 36px;
+        }
+    }
+
+    &.blue {
+        border-radius: 25px;
+        background-color: var(--secondary-color);
+        color: var(--dark-color);
+    }
+
+    &.yellow {
+        border-radius: 25px;
+        color: var(--accent-color);
+        background-color: var(--yellow-color);
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &:active {
+        opacity: 0.6;
+    }
+
+    &.fullWidth {
+        width: 100%;
+    }
+}

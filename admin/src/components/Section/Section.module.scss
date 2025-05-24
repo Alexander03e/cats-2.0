@@ -1,0 +1,24 @@
+.wrapper {
+    .inner {
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        align-items: flex-start;
+
+        .title {
+            font-size: 42px;
+            text-align: left;
+            font-weight: 700;
+
+            span[data-accent="true"] {
+                color: var(--accent-color)
+            }
+
+            color: var(--dark-color)
+        }
+
+        .content {
+            width: 100%;
+        }
+    }
+}
