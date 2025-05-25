@@ -5,6 +5,9 @@ from .models import Cat
 from .filters import CatFilter
 from .serializers import CatSerializer, AdoptionApplicationSerializer
 import django_filters
+from .models import CatAttribute
+from .serializers import CatAttributeSerializer
+
 
 class CatViewSet(viewsets.ModelViewSet):
     queryset = Cat.objects.all()
@@ -14,10 +17,10 @@ class CatViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-        
+
         # Получаем уникальные цвета из базы данных
         colors = Cat.objects.order_by('color').values_list('color', flat=True).distinct()
-        
+
         # Формируем объект фильтров
         filters = {
             'gender': dict(Cat.GENDER_CHOICES),
@@ -25,7 +28,7 @@ class CatViewSet(viewsets.ModelViewSet):
             'health_status': dict(Cat.HEALTH_STATUS_CHOICES),
             'color': {color: color for color in colors if color},
         }
-        
+
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)
@@ -39,10 +42,10 @@ class CatViewSet(viewsets.ModelViewSet):
             'results': serializer.data,
             'filters': filters
         })
-        
+
     @action(
-        methods=['post'], 
-        detail=True, 
+        methods=['post'],
+        detail=True,
         url_path='adopt',
         serializer_class=AdoptionApplicationSerializer,
         permission_classes=[permissions.AllowAny],
@@ -50,15 +53,21 @@ class CatViewSet(viewsets.ModelViewSet):
     def adopt(self, request, pk=None):
         cat = self.get_object()
         serializer = AdoptionApplicationSerializer(data=request.data)
-        
+
         if serializer.is_valid():
             # Создаем заявку и привязываем к кошке
             application = serializer.save(cat=cat)
-            
-            # Обновляем статус кошки 
-            cat.status = 'RESERVED'  
+
+            # Обновляем статус кошки
+            cat.status = 'RESERVED'
             cat.save()
-            
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
+
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class CatAttributeViewSet(viewsets.ModelViewSet):
+    queryset = CatAttribute.objects.all()
+    serializer_class = CatAttributeSerializer
+    permission_classes = [permissions.AllowAny]

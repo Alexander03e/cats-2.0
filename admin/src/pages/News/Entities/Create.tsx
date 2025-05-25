@@ -3,6 +3,7 @@ import { Section } from '@/Components/Section';
 import { Flex } from 'antd';
 import { Button } from '@/Components/Button';
 import { ArrowLeftOutlined } from '@ant-design/icons';
+import { NewsForm } from '@/Features/News/Form.tsx';
 
 export const CreateNewsPage = () => {
     const navigate = useNavigate();
@@ -17,6 +18,8 @@ export const CreateNewsPage = () => {
                     Создание новости
                 </Flex>
             }
-        ></Section>
+        >
+            <NewsForm />
+        </Section>
     );
 };
