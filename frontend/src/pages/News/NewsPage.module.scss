@@ -6,13 +6,32 @@
     width: 100%;
     margin-bottom: 16px;
 
+    @media screen and (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+
+    }
+
+    .card {
+        & > div {
+            height: 100%;
+        }
+    }
 
     .cardContent {
+        flex: 1;
         padding-bottom: 24px;
+
+        & > p {
+            flex: 1;
+        }
     }
 
     .cardBottom {
-        padding-block: 48px 0!important;
+        padding-block: 48px 0 !important;
     }
 
 }

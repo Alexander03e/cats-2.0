@@ -42,7 +42,7 @@ export const NewsPage = () => {
                         <CatCard
                             title={item.title}
                             img={item.cover_image}
-                            description={item.content}
+                            description={item.description}
                             className={styles.card}
                             bottomClass={styles.cardBottom}
                             contentClass={styles.cardContent}

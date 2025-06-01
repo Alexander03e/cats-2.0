@@ -8,6 +8,14 @@
         width: 350px;
         min-width: 350px;
     }
+
+    @media screen and (max-width: 890px) {
+        flex-direction: column;
+
+        .filters {
+            width: 100%;
+        }
+    }
 }
 
 .inner {
@@ -16,17 +24,75 @@
         text-align: left !important;
         padding-left: 350px;
     }
+
+    @media screen and (max-width: 890px) {
+
+        & > h2 {
+            padding-left: 0 !important;
+
+        }
+    }
 }
 
 .content {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    //justify-content: center;
-    //align-items: center;
     gap: 20px;
 
     .card {
-        width: 350px;
+        max-width: calc(100% / 3 - 20px) !important;
+        height: 100%;
+    }
+
+    @media screen and (max-width: 1400px) {
+        .card {
+
+            max-width: calc(100% / 2 - 20px) !important;
+        }
+    }
+
+    @media screen and (max-width: 1200px) {
+        .card {
+            max-width: 100% !important;
+        }
+    }
+}
+
+.mobileFilters {
+    position: fixed;
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    z-index: 999;
+    top: 0;
+    display: none;
+
+    &.opened {
+        display: block;
+    }
+
+    .filters {
+        height: 100%;
+        width: 100%;
+        padding-top: 0;
+    }
+
+    .filtersTop {
+        display: flex;
+        padding: 28px 24px;
+        justify-content: space-between;
+        align-items: center;
+
+
+        p {
+            font-family: Montserrat;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 100%;
+            letter-spacing: 0%;
+            color: var(--accent-color)
+        }
     }
 }

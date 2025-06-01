@@ -12,6 +12,10 @@
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         gap: 20px;
+
+        @media screen and (max-width: 600px) {
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        }
     }
 
     .bottom {
@@ -19,6 +23,11 @@
         display: flex;
         justify-content: space-between;
         width: 100%;
+        gap: 16px;
+
+        @media screen and (max-width: 600px) {
+            flex-direction: column;
+        }
     }
 
     .card {

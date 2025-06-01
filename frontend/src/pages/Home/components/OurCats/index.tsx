@@ -39,6 +39,7 @@ export const OurCats = () => {
             <div className={styles.cards}>
                 {map(slice(data?.results, 0, 3), (item, index) => (
                     <CatCard
+                        imgClass={styles.catImg}
                         onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
                         status={item.status}
                         className={styles.card}

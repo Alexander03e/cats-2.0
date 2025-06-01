@@ -2,6 +2,14 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    @media screen and (max-width: 500px) {
+        gap: 14px;
+    }
+
+    @media screen and (max-width: 500px) {
+        gap: 8px;
+    }
 }
 
 .checkbox {
@@ -15,6 +23,11 @@
 
     .error {
         color: red;
+        font-size: 14px;
+    }
+
+    @media screen and (max-width: 500px) {
+        margin-block: 12px;
         font-size: 14px;
     }
 }

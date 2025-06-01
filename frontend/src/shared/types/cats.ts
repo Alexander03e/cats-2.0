@@ -26,7 +26,7 @@ export interface ICatListItem {
     color: string;
     age: number;
     health_status: EHealthStatus;
-    attributes: string[];
+    attributes: { id: number; name: string }[];
     left_at: string;
     status: ECatStatus;
     description: string;

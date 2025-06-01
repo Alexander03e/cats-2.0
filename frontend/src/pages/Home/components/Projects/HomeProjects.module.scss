@@ -6,5 +6,22 @@
     .cards {
         display: flex;
         gap: 20px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+
+        .catCard {
+            max-width: calc(100% / 3 - 24px);
+
+            @media screen and (max-width: 1280px) {
+                max-width: calc(100% / 2 - 12px);
+
+            }
+
+            @media screen and (max-width: 768px) {
+
+                max-width: 100% !important;
+
+            }
+        }
     }
 }

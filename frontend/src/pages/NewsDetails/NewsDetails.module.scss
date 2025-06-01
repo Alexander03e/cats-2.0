@@ -1,0 +1,28 @@
+.newWrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+
+    @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+.mobileTitle {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: -2%;
+    text-align: center;
+
+    button {
+        height: fit-content;
+        display: flex;
+    }
+
+}

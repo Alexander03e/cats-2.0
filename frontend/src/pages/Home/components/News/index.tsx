@@ -17,10 +17,11 @@ export const News = () => {
             <div className={styles.content}>
                 {map(data, (item, index) => (
                     <MediaCard
+                        imgClass={styles.cardImg}
                         title={item.title}
                         onButton={() => navigate(PATHS.NEWS_DETAILS.ABSOLUTE(item.id))}
                         description={item.content}
-                        imgSrc={item.cover_image}
+                        imgSrc={item.cover_image_url}
                         key={`home-news-item-${index}`}
                     />
                 ))}

@@ -71,16 +71,18 @@ export const ArticlesPage = () => {
                         );
                     })}
                 </div>
-                {map(visibleItems, (item, index) => (
-                    <MediaCard
-                        imgSrc={item?.photo}
-                        description={item?.description}
-                        title={item?.title}
-                        onButton={() => navigate(PATHS.ARTICLES_DETAILS.ABSOLUTE(item?.id))}
-                        className={styles.card}
-                        key={`articles-item-${index}`}
-                    />
-                ))}
+                <div className={styles.cards}>
+                    {map(visibleItems, (item, index) => (
+                        <MediaCard
+                            imgSrc={item?.photo}
+                            description={item?.description}
+                            title={item?.title}
+                            onButton={() => navigate(PATHS.ARTICLES_DETAILS.ABSOLUTE(item?.id))}
+                            className={styles.card}
+                            key={`articles-item-${index}`}
+                        />
+                    ))}
+                </div>
                 {size(results) > visibleCount && (
                     <Button fullWidth onClick={handleShowMore}>
                         Показать больше

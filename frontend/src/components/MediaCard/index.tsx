@@ -11,10 +11,12 @@ export interface IMediaCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'c
     description?: string;
     renderButton?: ReactNode;
     onButton?: () => void;
+    imgClass?: string;
 }
 
 export const MediaCard = ({
     title,
+    imgClass,
     description,
     imgSrc,
     renderButton,
@@ -23,7 +25,7 @@ export const MediaCard = ({
 }: IMediaCardProps) => {
     return (
         <div className={cn(styles.wrapper, className)}>
-            <div className={styles.image}>
+            <div className={cn(styles.image, imgClass)}>
                 <img src={getImage(imgSrc)} />
             </div>
             <div className={styles.content}>

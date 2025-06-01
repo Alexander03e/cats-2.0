@@ -4,6 +4,7 @@
     gap: 20px;
     padding-top: 20px;
 
+
     .mainImg {
         width: 100%;
         aspect-ratio: 720 / 785;
@@ -55,6 +56,14 @@
                         color: white;
                         font-weight: 700;
                         font-size: 32px;
+
+                        @media screen and (max-width: 796px) {
+                            font-family: Montserrat;
+                            font-weight: 700;
+                            font-size: 16px;
+                            line-height: 100%;
+                            letter-spacing: 0%;
+                        }
                     }
                 }
             }
@@ -64,7 +73,38 @@
             display: flex;
             align-items: center;
             gap: 32px;
-            padding-bottom: 25px;
+
+
+            @media screen and (max-width: 796px) {
+                gap: 8px;
+
+                svg {
+                    height: 50px;
+                    width: 50px
+                }
+            }
+        }
+    }
+
+    @media screen and (max-width: 1180px) {
+        gap: 8px;
+        display: flex;
+        flex-direction: column-reverse;
+
+        .mainImg {
+            aspect-ratio: 300 / 200;
+            border-radius: 20px;
+        }
+
+        .info {
+            border-radius: 20px;
+            padding: 28px 24px;
+
+            .top {
+                gap: 24px !important;
+                padding-bottom: 64px;
+            }
+
         }
     }
 }

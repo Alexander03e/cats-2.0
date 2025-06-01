@@ -5,4 +5,6 @@ export interface INewsItem {
     date: string;
     cover_image: string;
     cover_image_url: string;
+    images: string[];
+    description?: string;
 }

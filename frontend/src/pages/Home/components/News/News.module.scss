@@ -3,13 +3,23 @@
     width: calc(var(--container-padding) * 2 + 100%);
     border-radius: 40px;
     background-color: var(--light-accent-color);
+
+    .content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+        padding-inline: 140px;
+    }
+
+    @media screen and (max-width: 1280px) {
+        padding-block: 24px;
+
+        .content {
+            padding-inline: 10px;
+
+        }
+    }
 }
 
-.content {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-    padding-inline: 140px;
-}
 

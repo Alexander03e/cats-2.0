@@ -15,10 +15,16 @@ import { Error } from '@/Components/Error';
 import filter from 'lodash/filter';
 import size from 'lodash/size';
 import { Empty } from '@/Components/Empty';
+import { useMobile } from '@/Shared/hooks/useMobile.ts';
+import { Button } from '@/Components/Button';
+import SVG from 'react-inlinesvg';
+import cn from 'classnames';
 
 export const CatsPage = () => {
     const [searchValue, setSearchValue] = useState('');
     const title = 'Наши <span data-accent="true">подопечные</span>';
+    const [openedFilers, setOpenedFilters] = useState(false);
+    const isMobile = useMobile();
 
     const [filters, setFilters] = useState<Record<string, string>>({});
 
@@ -26,8 +32,6 @@ export const CatsPage = () => {
     const { data, isLoading, isFetching, isError } = useQuery(catsQueries.list(params));
 
     const handleFiltersChange = (obj: Record<string, string>) => {
-        console.log(obj);
-        console.log(searchValue);
         setFilters(obj);
     };
     const navigate = useNavigate();
@@ -49,14 +53,43 @@ export const CatsPage = () => {
 
     return (
         <Section innerClass={styles.inner} contentClass={styles.section} title={title}>
-            <Filters
-                loading={isFetching}
-                onFilter={handleFiltersChange}
-                onSearch={setSearchValue}
-                className={styles.filters}
-                title={'Поиск по кличке'}
-                filters={data?.filters}
-            />
+            {!isMobile && (
+                <Filters
+                    loading={isFetching}
+                    onFilter={handleFiltersChange}
+                    onSearch={setSearchValue}
+                    className={styles.filters}
+                    title={'Поиск по кличке'}
+                    filters={data?.filters}
+                />
+            )}
+            {isMobile && (
+                <>
+                    <Button
+                        style={{ width: '100%', marginBottom: 12 }}
+                        onClick={() => setOpenedFilters(true)}
+                    >
+                        Открыть фильтры
+                    </Button>
+
+                    <div className={cn(styles.mobileFilters, { [styles.opened]: openedFilers })}>
+                        <div className={styles.filtersTop}>
+                            <p>Фильтры</p>
+                            <button onClick={() => setOpenedFilters(false)}>
+                                <SVG src={'/icons/close.svg'} />
+                            </button>
+                        </div>
+                        <Filters
+                            loading={isFetching}
+                            onFilter={handleFiltersChange}
+                            onSearch={setSearchValue}
+                            className={styles.filters}
+                            title={'Поиск по кличке'}
+                            filters={data?.filters}
+                        />
+                    </div>
+                </>
+            )}
             <div className={styles.content}>
                 {size(searchedValues) > 0 ? (
                     map(searchedValues, (item, index) => (

@@ -7,6 +7,7 @@
     overflow: hidden;
     position: relative;
     box-shadow: 0px 0px 15.9px 0px rgba(229, 229, 229, 1);
+    aspect-ratio: 370 / 470;
 
     &.clickable {
         cursor: pointer;
@@ -16,7 +17,7 @@
         display: flex;
         flex-direction: column;
         width: 100%;
-        height: 100%;
+        //height: 100%;
     }
 
     .hoverContainer {
@@ -56,11 +57,12 @@
 
 
     .img {
-        height: 313px;
         width: 100%;
+        min-height: 125px;
         overflow: hidden;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
+        aspect-ratio: 510/410;
 
         img {
             object-fit: cover;
@@ -90,6 +92,8 @@
             color: var(--dark-color);
             font-size: 16px;
             font-weight: 400;
+            //max-height: 60%;
+            //overflow: scroll;
         }
 
         .bottomSlot {
@@ -99,6 +103,39 @@
         &:has(.title, .description) {
             .top {
                 margin-bottom: 16px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+
+        .bottomSlot {
+            padding-bottom: 12px;
+        }
+
+        .content {
+
+            padding-bottom: 12px;
+
+            .top {
+                margin-bottom: 8px !important;
+            }
+
+            .title {
+                font-family: Montserrat;
+                font-weight: 700;
+                font-size: 24px;
+                line-height: 110.00000000000001%;
+                letter-spacing: -2%;
+            }
+
+            .description {
+                font-family: Montserrat;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 100%;
+                letter-spacing: 0%;
+
             }
         }
     }

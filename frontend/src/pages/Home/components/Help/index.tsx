@@ -4,9 +4,11 @@ import cn from 'classnames';
 import { Button } from '@/Components/Button';
 import { ANCHORS, PATHS } from '@/Shared/consts';
 import { useNavigate } from 'react-router-dom';
+import { useMobile } from '@/Shared/hooks/useMobile.ts';
 
 export const Help = () => {
     const title = 'Как нам можно <span data-accent="true">помочь?</span>';
+    const isMobile = useMobile();
 
     const navigate = useNavigate();
     return (
@@ -15,12 +17,21 @@ export const Help = () => {
                 <img src={'/images/kitty-flower.png'} />
             </div>
             <div className={styles.subgrid}>
-                <div className={cn(styles.gridItem, styles.take)}>
+                <div
+                    className={cn(styles.gridItem, {
+                        [styles.money]: isMobile,
+                        [styles.take]: !isMobile,
+                    })}
+                >
                     <div className={styles.top}>
                         <h5>Забрать питомца домой</h5>
                         <p>Стать хозяином и открыть свой дом для четвероногого друга</p>
                     </div>
-                    <Button onClick={() => navigate(PATHS.CATS)} variant={'blue'} size={'small'}>
+                    <Button
+                        onClick={() => navigate(PATHS.CATS)}
+                        variant={isMobile ? 'yellow' : 'blue'}
+                        size={'small'}
+                    >
                         Выбрать питомца
                     </Button>
                 </div>

@@ -33,6 +33,7 @@ export interface ICatCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
     img?: string;
     description?: string;
     bottomSlot?: ReactNode;
+    imgClass?: string;
     status?: ECatStatus;
     hoverable?: boolean;
     hoverStateRender?: ReactNode;
@@ -49,6 +50,7 @@ export const CatCard = ({
     onClick,
     hoverable,
     bottomSlot,
+    imgClass,
     hoverStateRender,
     bottomClass,
     img,
@@ -85,7 +87,7 @@ export const CatCard = ({
                 animate={mainControls}
                 transition={{ duration: 0.2, ease: 'easeInOut' }}
             >
-                <div className={styles.img}>
+                <div className={cn(styles.img, imgClass)}>
                     <img src={getImage(img)} />
                 </div>
                 <div className={cn(styles.content, contentClass)}>

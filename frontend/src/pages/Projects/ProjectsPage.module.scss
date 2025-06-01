@@ -7,4 +7,9 @@
         width: 100%;
         //aspect-ratio: 0.6;
     }
+
+    @media screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+    }
 }
