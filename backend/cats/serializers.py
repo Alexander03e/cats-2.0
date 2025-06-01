@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Cat, AdoptionApplication, CatAttribute
+from .models import Cat, AdoptionApplication, CatAttribute, CatPhoto
 
 
 class CatAttributeSerializer(serializers.ModelSerializer):
@@ -53,10 +53,22 @@ class CatSerializer(serializers.ModelSerializer):
 
     def update(self, instance, validated_data):
         attributes = validated_data.pop('attributes', [])
+
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
+
+        # Handle attributes
         instance.attributes.set(attributes)
+
+        # Handle photos if they exist in the request
+        if 'photos' in self.context.get('request', {}).FILES:
+            images_data = self.context['request'].FILES.getlist('photos')
+            # Delete all existing images (optional - you might want to keep them)
+            instance.photos.all().delete()
+            for image_data in images_data:
+                CatPhoto.objects.create(cat=instance, photo=image_data)  # Note: 'cat' not 'cats'
+
         return instance
 
 

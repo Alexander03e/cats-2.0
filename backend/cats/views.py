@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import Cat
+from .models import Cat, CatPhoto
 from .filters import CatFilter
 from .serializers import CatSerializer, AdoptionApplicationSerializer
 import django_filters

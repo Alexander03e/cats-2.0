@@ -14,6 +14,7 @@ class NewsViewSet(viewsets.ModelViewSet):
             return NewsListSerializer
         elif self.action == 'retrieve':
             return NewsDetailSerializer
+
         return NewsSerializer
 
     def get_permissions(self):

@@ -32,17 +32,15 @@ class NewsSerializer(serializers.ModelSerializer):
         return news
 
     def update(self, instance, validated_data):
+        # Update other fields
         for attr, value in validated_data.items():
             setattr(instance, attr, value)
         instance.save()
 
-        # Get all existing images
-        existing_images = instance.images.all()
-        # Delete all existing images
-        existing_images.delete()
-
-        # Add new images from the request
+        # Replace images with those provided in the request
         images_data = self.context['request'].FILES.getlist('images')
+        instance.images.all().delete()  # Delete all existing images
+
         for image_data in images_data:
             NewsImage.objects.create(news=instance, image=image_data)
 
