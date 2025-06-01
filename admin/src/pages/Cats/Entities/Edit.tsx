@@ -31,7 +31,7 @@ export const EditCatPage = () => {
                     </Flex>
                 }
             >
-                <CatForm initialData={data} />
+                <CatForm isEdit initialData={data} />
             </Section>
         </Spin>
     );

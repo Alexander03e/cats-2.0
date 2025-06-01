@@ -2,6 +2,7 @@ import { keepPreviousData, queryOptions, useMutation, useQueryClient } from '@ta
 import { $api } from '@/Shared/api/index.ts';
 import { ICatListItem, ICatsData, ITakeCat } from '@/Shared/types/cats.ts';
 import entries from 'lodash/entries';
+import { ICatAttribute } from '@/Features/Cat/Form.tsx';
 
 export const catsQueries = {
     list: (params?: Record<string, string>) =>
@@ -10,6 +11,13 @@ export const catsQueries = {
             queryFn: async () => (await $api.get('cats', { params })).data,
             placeholderData: keepPreviousData,
         }),
+
+    attributes: () => {
+        return queryOptions<ICatAttribute[]>({
+            queryKey: ['cat-attributes'],
+            queryFn: async () => (await $api.get('cats/attributes/')).data,
+        });
+    },
 
     detail: (id: string) =>
         queryOptions<ICatListItem>({
@@ -33,6 +41,49 @@ export const useDeleteCat = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['cats'],
+            });
+        },
+    });
+};
+
+interface ICreateAttribute {
+    name: string;
+}
+
+export const useCreateAttribute = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (data: ICreateAttribute): Promise<void> =>
+            (await $api.post('/cats/attributes/', data)).data,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['cat-attributes'],
+            });
+        },
+    });
+};
+
+export const useEditAttribute = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (data: ICatAttribute): Promise<void> =>
+            (await $api.put(`/cats/attributes/${data.id}/`, { name: data.name })).data,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['cat-attributes'],
+            });
+        },
+    });
+};
+
+export const useDeleteAttribute = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (id: number | string): Promise<void> =>
+            (await $api.delete(`/cats/attributes/${id}/`)).data,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['cat-attributes'],
             });
         },
     });

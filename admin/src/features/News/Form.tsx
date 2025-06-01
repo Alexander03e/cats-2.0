@@ -1,8 +1,7 @@
 // admin/src/features/News/Form.tsx
-import React, { useEffect } from 'react';
-import { Form, Input, Upload, message, Button } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Form, Input, Upload, message, Button, Spin } from 'antd';
 import { PlusOutlined, UploadOutlined } from '@ant-design/icons';
-import type { UploadFile } from 'antd/es/upload/interface';
 import ReactQuill from 'react-quill-new';
 import 'react-quill-new/dist/quill.snow.css';
 import { Button as AppButton } from '@/Components/Button';
@@ -19,6 +18,13 @@ interface IProps {
 export const NewsForm = ({ initialValues, isEdit }: IProps) => {
     const [form] = Form.useForm<INewsItem>();
     const [loading, setLoading] = React.useState(false);
+    const [fileList] = useState([]);
+
+    const createFileFromUrl = async (url: string, fileName: string) => {
+        const response = await fetch(url);
+        const blob = await response.blob();
+        return new File([blob], fileName, { type: blob.type });
+    };
 
     const onFinish = async (values: any) => {
         try {
@@ -29,24 +35,25 @@ export const NewsForm = ({ initialValues, isEdit }: IProps) => {
             formData.append('description', values.description);
             formData.append('content', values.content);
 
-            if (values.cover_image?.[0]?.originFileObj) {
+            if (values.cover_image?.[0]?.originFileBlob) {
                 formData.append('cover_image', values.cover_image[0].originFileObj);
             }
 
             if (values.images) {
-                console.log(values.images);
-                values.images.forEach((file: UploadFile) => {
+                for (const file of values.images) {
                     if (file.originFileObj) {
                         formData.append('images', file.originFileObj);
+                    } else if (file.url) {
+                        const fileBlob = await createFileFromUrl(file.url, file.name);
+                        formData.append('images', fileBlob);
                     }
-                });
+                }
             }
-
             if (isEdit && initialValues?.id) {
                 await $api.patch(`news/${initialValues.id}/`, formData, {
                     headers: { 'Content-Type': 'multipart/form-data' },
                 });
-                message.success('Новость успешно обновлена');
+                message.success({ content: 'Новость успешно обновлена', key: 'loadingMessage' });
             } else {
                 await $api.post('news/', formData, {
                     headers: { 'Content-Type': 'multipart/form-data' },
@@ -54,20 +61,12 @@ export const NewsForm = ({ initialValues, isEdit }: IProps) => {
                 message.success('Новость успешно создана');
                 form.resetFields();
             }
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
             message.error('Ошибка при сохранении новости');
         } finally {
             setLoading(false);
         }
-    };
-
-    const handleImageChange = ({ fileList: newFileList, file }: any) => {
-        // Если файл был удален и это существующее изображение
-        if (file.status === 'removed' && file.url) {
-            setRemovedImages(prev => [...prev, file.url]);
-        }
-        setFileList(newFileList);
-        form.setFieldValue('images', newFileList);
     };
 
     const normFile = (e: any) => {
@@ -103,69 +102,86 @@ export const NewsForm = ({ initialValues, isEdit }: IProps) => {
 
             form.setFieldsValue({
                 ...initialValues,
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
                 cover_image: coverImage,
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-expect-error
                 images,
             });
         }
     }, [initialValues, form]);
 
     return (
-        <Form form={form} layout='vertical' onFinish={onFinish}>
-            <Form.Item
-                name='title'
-                label='Заголовок'
-                rules={[{ required: true, message: 'Введите заголовок' }]}
-            >
-                <Input />
-            </Form.Item>
+        <Spin spinning={loading}>
+            <Form form={form} layout='vertical' onFinish={onFinish}>
+                <Form.Item
+                    name='title'
+                    label='Заголовок'
+                    rules={[{ required: true, message: 'Введите заголовок' }]}
+                >
+                    <Input />
+                </Form.Item>
 
-            <Form.Item
-                name='description'
-                label='Краткое описание'
-                rules={[{ required: true, message: 'Введите описание' }]}
-            >
-                <TextArea rows={3} />
-            </Form.Item>
+                <Form.Item
+                    name='description'
+                    label='Краткое описание'
+                    rules={[{ required: true, message: 'Введите описание' }]}
+                >
+                    <TextArea rows={3} />
+                </Form.Item>
 
-            <Form.Item
-                name='content'
-                label='Содержание'
-                rules={[{ required: true, message: 'Введите содержание' }]}
-            >
-                <ReactQuill theme='snow' />
-            </Form.Item>
+                <Form.Item
+                    name='content'
+                    label='Содержание'
+                    rules={[{ required: true, message: 'Введите содержание' }]}
+                >
+                    <ReactQuill theme='snow' />
+                </Form.Item>
 
-            <Form.Item
-                name='cover_image'
-                label='Обложка'
-                valuePropName='fileList'
-                getValueFromEvent={normFile}
-                rules={[{ required: true, message: 'Загрузите обложку' }]}
-            >
-                <Upload listType='picture-card' maxCount={1} beforeUpload={() => false}>
-                    <div>
-                        <PlusOutlined />
-                        <div style={{ marginTop: 8 }}>Загрузить</div>
-                    </div>
-                </Upload>
-            </Form.Item>
+                <Form.Item
+                    name='cover_image'
+                    label='Обложка'
+                    valuePropName='fileList'
+                    getValueFromEvent={normFile}
+                    rules={[{ required: true, message: 'Загрузите обложку' }]}
+                >
+                    <Upload
+                        accept='.jpg,.jpeg,.png'
+                        listType='picture-card'
+                        maxCount={1}
+                        beforeUpload={() => false}
+                    >
+                        <div>
+                            <PlusOutlined />
+                            <div style={{ marginTop: 8 }}>Загрузить</div>
+                        </div>
+                    </Upload>
+                </Form.Item>
 
-            <Form.Item
-                name='images'
-                label='Дополнительные изображения'
-                valuePropName='fileList'
-                getValueFromEvent={normFile}
-            >
-                <Upload listType='picture' multiple beforeUpload={() => false}>
-                    <Button icon={<UploadOutlined />}>Загрузить изображения</Button>
-                </Upload>
-            </Form.Item>
+                <Form.Item
+                    name='images'
+                    label='Дополнительные изображения'
+                    valuePropName='fileList'
+                    getValueFromEvent={normFile}
+                >
+                    <Upload
+                        accept='.jpg,.jpeg,.png'
+                        fileList={fileList}
+                        listType='picture'
+                        multiple
+                        beforeUpload={() => false}
+                    >
+                        <Button icon={<UploadOutlined />}>Загрузить изображения</Button>
+                    </Upload>
+                </Form.Item>
 
-            <Form.Item>
-                <AppButton type={'submit'} size={'small'}>
-                    {isEdit ? 'Сохранить изменения' : 'Создать новость'}
-                </AppButton>
-            </Form.Item>
-        </Form>
+                <Form.Item>
+                    <AppButton type={'submit'} size={'small'}>
+                        {isEdit ? 'Сохранить изменения' : 'Создать новость'}
+                    </AppButton>
+                </Form.Item>
+            </Form>
+        </Spin>
     );
 };

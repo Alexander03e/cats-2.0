@@ -1,7 +1,7 @@
 import { Section } from '@/Components/Section';
-import { Button as AntButton, Empty, Flex, Modal, Table, TableColumnsType } from 'antd';
+import { Button as AntButton, Empty, Flex, message, Modal, Table, TableColumnsType } from 'antd';
 import { useQuery } from '@tanstack/react-query';
-import { newsQueries } from '@/Shared/api/news.ts';
+import { newsQueries, useDeleteNew } from '@/Shared/api/news.ts';
 import { INewsItem } from '@/Shared/types/news.ts';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
@@ -10,11 +10,12 @@ import { Button } from '@/Components/Button';
 
 export const NewsPage = () => {
     const { data, isLoading } = useQuery(newsQueries.list());
+    const deleteNew = useDeleteNew();
     const [pagination, setPagination] = useState({
         current: 1,
         pageSize: 10,
     });
-    const handleDelete = (id: number) => {
+    const handleDelete = (id: number | string) => {
         Modal.confirm({
             centered: true,
             maskClosable: true,
@@ -22,6 +23,14 @@ export const NewsPage = () => {
             okText: 'Удалить',
             cancelText: 'Отмена',
             title: 'Вы действительно хотите удалить?',
+            onOk: async () => {
+                try {
+                    await deleteNew.mutateAsync(id);
+                    message.success('Новость успешно удалена');
+                } catch {
+                    message.error('Ошибка при удалении новости');
+                }
+            },
         });
     };
 

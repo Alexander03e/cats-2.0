@@ -1,7 +1,16 @@
 import { Section } from '@/Components/Section';
 import { useQuery } from '@tanstack/react-query';
 import { catsQueries, useDeleteCat } from '@/Shared/api/cats.ts';
-import { TableColumnsType, Table, Empty, Spin, Flex, Button as AntButton, Modal } from 'antd';
+import {
+    TableColumnsType,
+    Table,
+    Empty,
+    Spin,
+    Flex,
+    Button as AntButton,
+    Modal,
+    message,
+} from 'antd';
 import { ICatListItem } from '@/Shared/types/cats.ts';
 import { useState } from 'react';
 import { Error } from '@/Components/Error';
@@ -24,7 +33,14 @@ export const CatsPage = () => {
             okText: 'Удалить',
             cancelText: 'Отмена',
             title: 'Вы действительно хотите удалить?',
-            onOk: () => mutateAsync({ id }),
+            onOk: async () => {
+                try {
+                    await mutateAsync({ id });
+                    message.success('Кот успешно удален');
+                } catch {
+                    message.error('Ошибка при удалении кота');
+                }
+            },
         });
     };
 
