@@ -5,9 +5,11 @@ import { Flex } from 'antd';
 import { useLocation } from 'react-router-dom';
 import { Link } from '@/Components/Link';
 import { Button } from '@/Components/Button';
+import { useAppContext } from '../../app/App.tsx';
 
 export const Sidebar = () => {
     const location = useLocation();
+    const { logout } = useAppContext();
     const pathname = location.pathname;
 
     const activeStyles = {
@@ -57,7 +59,7 @@ export const Sidebar = () => {
                     </Link>
                 </Flex>
 
-                <Button>Выйти</Button>
+                <Button onClick={() => logout()}>Выйти</Button>
             </Flex>
         </Sider>
     );

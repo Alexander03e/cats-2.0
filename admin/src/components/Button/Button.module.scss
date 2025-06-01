@@ -3,6 +3,11 @@
     font-weight: bold;
     white-space: nowrap;
 
+    &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed !important;
+    }
+
     &.small {
         padding: 8px 24px;
         line-height: 1;
