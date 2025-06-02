@@ -27,6 +27,7 @@ class CatSerializer(serializers.ModelSerializer):
             'breed',
             'color',
             'age',
+            'short_description',
             'health_status',
             'gender',
             'diagnosis',

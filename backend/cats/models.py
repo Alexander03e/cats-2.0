@@ -1,13 +1,14 @@
 from django.db import models
 
+
 class CatAttribute(models.Model):
     name = models.CharField(
-        "Название атрибута", 
+        "Название атрибута",
         max_length=100,
         unique=True,
         help_text="Например: 'Знает лоточек', 'Вакцинирован'"
     )
-    
+
     class Meta:
         verbose_name = "Атрибут кошки"
         verbose_name_plural = "Атрибуты кошек"
@@ -19,8 +20,8 @@ class CatAttribute(models.Model):
 
 class Cat(models.Model):
     GENDER_CHOICES = [
-      ('MALE', 'Мальчик'), 
-      ('FEMALE', 'Девочка')
+        ('MALE', 'Мальчик'),
+        ('FEMALE', 'Девочка')
     ]
     HEALTH_STATUS_CHOICES = [
         ('HEALTHY', 'Здоров(а)'),
@@ -34,7 +35,7 @@ class Cat(models.Model):
         ('QUARANTINE', 'На карантине'),
         ('UNAVAILABLE', 'Не доступен(а)'),
     ]
-    
+
     COAT_TYPE_CHOICES = [
         ('SHORT', 'Гладкошерстный'),
         ('LONG', 'Пушистый'),
@@ -44,6 +45,7 @@ class Cat(models.Model):
     breed = models.CharField(max_length=100, blank=True)
     color = models.CharField(max_length=50)
     age = models.PositiveIntegerField()
+    short_description = models.CharField(max_length=150, verbose_name="Краткое описание", blank=True)
     health_status = models.CharField(max_length=10, choices=HEALTH_STATUS_CHOICES, default='HEALTHY')
     gender = models.CharField(max_length=6, choices=GENDER_CHOICES)
     diagnosis = models.TextField(blank=True)
@@ -63,18 +65,18 @@ class Cat(models.Model):
         blank=True,
         related_name='cats'
     )
-    
+
     class Meta:
         verbose_name = "Кошачья особь"
         verbose_name_plural = "Кошачьи особи"
 
     def __str__(self):
         return self.name
-    
-    
+
+
 class CatPhoto(models.Model):
     cat = models.ForeignKey(
-        Cat, 
+        Cat,
         on_delete=models.CASCADE,
         related_name='photos'
     )
@@ -94,10 +96,11 @@ class CatPhoto(models.Model):
 
     def __str__(self):
         return f"Фото {self.id} для {self.cat.name}"
-    
-    
+
+
 from django.db import models
 from django.core.validators import RegexValidator
+
 
 class AdoptionApplication(models.Model):
     STATUS_CHOICES = [
@@ -115,7 +118,7 @@ class AdoptionApplication(models.Model):
     )
     first_name = models.CharField("Имя", max_length=50)
     last_name = models.CharField("Фамилия", max_length=50)
-    
+
     phone_regex = RegexValidator(
         regex=r'^\+?1?\d{9,15}$',
         message="Телефон должен быть в формате: '+79999999999'"
@@ -125,7 +128,7 @@ class AdoptionApplication(models.Model):
         validators=[phone_regex],
         max_length=17
     )
-    
+
     email = models.EmailField("Email")
     consent = models.BooleanField(
         "Согласие на обработку данных",
