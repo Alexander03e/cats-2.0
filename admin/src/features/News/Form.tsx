@@ -35,8 +35,16 @@ export const NewsForm = ({ initialValues, isEdit }: IProps) => {
             formData.append('description', values.description);
             formData.append('content', values.content);
 
-            if (values.cover_image?.[0]?.originFileBlob) {
-                formData.append('cover_image', values.cover_image[0].originFileObj);
+            if (values.cover_image?.[0]) {
+                if (values.cover_image?.[0]?.originFileObj) {
+                    formData.append('cover_image', values.cover_image[0].originFileObj);
+                } else {
+                    const coverImageBlob = await createFileFromUrl(
+                        values.cover_image[0].url,
+                        values.cover_image[0].name || 'cover_image',
+                    );
+                    formData.append('cover_image', coverImageBlob);
+                }
             }
 
             if (values.images) {
