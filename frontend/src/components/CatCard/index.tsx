@@ -39,6 +39,7 @@ export interface ICatCardProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
     hoverStateRender?: ReactNode;
     contentClass?: string;
     bottomClass?: string;
+    isProject?: boolean;
 }
 
 export const CatCard = ({
@@ -46,6 +47,7 @@ export const CatCard = ({
     title,
     status,
     description,
+    isProject,
     contentClass,
     onClick,
     hoverable,
@@ -78,6 +80,7 @@ export const CatCard = ({
             className={cn(styles.wrapper, className, {
                 [styles.hovered]: isHovered,
                 [styles.clickable]: !!onClick,
+                [styles.isProject]: isProject,
             })}
             {...props}
         >

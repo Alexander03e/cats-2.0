@@ -21,6 +21,7 @@ export const HomeProjects = () => {
             <div className={styles.cards}>
                 {map(slice(data, 0, 3), (item, index) => (
                     <CatCard
+                        isProject
                         title={item.title}
                         className={styles.catCard}
                         img={item?.cover_image}

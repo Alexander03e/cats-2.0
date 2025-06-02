@@ -33,6 +33,7 @@ export interface ICatListItem {
     photos: string[];
     gender: EGender;
     diagnosis: string;
+    short_description: string;
 }
 
 export interface ICatsData {

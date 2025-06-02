@@ -46,7 +46,7 @@ export const HistoryPage = () => {
                         description={
                             item?.left_at
                                 ? `Выбыл: ${dayjs(item?.left_at).format('DD.MM.YYYY')}`
-                                : item?.description
+                                : item?.short_description
                         }
                         title={item.name}
                     />

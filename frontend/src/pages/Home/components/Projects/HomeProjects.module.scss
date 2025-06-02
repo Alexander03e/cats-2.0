@@ -9,18 +9,29 @@
         flex-wrap: wrap;
         justify-content: space-between;
 
+        @media screen and (max-width: 900px) {
+            gap: 10px !important;
+        }
+
         .catCard {
             max-width: calc(100% / 3 - 24px);
 
             @media screen and (max-width: 1280px) {
-                max-width: calc(100% / 2 - 12px);
+                max-width: calc(100% / 2 - 10px);
 
             }
 
             @media screen and (max-width: 768px) {
 
-                max-width: 100% !important;
+                max-width: calc(100% / 2 - 5px);
 
+            }
+
+            @media screen and (max-width: 440px) {
+                max-width: calc(100%);
+
+                aspect-ratio: initial;
+                height: fit-content;
             }
         }
     }

@@ -2,7 +2,7 @@ import styles from './Header.module.scss';
 import { Link } from '@/Components/Link';
 import { ANCHORS, PATHS } from '@/Shared/consts';
 import { NavLink } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SVG from 'react-inlinesvg';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -16,10 +16,22 @@ export const MobileBurger = () => {
         }
     }, [isOpen]);
 
+    const handleNavigationClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        if (e.target instanceof HTMLAnchorElement || e.target instanceof HTMLButtonElement) {
+            setIsOpen(false);
+        }
+    }, []);
+
     return (
         <>
             <button onClick={() => setIsOpen(prev => !prev)} className={styles.burger}>
-                <SVG src={'/icons/burger.svg'} />
+                {!isOpen ? (
+                    <SVG src={'/icons/burger.svg'} />
+                ) : (
+                    <div className={styles.closeBurger}>
+                        <SVG src={'/icons/plus.svg'} />
+                    </div>
+                )}
             </button>
             <AnimatePresence>
                 {isOpen && (
@@ -35,7 +47,7 @@ export const MobileBurger = () => {
                         className={styles.burgerWrapper}
                     >
                         <div className={styles.burgerInner}>
-                            <div className={styles.navigation}>
+                            <div onClick={handleNavigationClick} className={styles.navigation}>
                                 <Link mode={'hash'} href={ANCHORS.HELP}>
                                     Как помочь
                                 </Link>

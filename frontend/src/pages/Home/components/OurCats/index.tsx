@@ -15,7 +15,7 @@ const LastItem = () => {
     return (
         <div className={styles.lastItem}>
             <div className={styles.lastTop}>
-                <h6>Еще больше очаровательных малышей</h6>
+                <h6>Ещё боль&shy;ше очарова&shy;тельных малы&shy;шей</h6>
                 <p>
                     Узнайте о уникальных чертах, включая веселые способности, предпочтения игр и
                     особенности личности :)
@@ -44,7 +44,7 @@ export const OurCats = () => {
                         status={item.status}
                         className={styles.card}
                         title={item.name}
-                        description={item.description}
+                        description={item?.short_description}
                         img={getBackendImage(item?.photos?.[0])}
                         key={`our-cats-item-${index}`}
                     />

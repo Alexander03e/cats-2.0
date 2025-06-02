@@ -111,3 +111,25 @@
         }
     }
 }
+
+.closeBurger {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    border-radius: 50%;
+    background: var(--accent-color);
+    transition: 0.5s ease;
+
+    svg {
+        width: 16px;
+        height: 16px;
+        fill: white;
+
+        rect {
+            fill: white;
+        }
+    }
+}

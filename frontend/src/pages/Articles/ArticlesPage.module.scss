@@ -12,6 +12,10 @@
     @media screen and (max-width: 768px) {
         padding-inline: 20px;
     }
+
+    @media screen and (max-width: 600px) {
+        padding-inline: 0;
+    }
 }
 
 .categories {
@@ -20,6 +24,10 @@
     gap: 20px;
     justify-content: center;
     margin-bottom: 20px;
+
+    @media screen and (max-width: 768px) {
+        gap: 10px;
+    }
 }
 
 .cards {

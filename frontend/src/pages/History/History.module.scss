@@ -16,7 +16,21 @@
         }
     }
 
-    @media screen and (max-width: 790px) {
+    //@media screen and (max-width: 790px) {
+    //    .card {
+    //        max-width: 100% !important;
+    //    }
+
+
+    @media screen and (max-width: 890px) {
+        gap: 10px;
+        .card {
+            max-width: calc(100% / 2 - 5px) !important;
+
+        }
+    }
+
+    @media screen and (max-width: 374px) {
         .card {
             max-width: 100% !important;
         }

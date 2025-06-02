@@ -16,7 +16,6 @@ import filter from 'lodash/filter';
 import size from 'lodash/size';
 import { Empty } from '@/Components/Empty';
 import { useMobile } from '@/Shared/hooks/useMobile.ts';
-import { Button } from '@/Components/Button';
 import SVG from 'react-inlinesvg';
 import cn from 'classnames';
 
@@ -65,12 +64,10 @@ export const CatsPage = () => {
             )}
             {isMobile && (
                 <>
-                    <Button
-                        style={{ width: '100%', marginBottom: 12 }}
-                        onClick={() => setOpenedFilters(true)}
-                    >
-                        Открыть фильтры
-                    </Button>
+                    <button className={styles.filtersBtn} onClick={() => setOpenedFilters(true)}>
+                        <SVG src={'/icons/filters.svg'} />
+                        <p>Фильтры</p>
+                    </button>
 
                     <div className={cn(styles.mobileFilters, { [styles.opened]: openedFilers })}>
                         <div className={styles.filtersTop}>
@@ -98,7 +95,7 @@ export const CatsPage = () => {
                             status={item.status}
                             className={styles.card}
                             title={item.name}
-                            description={item.description}
+                            description={item?.short_description}
                             img={getBackendImage(item?.photos?.[0])}
                             key={`our-cats-item-${index}`}
                         />

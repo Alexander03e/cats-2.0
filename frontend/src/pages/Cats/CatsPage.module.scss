@@ -57,6 +57,20 @@
             max-width: 100% !important;
         }
     }
+
+    @media screen and (max-width: 890px) {
+        gap: 10px;
+        .card {
+            max-width: calc(100% / 2 - 5px) !important;
+
+        }
+    }
+
+    @media screen and (max-width: 374px) {
+        .card {
+            max-width: 100% !important;
+        }
+    }
 }
 
 .mobileFilters {
@@ -94,5 +108,21 @@
             letter-spacing: 0%;
             color: var(--accent-color)
         }
+    }
+}
+
+.filtersBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    p {
+        color: rgba(68, 68, 68, 1);
+        font-family: Montserrat;
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 100%;
+        letter-spacing: 0%;
+
     }
 }

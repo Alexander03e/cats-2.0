@@ -9,8 +9,8 @@
     }
 
     @media screen and (max-width: 768px) {
-        display: flex;
-        flex-direction: column;
+        //display: flex;
+        //flex-direction: column;
     }
 
     .mainImg {
@@ -44,7 +44,8 @@
 
 
         @media screen and (max-width: 768px) {
-            grid-template-columns: 1fr;
+            gap: 10px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
 
         .gridItem {
@@ -62,11 +63,12 @@
 
             @media screen and (max-width: 768px) {
                 height: auto;
-                aspect-ratio: 300 / 240;
+                border-radius: 20px;
                 width: 100%;
+                padding: 20px;
             }
 
-            @media screen and (max-width: 400px) {
+            @media screen and (max-width: 560px) {
                 aspect-ratio: initial;
             }
 
@@ -91,6 +93,13 @@
                     color: var(--desc-color);
                     font-size: 16px;
                     font-weight: 600;
+                }
+
+                @media screen and (max-width: 768px) {
+                    h5 {
+                        font-size: 20px;
+                    }
+
                 }
             }
 
