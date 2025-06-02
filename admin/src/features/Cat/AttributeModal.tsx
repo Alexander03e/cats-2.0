@@ -66,7 +66,7 @@ export const AttributeModal = ({ open, onClose }: IProps) => {
             title={'Список аттрибутов'}
             onCancel={onClose}
         >
-            <Flex style={{ marginBlock: 20 }} vertical gap={12}>
+            <Flex style={{ maxHeight: 250, overflow: 'scroll', marginBlock: 20 }} vertical gap={12}>
                 {map(data, item => (
                     <Flex flex={1} justify={'space-between'}>
                         <Typography.Text

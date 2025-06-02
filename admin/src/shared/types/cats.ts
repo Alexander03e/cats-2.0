@@ -22,6 +22,7 @@ export enum ECatStatus {
 export interface ICatListItem {
     id: number;
     name: string;
+    short_description: string;
     breed: string;
     color: string;
     age: number;

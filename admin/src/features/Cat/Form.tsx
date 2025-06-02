@@ -156,6 +156,10 @@ export const CatForm = ({ initialData, isEdit }: IProps) => {
                         <Input placeholder='Введите породу' />
                     </Form.Item>
 
+                    <Form.Item label={'Краткое описание'} name='short_description'>
+                        <Input placeholder='Введите краткое описание' />
+                    </Form.Item>
+
                     <Flex gap={12}>
                         <Form.Item
                             label={'Цвет'}
