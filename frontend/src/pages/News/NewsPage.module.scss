@@ -6,15 +6,6 @@
     width: 100%;
     margin-bottom: 16px;
 
-    @media screen and (max-width: 1200px) {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media screen and (max-width: 768px) {
-        grid-template-columns: 1fr;
-
-    }
-
     .card {
         & > div {
             height: 100%;
@@ -32,6 +23,25 @@
 
     .cardBottom {
         padding-block: 48px 0 !important;
+    }
+
+    @media screen and (max-width: 1200px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr;
+
+        .cardBottom {
+            button {
+                padding-block: 10px;
+            }
+
+            height: fit-content;
+            align-content: flex-end;
+            padding-block: 0 !important;
+        }
+
     }
 
 }

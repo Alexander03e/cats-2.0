@@ -24,6 +24,13 @@
                 color: var(--accent-color);
                 line-height: 100%;
             }
+
+            @media screen and (max-width: 768px) {
+                margin-bottom: 6px;
+                p {
+                    font-size: 16px;
+                }
+            }
         }
     }
 

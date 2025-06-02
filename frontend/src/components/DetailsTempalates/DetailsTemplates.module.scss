@@ -64,13 +64,13 @@
     @media screen and (max-width: 768px) {
         .inner {
             width: 100%;
-            padding-inline: 24px;
+            padding-inline: 12px;
         }
 
         .title {
             font-family: Montserrat;
             font-weight: 700;
-            font-size: 24px;
+            font-size: 20px;
             line-height: 100%;
             letter-spacing: 0%;
             text-align: center;
@@ -101,6 +101,14 @@
         font-size: 40px;
         line-height: 100%;
         margin-bottom: 20px;
+    }
+
+    @media screen and (max-width: 768px) {
+        padding: 24px;
+
+        .title {
+            font-size: 24px;
+        }
     }
 }
 

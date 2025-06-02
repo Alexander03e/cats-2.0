@@ -30,6 +30,20 @@
                 }
             }
         }
+
+        @media screen and (max-width: 768px) {
+            margin-top: 20px;
+            .date {
+
+                h6 {
+                    font-size: 16px !important;
+                }
+
+                p {
+                    font-size: 14px !important;
+                }
+            }
+        }
     }
 }
 
@@ -50,6 +64,17 @@
             font-size: 32px;
             line-height: 100%;
             color: var(--accent-color)
+        }
+    }
+
+    @media screen and (max-width: 768px) {
+        gap: 32px;
+        padding: 24px 10px;
+
+        .group {
+            h6 {
+                font-size: 20px;
+            }
         }
     }
 }
