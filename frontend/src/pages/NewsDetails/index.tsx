@@ -44,7 +44,7 @@ export const NewsDetails = () => {
             {isMobile && <MobileTitle />}
             <div className={styles.newWrapper}>
                 <Details.Image images={data?.images} />
-                {parse(data?.content)}
+                <div className={styles.contentWrapper}>{parse(data?.content)}</div>
             </div>
         </Section>
     );

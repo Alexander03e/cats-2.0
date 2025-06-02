@@ -26,3 +26,61 @@
     }
 
 }
+
+.contentWrapper {
+    strong {
+        font-weight: 700
+    }
+
+    a {
+        color: var(--accent-color);
+    }
+
+    ul {
+        list-style-type: disc;
+        padding-left: 20px;
+        margin-bottom: 20px;
+
+        li {
+            margin-bottom: 10px;
+        }
+    }
+
+    ol {
+        list-style-type: decimal;
+        padding-left: 20px;
+        margin-bottom: 20px;
+
+        li {
+            margin-bottom: 10px;
+        }
+    }
+
+    em {
+        font-style: italic;
+    }
+
+    h1 {
+        font-size: 48px;
+    }
+
+    h2 {
+        font-size: 32px;
+    }
+
+    h3 {
+        font-size: 28px;
+    }
+
+    h4 {
+        font-size: 24px;
+    }
+
+    h5 {
+        font-size: 20px;
+    }
+
+    h6 {
+        font-size: 18px;
+    }
+}
