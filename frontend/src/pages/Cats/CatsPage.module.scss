@@ -61,6 +61,7 @@
     @media screen and (max-width: 890px) {
         gap: 10px;
         .card {
+            aspect-ratio: 300/500;
             max-width: calc(100% / 2 - 5px) !important;
 
         }
@@ -68,6 +69,7 @@
 
     @media screen and (max-width: 374px) {
         .card {
+            aspect-ratio: 300/370;
             max-width: 100% !important;
         }
     }

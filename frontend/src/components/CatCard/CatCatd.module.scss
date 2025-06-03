@@ -100,11 +100,15 @@
             font-size: 16px;
             font-weight: 400;
             //max-height: 60%;
-            //overflow: scroll;
+            overflow: scroll;
+            scrollbar-width: none;
+
         }
 
         .bottomSlot {
             padding-block: 48px 24px;
+            overflow: scroll;
+            scrollbar-width: none;
         }
 
         &:has(.title, .description) {

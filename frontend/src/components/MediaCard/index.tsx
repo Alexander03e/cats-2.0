@@ -31,7 +31,7 @@ export const MediaCard = ({
             <div className={styles.content}>
                 <div className={styles.top}>
                     <h5>{title}</h5>
-                    <p>{description ? parse(description) : ''}</p>
+                    <p>{description ? parse(description || '') : ''}</p>
                 </div>
                 {renderButton || (
                     <Button variant={'light'} size={'small'} onClick={onButton}>

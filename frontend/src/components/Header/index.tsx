@@ -9,7 +9,8 @@ import { useMobile } from '@/Shared/hooks/useMobile.ts';
 import { MobileBurger } from '@/Components/Header/MobileBurger.tsx';
 
 export const Header = () => {
-    const isMobile = useMobile();
+    const isMobile = useMobile(1200);
+    console.log(isMobile);
     return (
         <header className={styles.wrapper}>
             <div className={styles.logo}>

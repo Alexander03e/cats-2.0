@@ -13,7 +13,7 @@ export const ContactsPage = () => {
                         <h6>контакты</h6>
                         <div className={styles.group}>
                             <p>kotodom_official@icloud.com</p>
-                            <p>8(000)-000-00-00</p>
+                            <p>8(902)-323-53-50</p>
                         </div>
                     </div>
                     <div className={styles.workTime}>
@@ -26,9 +26,13 @@ export const ContactsPage = () => {
                 </div>
 
                 <div className={styles.links}>
-                    <SVG src={'/icons/tg.svg'} />
+                    <a href={'https://t.me/kotodom_samara'} target={'_blank'} rel='noreferrer'>
+                        <SVG src={'/icons/tg.svg'} />
+                    </a>
                     <SVG src={'/icons/viber.svg'} />
-                    <SVG src={'/icons/vk.svg'} />
+                    <a href={'https://vk.com/priutsamara'} target={'_blank'}>
+                        <SVG src={'/icons/vk.svg'} />
+                    </a>
                 </div>
             </div>
         </div>

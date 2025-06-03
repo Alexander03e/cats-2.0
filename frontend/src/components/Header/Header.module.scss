@@ -42,7 +42,7 @@
 
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
         display: flex;
         padding: 4px 5px;
         border-radius: 20px;
@@ -76,7 +76,7 @@
     position: relative;
     z-index: 99;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1200px) {
 
         svg {
             width: 34px;

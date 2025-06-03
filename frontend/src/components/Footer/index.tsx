@@ -10,11 +10,29 @@ export const Footer = () => {
                 <div className={styles.card}>
                     <h6>Свяжитесь с нами</h6>
                     <div className={styles.nav}>
-                        <Link icon={<SVG src={'/icons/footer/letter.svg'} />}>kotodom@mail.ru</Link>
-                        <Link icon={<SVG src={'/icons/footer/phone-call.svg'} />}>
-                            +7 999 999-99-99
+                        <Link
+                            href={'mailto:kotodom@mail.ru'}
+                            mode={'html'}
+                            icon={<SVG src={'/icons/footer/letter.svg'} />}
+                        >
+                            kotodom@mail.ru
                         </Link>
-                        <Link icon={<SVG src={'/icons/footer/tg.svg'} />}>Telegram</Link>
+                        <Link
+                            href={'tel:+79023235350'}
+                            target={'_blank'}
+                            mode={'html'}
+                            icon={<SVG src={'/icons/footer/phone-call.svg'} />}
+                        >
+                            +7-902-323-53-50
+                        </Link>
+                        <Link
+                            href={'https://t.me/kotodom_samara'}
+                            target={'_blank'}
+                            mode={'html'}
+                            icon={<SVG src={'/icons/footer/tg.svg'} />}
+                        >
+                            Telegram
+                        </Link>
                         <Link icon={<SVG src={'/icons/footer/wu.svg'} />}>Whats App</Link>
                     </div>
                     <div className={styles.bottomContent}>
@@ -62,7 +80,14 @@ export const Footer = () => {
                 <div className={styles.card}>
                     <h6>Социальные сети</h6>
                     <div className={styles.nav}>
-                        <Link icon={<SVG src={'/icons/footer/vk.svg'} />}>ВКонтакте</Link>
+                        <Link
+                            href={'https://vk.com/priutsamara'}
+                            target={'_blank'}
+                            mode={'html'}
+                            icon={<SVG src={'/icons/footer/vk.svg'} />}
+                        >
+                            ВКонтакте
+                        </Link>
                     </div>
                 </div>
             </div>
