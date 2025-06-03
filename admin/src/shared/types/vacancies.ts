@@ -1,4 +1,4 @@
-export enum EVacancyStatus {
+export enum EVacancyOpenedStatus {
     OPEN = 'OPEN',
     CLOSED = 'CLOSED',
 }
@@ -8,7 +8,18 @@ export interface IVacancyItem {
     title: string;
     description: string;
     status: EVacancyStatus;
+    image: any;
     created_at: string;
+}
+
+export interface IVacancyAppointment {
+    id: number;
+    type: EVacancyType;
+    applicant_name: string;
+    status: EVacancyStatus;
+    phone: string;
+    date: string;
+    vacancy: number;
 }
 
 export enum EVacancyType {

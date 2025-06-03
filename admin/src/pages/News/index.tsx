@@ -101,6 +101,7 @@ export const NewsPage = () => {
             </Button>
             <Table<INewsItem>
                 rowKey='id'
+                loading={isLoading}
                 size={'middle'}
                 style={{
                     width: '100%',

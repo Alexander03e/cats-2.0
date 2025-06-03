@@ -57,6 +57,17 @@ export const Sidebar = () => {
                     >
                         Новости
                     </Link>
+                    <Link
+                        href={'/vacancy'}
+                        mode={'react'}
+                        style={{
+                            fontSize: '24px',
+                            color: 'var(--default-dark)',
+                            ...(pathname === '/vacancy' && activeStyles),
+                        }}
+                    >
+                        Вакансии
+                    </Link>
                 </Flex>
 
                 <Button onClick={() => logout()}>Выйти</Button>

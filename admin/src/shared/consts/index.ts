@@ -1,3 +1,5 @@
+import { EVacancyOpenedStatus, EVacancyStatus, EVacancyType } from '@/Shared/types/vacancies.ts';
+
 export const PATHS = {
     HOME: '/',
     ARRIVED: '/arrived',
@@ -42,4 +44,20 @@ export const PATHS = {
 export const ANCHORS = {
     HELP: 'help',
     FAQ: 'faq',
+};
+
+export const VACANCY_TRANSLATES = {
+    status: {
+        [EVacancyStatus.APPROVED]: 'Одобрена',
+        [EVacancyStatus.REJECTED]: 'Отклонена',
+        [EVacancyStatus.REVIEW]: 'На рассмотрении',
+    },
+    type: {
+        [EVacancyType.VOLUNTEER]: 'Волонтер',
+        [EVacancyType.EMPLOYEE]: 'Сотрудник',
+    },
+    openedStatus: {
+        [EVacancyOpenedStatus.OPEN]: 'Открыта',
+        [EVacancyOpenedStatus.CLOSED]: 'Закрыта',
+    },
 };
