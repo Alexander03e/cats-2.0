@@ -20,7 +20,7 @@ export const News = () => {
                         imgClass={styles.cardImg}
                         title={item.title}
                         onButton={() => navigate(PATHS.NEWS_DETAILS.ABSOLUTE(item.id))}
-                        description={item.content}
+                        description={item.description}
                         imgSrc={item.cover_image_url}
                         key={`home-news-item-${index}`}
                     />
