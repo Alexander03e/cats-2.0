@@ -1,15 +1,17 @@
 from django.db import models
 
+
 class Category(models.Model):
     name = models.CharField("Название категории", max_length=50, unique=True)
     slug = models.SlugField("Slug", max_length=50, unique=True)
-    
+
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
-    
+
     def __str__(self):
         return self.name
+
 
 class SuccessStory(models.Model):
     title = models.CharField("Заголовок", max_length=200)
@@ -24,11 +26,10 @@ class SuccessStory(models.Model):
         null=True,
         blank=True
     )
-    
+
     class Meta:
-        verbose_name = "История успеха"
-        verbose_name_plural = "Истории успеха"
+        verbose_name = "Полезная статья"
+        verbose_name_plural = "Полезные статьи"
 
     def __str__(self):
         return self.title
-  

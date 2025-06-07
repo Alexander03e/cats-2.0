@@ -21,6 +21,7 @@ class Project(models.Model):
         blank=True,
         null=True
     )
+    details = models.TextField('Подробности проекта', blank=True, null=True)
     for_what = models.CharField("Для чего нужны (1 подзаголовок)", max_length=255, default="")
     money_spend = models.TextField(
         "На что пойдут деньги",
