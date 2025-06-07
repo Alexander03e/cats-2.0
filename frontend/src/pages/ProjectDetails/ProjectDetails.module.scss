@@ -1,3 +1,5 @@
+@use '@scss/mixins' as *;
+
 .info {
     background-color: rgba(220, 218, 255, 1);
 
@@ -33,8 +35,8 @@
 
         @media screen and (max-width: 768px) {
             margin-top: 20px;
-            .date {
 
+            .date {
                 h6 {
                     font-size: 16px !important;
                 }
@@ -90,16 +92,34 @@
     align-items: flex-start;
     justify-content: space-between;
 
+    .details {
+        @include marking();
+        margin-bottom: 24px;
+
+        h1, h2, h3 {
+            color: var(--accent-color);
+            font-weight: 500;
+            line-height: 100%;
+        }
+
+        p {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 100%;
+        }
+    }
+
     .group {
         margin-bottom: 30px;
     }
 
     .right {
         display: flex;
-        margin-right: 86px;
         flex-direction: column;
         gap: 24px;
+        align-items: center;
         width: 350px;
+
 
         .qr {
             width: 350px;
@@ -116,6 +136,22 @@
             font-size: 20px;
             line-height: 100%;
             text-align: center;
+
+            a {
+                text-decoration: underline;
+                color: var(--accent-color);
+                display: block;
+                width: fit-content;
+                text-align: center;
+                margin: 0 auto;
+            }
+        }
+    }
+
+    @media screen and (max-width: 1080px) {
+        .qr {
+            width: 260px !important;
+            height: 260px !important;
         }
     }
 

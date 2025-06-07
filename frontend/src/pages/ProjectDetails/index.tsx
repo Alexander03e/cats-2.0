@@ -6,16 +6,16 @@ import { projectQueries } from '@/Shared/api/projects.ts';
 import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { Loader } from '@/Components/Loader';
-import map from 'lodash/map';
 import QRCode from 'react-qr-code';
-import size from 'lodash/size';
-
-const howToDonate = [
-    '1. переведи по номеру ххххххххххх (Фамилия И.О.)',
-    '2. нажми кнопку "Пожертвовать" в начале страницы',
-    '3. отсканируй QR код и переведи удобную сумму',
-    '4. мы с радостью примем строительные материалы',
-];
+import parse from 'html-react-parser';
+import { BACKEND_URL } from '@/Shared/api';
+import { PATHS } from '@/Shared/consts';
+// const howToDonate = [
+//     '1. переведи по номеру ххххххххххх (Фамилия И.О.)',
+//     '2. нажми кнопку "Пожертвовать" в начале страницы',
+//     '3. отсканируй QR код и переведи удобную сумму',
+//     '4. мы с радостью примем строительные материалы',
+// ];
 
 export const ProjectDetails = () => {
     const { projectId } = useParams();
@@ -59,46 +59,38 @@ export const ProjectDetails = () => {
             </Details.Info>
             <Details.Bottom noStyle>
                 <div className={styles.bottomContent}>
-                    {!!data?.for_what && (
-                        <div className={styles.group}>
-                            <h6>Для чего нужен кабинет</h6>
-                            <p>{data?.for_what}</p>
-                        </div>
-                    )}
+                    {/*{!!data?.for_what && (*/}
+                    {/*    <div className={styles.group}>*/}
+                    {/*        <h6>Для чего нужен кабинет</h6>*/}
+                    {/*        <p>{data?.for_what}</p>*/}
+                    {/*    </div>*/}
+                    {/*)}*/}
 
-                    <div className={styles.body}>
-                        <div className={styles.left}>
-                            {size(data?.spending_list) > 0 && (
-                                <div className={styles.group}>
-                                    <h6>На что пойдут средства</h6>
-                                    <div className={styles.spending}>
-                                        {map(data?.spending_list, item => {
-                                            return <p key={item}>{item}</p>;
-                                        })}
-                                    </div>
-                                </div>
-                            )}
-                            <div className={styles.group}>
-                                <h6>Как поддержать проект</h6>
-                                <div className={styles.spending}>
-                                    {map(howToDonate, item => {
-                                        return <p key={item}>{item}</p>;
-                                    })}
-                                </div>
+                    <div
+                        style={!data?.details ? { justifyContent: 'center' } : {}}
+                        className={styles.body}
+                    >
+                        {data?.details && (
+                            <div className={styles.left}>
+                                <div className={styles.details}>{parse(data.details)}</div>
                             </div>
-                        </div>
+                        )}
 
                         <div className={styles.right}>
                             <div className={styles.qr}>
                                 <QRCode
                                     bgColor={'transparent'}
                                     fgColor={'rgba(103, 97, 205, 1)'}
-                                    value={'qr'}
+                                    value={BACKEND_URL + PATHS.PROJECT_DONATE.ABSOLUTE(data.id)}
                                 />
                             </div>
                             <p className={styles.qrText}>
-                                Мы создали отдельный счет для проекта. Отсканируйте QR код и
-                                переведите удобную для вас сумму
+                                Мы создали отдельный счет для проекта. Отсканируйте QR код, либо
+                                перейдите по{' '}
+                                <a target={'_blank'} href={window.location.href + `/donate`}>
+                                    этой ссылке
+                                </a>
+                                и переведите удобную для вас сумму
                             </p>
                         </div>
                     </div>

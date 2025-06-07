@@ -89,7 +89,7 @@ export const CatsPage = () => {
             )}
             <div className={styles.content}>
                 {size(searchedValues) > 0 ? (
-                    map(searchedValues, (item, index) => (
+                    map(searchedValues, item => (
                         <CatCard
                             onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
                             status={item.status}
@@ -97,7 +97,7 @@ export const CatsPage = () => {
                             title={item.name}
                             description={item?.short_description}
                             img={getBackendImage(item?.photos?.[0])}
-                            key={`our-cats-item-${index}`}
+                            key={`our-cats-item-${item.id}`}
                         />
                     ))
                 ) : (

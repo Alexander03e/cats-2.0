@@ -30,6 +30,10 @@ export const PATHS = {
         INDEX: '/vacancy/:vacancyId',
         ABSOLUTE: (id: string | number) => `/vacancy/${id}`,
     },
+    PROJECT_DONATE: {
+        INDEX: '/projects/:projectId/donate',
+        ABSOLUTE: (projectId: string | number) => `/projects/${projectId}/donate`,
+    },
     PROJECTS_DETAILS: {
         INDEX: '/projects/:projectId',
         ABSOLUTE: (id: string | number) => `/projects/${id}`,

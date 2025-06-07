@@ -41,21 +41,25 @@ export const Filters = ({
     const handleFilterChange = (filterKey: string, itemKey: string) => {
         const newSelectedFilters = { ...selectedFilters };
 
-        // Для радио-кнопок просто устанавливаем новое значение
-        newSelectedFilters[filterKey] = itemKey;
+        const currentValue = newSelectedFilters[filterKey]?.split(',').filter(Boolean) || [];
+        if (currentValue.includes(itemKey)) {
+            newSelectedFilters[filterKey] = currentValue
+                .filter(value => value !== itemKey)
+                .join(',');
+        } else {
+            newSelectedFilters[filterKey] = [...currentValue, itemKey].join(',');
+        }
 
         setSelectedFilters(newSelectedFilters);
 
         if (onChange) {
-            onChange(filterKey, itemKey);
+            onChange(filterKey, newSelectedFilters[filterKey]);
         }
     };
 
     const handleResetGroup = (filterKey: string) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         setSelectedFilters(prev => {
-            const newFilters = { ...prev, [filterKey]: null };
+            const newFilters = { ...prev, [filterKey]: '' };
 
             if (onChange) {
                 onChange(filterKey, '');
@@ -71,7 +75,10 @@ export const Filters = ({
     };
 
     useEffect(() => {
-        onFilter?.(selectedFilters);
+        const nonEmptyFilters = Object.fromEntries(
+            Object.entries(selectedFilters).filter(([_, value]) => value.trim() !== ''),
+        );
+        onFilter?.(nonEmptyFilters);
     }, [selectedFilters]);
 
     return (
@@ -111,12 +118,15 @@ export const Filters = ({
                             </div>
                             <div className={styles.items}>
                                 {Object.entries(filterItems).map(([itemKey, itemValue]) => {
-                                    const isChecked = selectedFilters[filterKey] === itemKey;
+                                    const currentValue =
+                                        selectedFilters[filterKey]?.split(',') || [];
+                                    const isChecked = currentValue.includes(itemKey);
+
                                     return (
                                         <label key={itemKey} className={styles.filterItem}>
                                             <input
-                                                type='radio'
-                                                name={filterKey} // Группируем радио-кнопки по name
+                                                type='checkbox'
+                                                name={filterKey}
                                                 checked={isChecked}
                                                 onChange={() =>
                                                     handleFilterChange(filterKey, itemKey)

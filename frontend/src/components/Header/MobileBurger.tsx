@@ -53,12 +53,14 @@ export const MobileBurger = () => {
                                 </Link>
                                 <NavLink to={PATHS.PROJECTS}>Проекты</NavLink>
                                 <NavLink to={PATHS.CATS}>Взять котика</NavLink>
-                                <NavLink to={PATHS.HISTORY}>Истории успеха</NavLink>
+                                <NavLink to={PATHS.HISTORY}>Уже дома</NavLink>
                                 <Link mode={'react'} href={PATHS.VACANCY}>
                                     Вакансии
                                 </Link>
+                                <Link mode={'react'} href={PATHS.NEWS}>
+                                    Новости
+                                </Link>
                                 <Link mode={'hash'}>О приюте</Link>
-                                <NavLink to={PATHS.ARTICLES}>Полезные статьи</NavLink>
                                 <Link mode={'hash'} href={ANCHORS.FAQ}>
                                     FAQ
                                 </Link>

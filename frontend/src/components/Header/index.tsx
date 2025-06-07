@@ -25,12 +25,15 @@ export const Header = () => {
                     </Link>
                     <NavLink to={PATHS.PROJECTS}>Проекты</NavLink>
                     <NavLink to={PATHS.CATS}>Взять котика</NavLink>
-                    <NavLink to={PATHS.HISTORY}>Истории успеха</NavLink>
+                    <NavLink to={PATHS.HISTORY}>Уже дома</NavLink>
                     <Dropdown
                         overlay={
                             <div className={styles.about}>
                                 <Link mode={'react'} href={PATHS.VACANCY}>
                                     Вакансии
+                                </Link>
+                                <Link mode={'react'} href={PATHS.NEWS}>
+                                    Новости
                                 </Link>
                                 <Link mode={'hash'}>О приюте</Link>
                             </div>
@@ -38,7 +41,6 @@ export const Header = () => {
                     >
                         <p style={{ cursor: 'pointer' }}>О приюте</p>
                     </Dropdown>
-                    <NavLink to={PATHS.ARTICLES}>Полезные статьи</NavLink>
                     <Link mode={'hash'} href={ANCHORS.FAQ}>
                         FAQ
                     </Link>

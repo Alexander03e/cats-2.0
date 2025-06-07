@@ -16,15 +16,15 @@ import { ArticleDetails } from '@/Pages/ArticleDetails';
 import { NewsDetails } from '@/Pages/NewsDetails';
 import { HistoryPage } from '@/Pages/History';
 import { HistoryDetails } from '@/Pages/HistoryDetails';
+import { DonationPage } from '@/Pages/DonationPage';
 
 export const AppRoutes = () => {
     // Роутинг приложения
     return (
         <Routes>
-            <Route element={<Layout />}>
-                <Route path={PATHS.ARRIVED} element={<div>Прибыло</div>} />
-                <Route path={PATHS.DROPPED} element={<div>Сброшено</div>} />
+            <Route path={PATHS.PROJECT_DONATE.INDEX} element={<DonationPage />} />
 
+            <Route element={<Layout />}>
                 <Route path={PATHS.HOME} element={<HomePage />} />
                 <Route path={PATHS.CONTACTS} element={<ContactsPage />} />
                 <Route path={PATHS.HELP} element={<HowToHelp />} />
