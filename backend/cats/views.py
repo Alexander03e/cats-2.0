@@ -77,10 +77,10 @@ class ApplicationsViewSet(viewsets.ModelViewSet):
     serializer_class = AdoptionApplicationSerializer
 
     def get_queryset(self):
-        return AdoptionApplication.objects.filter(vacancy=self.kwargs.get('cat_pk'))
+        return AdoptionApplication.objects.filter(cat=self.kwargs.get('cat_pk'))
 
     @action(detail=True, methods=['patch'])
-    def update_status(self, request, pk=None, vacancy_pk=None):
+    def update_status(self, request, pk=None, cat_pk=None):
         application = self.get_object()
         new_status = request.data.get('status')
 
