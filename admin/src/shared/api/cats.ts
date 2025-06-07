@@ -1,6 +1,12 @@
 import { keepPreviousData, queryOptions, useMutation, useQueryClient } from '@tanstack/react-query';
 import { $api } from '@/Shared/api/index.ts';
-import { ICatListItem, ICatsData, ITakeCat } from '@/Shared/types/cats.ts';
+import {
+    ECatApplicationStatus,
+    ICatApplication,
+    ICatListItem,
+    ICatsData,
+    ITakeCat,
+} from '@/Shared/types/cats.ts';
 import entries from 'lodash/entries';
 import { ICatAttribute } from '@/Features/Cat/Form.tsx';
 
@@ -24,6 +30,13 @@ export const catsQueries = {
             queryKey: ['cat', id],
             queryFn: async () => (await $api.get(`/cats/${id}`)).data,
         }),
+
+    appointments: (id: string) => {
+        return queryOptions<ICatApplication[]>({
+            queryKey: ['cat', id, 'applications'],
+            queryFn: async () => (await $api.get(`/cats/${id}/applications/`)).data,
+        });
+    },
 };
 
 export const useTakeCat = () => {
@@ -84,6 +97,29 @@ export const useDeleteAttribute = () => {
         onSuccess: () => {
             queryClient.invalidateQueries({
                 queryKey: ['cat-attributes'],
+            });
+        },
+    });
+};
+
+interface IUpdateCatApplication {
+    catId: number;
+    appId: number;
+    status: ECatApplicationStatus;
+}
+
+export const useUpdateCatApplication = () => {
+    const queryClient = useQueryClient();
+    return useMutation({
+        mutationFn: async (data: IUpdateCatApplication): Promise<ICatApplication> =>
+            (
+                await $api.patch(`/cats/${data.catId}/applications/${data.appId}/`, {
+                    status: data.status,
+                })
+            ).data,
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ['cat'],
             });
         },
     });

@@ -19,6 +19,13 @@ export enum ECatStatus {
     UNAVAILABLE = 'UNAVAILABLE',
 }
 
+export enum ECatApplicationStatus {
+    NEW = 'NEW',
+    IN_REVIEW = 'IN_REVIEW',
+    APPROVED = 'APPROVED',
+    REJECTED = 'REJECTED',
+}
+
 export interface ICatListItem {
     id: number;
     name: string;
@@ -47,4 +54,14 @@ export interface ITakeCat {
     phone: string;
     email: string;
     consent?: boolean;
+}
+
+export interface ICatApplication {
+    id: number;
+    first_name: string;
+    last_name: string;
+    phone: string;
+    email: string;
+    consent?: boolean;
+    status: ECatApplicationStatus;
 }

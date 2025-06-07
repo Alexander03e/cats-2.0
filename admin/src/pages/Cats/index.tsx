@@ -63,6 +63,19 @@ export const CatsPage = () => {
         },
         {
             title: '',
+            width: 120,
+            render: (_, data) => (
+                <AntButton
+                    size={'small'}
+                    type={'primary'}
+                    onClick={() => navigate(`/cats/appointments/${data.id}`)}
+                >
+                    Заявки
+                </AntButton>
+            ),
+        },
+        {
+            title: '',
             align: 'center',
             width: 100,
             render: (_value, data) => {

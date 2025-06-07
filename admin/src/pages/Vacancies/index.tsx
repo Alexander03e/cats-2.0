@@ -151,6 +151,9 @@ export const VacanciesPage = () => {
                 style={{
                     width: '100%',
                 }}
+                scroll={{
+                    x: 'max-content',
+                }}
                 onChange={handleTableChange}
                 loading={isLoading}
                 locale={{
