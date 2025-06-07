@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions, status
 from rest_framework.response import Response
 from rest_framework.decorators import action
-from .models import Cat, CatPhoto
+from .models import Cat, CatPhoto, AdoptionApplication
 from .filters import CatFilter
 from .serializers import CatSerializer, AdoptionApplicationSerializer
 import django_filters
@@ -71,3 +71,21 @@ class CatAttributeViewSet(viewsets.ModelViewSet):
     queryset = CatAttribute.objects.all()
     serializer_class = CatAttributeSerializer
     permission_classes = [permissions.AllowAny]
+
+
+class ApplicationsViewSet(viewsets.ModelViewSet):
+    serializer_class = AdoptionApplicationSerializer
+
+    def get_queryset(self):
+        return AdoptionApplication.objects.filter(vacancy=self.kwargs.get('cat_pk'))
+
+    @action(detail=True, methods=['patch'])
+    def update_status(self, request, pk=None, vacancy_pk=None):
+        application = self.get_object()
+        new_status = request.data.get('status')
+
+        if new_status in dict(AdoptionApplication.STATUS_CHOICES):
+            application.status = new_status
+            application.save()
+            return Response({'status': 'Статус обновлен'})
+        return Response({'error': 'Недопустимый статус'}, status=400)

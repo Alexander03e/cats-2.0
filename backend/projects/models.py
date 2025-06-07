@@ -50,7 +50,7 @@ class Project(models.Model):
 class Donation(models.Model):
     STATUS_CHOICES = [
         ('PENDING', 'Ожидается'),
-        ('SUCCESS', 'Олпачено'),
+        ('SUCCESS', 'Оплачено'),
         ('FAILED', 'Просрочен'),
     ]
     project = models.ForeignKey(Project, verbose_name="Проект", on_delete=models.CASCADE, related_name='donations')

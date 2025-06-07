@@ -34,4 +34,3 @@ class ApplicationViewSet(viewsets.ModelViewSet):
             application.save()
             return Response({'status': 'Статус обновлен'})
         return Response({'error': 'Недопустимый статус'}, status=400)
-      
