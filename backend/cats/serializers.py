@@ -76,10 +76,9 @@ class CatSerializer(serializers.ModelSerializer):
 class AdoptionApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = AdoptionApplication
-        fields = ['first_name', 'last_name', 'phone', 'email', 'consent']
+        fields = '__all__'
         extra_kwargs = {
             'cat': {'read_only': True},
-            'status': {'read_only': True}
         }
 
     def validate_consent(self, value):
