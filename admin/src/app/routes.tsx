@@ -15,11 +15,14 @@ import { EditProjectPage } from '@/Pages/Project/Entities/Edit.tsx';
 import { CreateProjectPage } from '@/Pages/Project/Entities/Create.tsx';
 import { ProjectDonationPage } from '@/Pages/Project/Entities/Donates.tsx';
 import { CatAppointmentsPage } from '@/Pages/Cats/Entities/Appointments.tsx';
+import { ContactsPage } from '@/Pages/Contacts';
 
 export const AppRoutes = () => {
     return (
         <Routes>
             <Route element={<Layout />}>
+                {/* Контакты */}
+                <Route path={'/contacts'} element={<ContactsPage />} />
                 {/* Проекты */}
                 <Route path={'/projects'} element={<ProjectsPage />} />
                 <Route path={'/projects/create'} element={<CreateProjectPage />} />

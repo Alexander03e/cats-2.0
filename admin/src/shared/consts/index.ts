@@ -1,4 +1,5 @@
 import { EVacancyOpenedStatus, EVacancyStatus, EVacancyType } from '@/Shared/types/vacancies.ts';
+import { ISystemInfo } from '@/Shared/types';
 
 export const PATHS = {
     HOME: '/',
@@ -61,3 +62,17 @@ export const VACANCY_TRANSLATES = {
         [EVacancyOpenedStatus.CLOSED]: 'Закрыта',
     },
 };
+
+export const DEFAULT_SYSTEM_INFO = {
+    id: 1,
+    calendar_info: `
+        пн-пт с 9:00 до 20:00
+        сб-вс с 9:00 до 17:00
+    `,
+    address: '',
+    phone_number: '+79023235350',
+    email: 'kotodom@mail.ru',
+    short_calendar_info: 'Ежедневно 11:00-20:00',
+    vk_link: 'https://vk.com/priutsamara',
+    telegram_link: 'https://t.me/kotodom_samara',
+} as ISystemInfo;
