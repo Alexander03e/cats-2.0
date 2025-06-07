@@ -48,11 +48,17 @@ class Project(models.Model):
 
 
 class Donation(models.Model):
+    STATUS_CHOICES = [
+        ('PENDING', 'Ожидается'),
+        ('SUCCESS', 'Олпачено'),
+        ('FAILED', 'Просрочен'),
+    ]
     project = models.ForeignKey(Project, verbose_name="Проект", on_delete=models.CASCADE, related_name='donations')
     amount = models.DecimalField("Сумма", max_digits=12, decimal_places=2)
     donor_name = models.CharField("Имя донора", max_length=100)
     message = models.TextField("Сообщение", blank=True)
     date = models.DateTimeField("Дата", auto_now_add=True)
+    status = models.CharField("Статус", max_length=10, choices=STATUS_CHOICES, default='PENDING')
 
     class Meta:
         verbose_name = "Донат"
