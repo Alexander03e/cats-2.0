@@ -41,7 +41,7 @@ export const NewsPage = () => {
                     {map(visibleItems, (item, index) => (
                         <CatCard
                             title={item.title}
-                            img={item.cover_image}
+                            img={item.cover_image_url}
                             description={item.description}
                             className={styles.card}
                             bottomClass={styles.cardBottom}
