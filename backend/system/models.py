@@ -17,4 +17,4 @@ class System(models.Model):
         verbose_name_plural = "Информация"
 
     def __str__(self):
-        return self.name
+        return "Информация о системе"
