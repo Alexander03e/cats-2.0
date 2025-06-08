@@ -7,6 +7,9 @@ from .serializers import CatSerializer, AdoptionApplicationSerializer
 import django_filters
 from .models import CatAttribute
 from .serializers import CatAttributeSerializer
+from django.core.mail import send_mail
+
+EMAIL_HOST_USER = 'alexander034e@gmail.com'
 
 
 class CatViewSet(viewsets.ModelViewSet):
@@ -57,7 +60,19 @@ class CatViewSet(viewsets.ModelViewSet):
         if serializer.is_valid():
             # Создаем заявку и привязываем к кошке
             application = serializer.save(cat=cat)
-
+            # Send email notification
+            send_mail(
+                subject=f'Заявка на кошку: {cat.name}',
+                message=(
+                    f'Имя: {application.first_name}\n'
+                    f'Фамилия: {application.last_name}\n'
+                    f'Телефон: {application.phone}\n'
+                    f'Email: {application.email}\n'
+                ),
+                from_email=EMAIL_HOST_USER,
+                recipient_list=[EMAIL_HOST_USER],
+                fail_silently=False,
+            )
             # Обновляем статус кошки
             cat.status = 'RESERVED'
             cat.save()

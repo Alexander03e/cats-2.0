@@ -4,6 +4,11 @@ from rest_framework.response import Response
 from .models import Vacancy, Application
 from .serializers import VacancySerializer, ApplicationSerializer
 
+from django.core.mail import send_mail
+
+EMAIL_HOST_USER = 'alexander034e@gmail.com'
+
+
 class VacancyViewSet(viewsets.ModelViewSet):
     queryset = Vacancy.objects.all().order_by('-created_at')
     serializer_class = VacancySerializer
@@ -12,15 +17,31 @@ class VacancyViewSet(viewsets.ModelViewSet):
     def apply(self, request, pk=None):
         vacancy = self.get_object()
         serializer = ApplicationSerializer(data=request.data)
-        
+
         if serializer.is_valid():
-            serializer.save(vacancy=vacancy)
+            application = serializer.save(vacancy=vacancy)
+
+            # Send email notification
+            send_mail(
+                subject=f'Ответ на вакансию: {vacancy.title}',
+                message=(
+                    f'Имя отправителя: {application.applicant_name}\n'
+                    f'Телефон: {application.phone}\n'
+                    f'Тип отправителя: {application.get_type_display()}\n'
+                    f'Статус: {application.get_status_display()}'
+                ),
+                from_email=EMAIL_HOST_USER,
+                recipient_list=[EMAIL_HOST_USER],
+                fail_silently=False,
+            )
+
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class ApplicationViewSet(viewsets.ModelViewSet):
     serializer_class = ApplicationSerializer
-    
+
     def get_queryset(self):
         return Application.objects.filter(vacancy=self.kwargs.get('vacancy_pk'))
 
@@ -28,7 +49,7 @@ class ApplicationViewSet(viewsets.ModelViewSet):
     def update_status(self, request, pk=None, vacancy_pk=None):
         application = self.get_object()
         new_status = request.data.get('status')
-        
+
         if new_status in dict(Application.STATUS_CHOICES):
             application.status = new_status
             application.save()
