@@ -16,7 +16,6 @@ def yookassa_webhook_handler(request):
     try:
         notification_object = WebhookNotificationFactory().create(event_json)
         response_object = notification_object.object
-        print(json.loads(notification_object))
 
         print(f"Тип ивента: {notification_object.event}")
         print(f"Данные: {response_object}")
