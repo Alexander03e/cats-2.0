@@ -24,20 +24,31 @@ def yookassa_webhook_handler(request):
         if notification_object.event == WebhookNotificationEventType.PAYMENT_SUCCEEDED:
             metadata = response_object.metadata
             project_id = metadata.get('project_id')
+            donation_id = metadata.get('donation_id')
             amount = response_object.amount.value
 
+            # Update project amount
             project = Project.objects.get(id=project_id)
             project.current_amount += float(amount)
             project.save()
 
+            # Update donation status
+            donation = Donation.objects.get(id=donation_id)
+            donation.status = 'SUCCESS'
+            donation.save()
+
+        elif notification_object.event == WebhookNotificationEventType.PAYMENT_CANCELED:
+            metadata = response_object.metadata
+            donation_id = metadata.get('donation_id')
+
+            # Update donation status
+            donation = Donation.objects.get(id=donation_id)
+            donation.status = 'FAILED'
+            donation.save()
+
         elif notification_object.event == WebhookNotificationEventType.PAYMENT_WAITING_FOR_CAPTURE:
             # Handle waiting for capture logic if needed
             pass
-
-        elif notification_object.event == WebhookNotificationEventType.PAYMENT_CANCELED:
-            # Handle payment cancellation logic if needed
-            pass
-
 
     except Exception as e:
         # Log the error and return a failure response
