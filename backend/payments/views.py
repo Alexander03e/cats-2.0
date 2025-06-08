@@ -12,12 +12,15 @@ def yookassa_webhook_handler(request):
     # if not SecurityHelper().is_ip_trusted(ip):
     #     return HttpResponse(status=400)
     event_json = json.loads(request.body)
+    print(event_json)
     try:
         notification_object = WebhookNotificationFactory().create(event_json)
         response_object = notification_object.object
+        print(json.loads(notification_object))
 
         print(f"Тип ивента: {notification_object.event}")
         print(f"Данные: {response_object}")
+
         if notification_object.event == WebhookNotificationEventType.PAYMENT_SUCCEEDED:
             metadata = response_object.metadata
             project_id = metadata.get('project_id')
@@ -48,6 +51,7 @@ def yookassa_webhook_handler(request):
             pass
 
     except Exception as e:
+        print(e)
         # Log the error and return a failure response
         return HttpResponse(status=400)
 
