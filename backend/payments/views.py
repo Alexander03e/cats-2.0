@@ -16,6 +16,8 @@ def yookassa_webhook_handler(request):
         notification_object = WebhookNotificationFactory().create(event_json)
         response_object = notification_object.object
 
+        print(f"Тип ивента: {notification_object.event}")
+        print(f"Данные: {response_object}")
         if notification_object.event == WebhookNotificationEventType.PAYMENT_SUCCEEDED:
             metadata = response_object.metadata
             project_id = metadata.get('project_id')
