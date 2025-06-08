@@ -2,8 +2,10 @@ from django.http import HttpResponse
 from yookassa.domain.notification import WebhookNotificationEventType, WebhookNotificationFactory
 from projects.models import Project, Donation
 import json
+from django.views.decorators.csrf import csrf_exempt
 
 
+@csrf_exempt
 def yookassa_webhook_handler(request):
     # # Verify the request IP
     # ip = request.META.get('REMOTE_ADDR')
