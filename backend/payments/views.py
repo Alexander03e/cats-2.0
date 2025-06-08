@@ -3,6 +3,7 @@ from yookassa.domain.notification import WebhookNotificationEventType, WebhookNo
 from projects.models import Project, Donation
 import json
 from django.views.decorators.csrf import csrf_exempt
+from decimal import Decimal
 
 
 @csrf_exempt
@@ -24,11 +25,11 @@ def yookassa_webhook_handler(request):
             metadata = response_object.metadata
             project_id = metadata.get('project_id')
             donation_id = metadata.get('donation_id')
-            amount = response_object.amount.value
+            amount = Decimal(response_object.amount['value'])
 
             # Update project amount
             project = Project.objects.get(id=project_id)
-            project.current_amount += float(amount)
+            project.current_amount += amount
             project.save()
 
             # Update donation status
@@ -47,6 +48,7 @@ def yookassa_webhook_handler(request):
 
         elif notification_object.event == WebhookNotificationEventType.PAYMENT_WAITING_FOR_CAPTURE:
             # Handle waiting for capture logic if needed
+            
             pass
 
     except Exception as e:
