@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 from yookassa import Configuration
 
+# Установка конфигурации для работы с YooKassa
 Configuration.configure('403818', 'test_Qdl2Frci4T_y8fzi265HqZNskfF7KmDulWypvTzkqCI')
 
 # Рассылка на почту
@@ -56,6 +57,7 @@ INSTALLED_APPS = [
     'news',
     'system',
     'common',
+    'payments',
     # Third
     'rest_framework',
     'rest_framework.authtoken',
