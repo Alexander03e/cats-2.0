@@ -16,7 +16,7 @@ export const ProjectDonationPage = () => {
 
     const data = orderBy(
         initialData,
-        [item => item.status === EDonationStatus.PENDING, 'status'],
+        [item => item.status === EDonationStatus.SUCCESS, 'status'],
         ['desc', 'asc'],
     );
 

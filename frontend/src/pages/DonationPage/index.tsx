@@ -48,6 +48,7 @@ export const DonationPage = () => {
                     donor_name: formData.donor_name,
                     message: formData.message,
                     project: projectId,
+                    redirectUrl: `${window.location.origin}/projects/${projectId}`,
                 })
             ).data;
             if (response.confirmation_url) {

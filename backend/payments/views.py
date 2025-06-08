@@ -13,13 +13,10 @@ def yookassa_webhook_handler(request):
     # if not SecurityHelper().is_ip_trusted(ip):
     #     return HttpResponse(status=400)
     event_json = json.loads(request.body)
-    print(event_json)
+    
     try:
         notification_object = WebhookNotificationFactory().create(event_json)
         response_object = notification_object.object
-
-        print(f"Тип ивента: {notification_object.event}")
-        print(f"Данные: {response_object}")
 
         if notification_object.event == WebhookNotificationEventType.PAYMENT_SUCCEEDED:
             metadata = response_object.metadata
@@ -48,7 +45,7 @@ def yookassa_webhook_handler(request):
 
         elif notification_object.event == WebhookNotificationEventType.PAYMENT_WAITING_FOR_CAPTURE:
             # Handle waiting for capture logic if needed
-            
+
             pass
 
     except Exception as e:
