@@ -9,7 +9,7 @@ import { catsQueries } from '@/Shared/api/cats.ts';
 import { getBackendImage } from '@/Shared/utils/getImage.ts';
 import { Loader } from '@/Components/Loader';
 import { Filters } from '@/Components/Filters';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { clearObj } from '@/Shared/utils/common.ts';
 import { Error } from '@/Components/Error';
 import filter from 'lodash/filter';
@@ -18,6 +18,7 @@ import { Empty } from '@/Components/Empty';
 import { useMobile } from '@/Shared/hooks/useMobile.ts';
 import SVG from 'react-inlinesvg';
 import cn from 'classnames';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export const CatsPage = () => {
     const [searchValue, setSearchValue] = useState('');
@@ -42,6 +43,10 @@ export const CatsPage = () => {
         return filter(items, item => item.name.toLowerCase()?.includes(searchValue.toLowerCase()));
     }, [data, searchValue]);
 
+    useEffect(() => {
+        document.body.style.overflow = openedFilers ? 'hidden' : 'auto';
+    }, [openedFilers]);
+
     if (isError) {
         return <Error />;
     }
@@ -57,8 +62,8 @@ export const CatsPage = () => {
                     loading={isFetching}
                     onFilter={handleFiltersChange}
                     onSearch={setSearchValue}
-                    className={styles.filters}
                     title={'Поиск по кличке'}
+                    className={styles.filters}
                     filters={data?.filters}
                 />
             )}
@@ -69,24 +74,37 @@ export const CatsPage = () => {
                         <p>Фильтры</p>
                     </button>
 
-                    <div className={cn(styles.mobileFilters, { [styles.opened]: openedFilers })}>
-                        <div className={styles.filtersTop}>
-                            <p>Фильтры</p>
-                            <button onClick={() => setOpenedFilters(false)}>
-                                <SVG src={'/icons/close.svg'} />
-                            </button>
-                        </div>
-                        <Filters
-                            loading={isFetching}
-                            onFilter={handleFiltersChange}
-                            onSearch={setSearchValue}
-                            className={styles.filters}
-                            title={'Поиск по кличке'}
-                            filters={data?.filters}
-                        />
-                    </div>
+                    <AnimatePresence>
+                        {openedFilers && (
+                            <motion.div
+                                initial={{ x: '-100%' }}
+                                animate={{ x: 0 }}
+                                exit={{ x: '-100%' }}
+                                transition={{ duration: 0.3 }}
+                                className={cn(styles.mobileFilters, {
+                                    [styles.opened]: openedFilers,
+                                })}
+                            >
+                                <div className={styles.filtersTop}>
+                                    <p>Фильтры</p>
+                                    <button onClick={() => setOpenedFilters(false)}>
+                                        <SVG src={'/icons/close.svg'} />
+                                    </button>
+                                </div>
+                                <Filters
+                                    loading={isFetching}
+                                    onFilter={handleFiltersChange}
+                                    onSearch={setSearchValue}
+                                    className={styles.filters}
+                                    title={'Поиск по кличке'}
+                                    filters={data?.filters}
+                                />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
                 </>
             )}
+
             <div className={styles.content}>
                 {size(searchedValues) > 0 ? (
                     map(searchedValues, item => (

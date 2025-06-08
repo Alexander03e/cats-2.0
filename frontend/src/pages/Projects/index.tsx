@@ -10,11 +10,14 @@ import { useNavigate } from 'react-router-dom';
 import { Loader } from '@/Components/Loader';
 import size from 'lodash/size';
 import { Empty } from '@/Components/Empty';
+import filter from 'lodash/filter';
+import { EProjectStatus } from '@/Shared/types/projects.ts';
 
 export const ProjectsPage = () => {
     const title = 'Наши <span data-accent="true">проекты</span>';
-    const { data, isLoading } = useQuery(projectQueries.list());
+    const { data: initialData, isLoading } = useQuery(projectQueries.list());
     const navigate = useNavigate();
+    const data = filter(initialData, item => item.status !== EProjectStatus.END);
 
     if (isLoading) {
         return <Loader />;

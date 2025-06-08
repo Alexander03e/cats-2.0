@@ -49,7 +49,7 @@ export const Header = () => {
             )}
 
             <div className={styles.rest}>
-                <Link className={styles.helpLink} mode={'hash'} href={ANCHORS.HELP}>
+                <Link className={styles.helpLink} mode={'react'} href={PATHS.HELP}>
                     <Button className={styles.headerBtn}>Хочу помочь!</Button>
                 </Link>
                 {isMobile && <MobileBurger />}

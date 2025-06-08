@@ -89,9 +89,9 @@ export const Footer = () => {
                 <div className={styles.card}>
                     <h6>Информация</h6>
                     <div className={styles.nav}>
-                        <Link mode={'react'} href={PATHS.ARTICLES}>
-                            Полезные статьи
-                        </Link>
+                        {/*<Link mode={'react'} href={PATHS.ARTICLES}>*/}
+                        {/*    Полезные статьи*/}
+                        {/*</Link>*/}
                         <Link mode={'react'} href={'vacancy'}>
                             Вакансии
                         </Link>

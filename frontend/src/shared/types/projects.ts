@@ -1,7 +1,7 @@
 export enum EProjectStatus {
-    SOON = 'soon',
-    ACTIVE = 'active',
-    END = 'end',
+    SOON = 'SOON',
+    ACTIVE = 'ACTIVE',
+    END = 'END',
 }
 
 export interface IProjectItem {

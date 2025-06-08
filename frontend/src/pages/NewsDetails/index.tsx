@@ -6,9 +6,9 @@ import parse from 'html-react-parser';
 import { Loader } from '@/Components/Loader';
 import { Details } from '@/Components/DetailsTempalates';
 import styles from './NewsDetails.module.scss';
-import SVG from 'react-inlinesvg';
 import { useMobile } from '@/Shared/hooks/useMobile.ts';
 import { PATHS } from '@/Shared/consts';
+import { MobileTitle } from '@/Components/MobileSectionTitle';
 
 export const NewsDetails = () => {
     const { newId } = useParams();
@@ -26,22 +26,17 @@ export const NewsDetails = () => {
         return <Loader />;
     }
 
-    const MobileTitle = () => {
-        return (
-            <div className={styles.mobileTitle}>
-                <button onClick={handleBack}>
-                    <SVG src={'/icons/arrow-back-btn.svg'} />
-                </button>
-                <p>Ко всем новостям</p>
-            </div>
-        );
-    };
-
     if (!data) return null;
 
     return (
         <Section title={isMobile ? undefined : title}>
-            {isMobile && <MobileTitle />}
+            {isMobile && (
+                <MobileTitle
+                    className={styles.mobileTitle}
+                    onBack={handleBack}
+                    title={'Ко всем новостям'}
+                />
+            )}
             <div className={styles.newWrapper}>
                 <Details.Image images={data?.images} />
                 <div className={styles.contentWrapper}>{parse(data?.content)}</div>

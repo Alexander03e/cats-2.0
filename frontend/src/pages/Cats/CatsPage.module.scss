@@ -2,10 +2,13 @@
     display: flex;
     align-items: flex-start;
     gap: 20px;
+    position: relative;
 
     .filters {
         height: fit-content;
         width: 350px;
+        position: sticky;
+        top: 130px;
         min-width: 350px;
     }
 
@@ -13,6 +16,8 @@
         flex-direction: column;
 
         .filters {
+            position: relative;
+            top: 0;
             width: 100%;
         }
     }
@@ -83,11 +88,6 @@
     left: 0;
     z-index: 999;
     top: 0;
-    display: none;
-
-    &.opened {
-        display: block;
-    }
 
     .filters {
         height: 100%;
