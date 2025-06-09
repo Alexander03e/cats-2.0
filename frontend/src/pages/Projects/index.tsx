@@ -36,6 +36,7 @@ export const ProjectsPage = () => {
             <div className={styles.content}>
                 {map(data, (item, index) => (
                     <CatCard
+                        isProject
                         className={styles.card}
                         key={`projects-cat-card-item-${index}`}
                         title={item.title}

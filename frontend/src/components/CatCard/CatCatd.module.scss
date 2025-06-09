@@ -10,6 +10,20 @@
     aspect-ratio: 300 / 370;
 
     &.isProject {
+        .content {
+            gap: 20px !important;
+            max-height: 700px;
+            flex: 1;
+        }
+
+        .description {
+            flex: 1;
+        }
+
+        .bottomSlot {
+            padding: 0 !important;
+        }
+
         aspect-ratio: 300 / 500;
     }
 
@@ -120,9 +134,16 @@
 
     @media screen and (max-width: 768px) {
 
+        &.isProject {
+            .img {
+                height: 300px;
+            }
+
+            aspect-ratio: initial;
+        }
         .bottomSlot {
             padding-block: 24px 12px !important;
-            flex: 1;
+            //flex: 1;
             overflow: scroll;
         }
 
