@@ -8,8 +8,6 @@ import dayjs from 'dayjs';
 import { Loader } from '@/Components/Loader';
 import QRCode from 'react-qr-code';
 import parse from 'html-react-parser';
-import { BACKEND_URL } from '@/Shared/api';
-import { PATHS } from '@/Shared/consts';
 // const howToDonate = [
 //     '1. переведи по номеру ххххххххххх (Фамилия И.О.)',
 //     '2. нажми кнопку "Пожертвовать" в начале страницы',
@@ -27,6 +25,8 @@ export const ProjectDetails = () => {
     }
 
     if (!data) return null;
+
+    const QR_URL = window.location.href + '/donate/';
 
     return (
         <Details>
@@ -81,7 +81,7 @@ export const ProjectDetails = () => {
                                 <QRCode
                                     bgColor={'transparent'}
                                     fgColor={'rgba(103, 97, 205, 1)'}
-                                    value={BACKEND_URL + PATHS.PROJECT_DONATE.ABSOLUTE(data.id)}
+                                    value={QR_URL}
                                 />
                             </div>
                             <p className={styles.qrText}>
