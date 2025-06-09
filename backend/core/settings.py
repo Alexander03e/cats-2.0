@@ -37,30 +37,7 @@ SECRET_KEY = 'django-insecure-&3m$^*!v8xv1h2*_)=55i@@=9nyv&6e*ll0z_-&c-0tka#31ub
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['api.xn----8sbaaq9apcnab3aji.xn--p1ai', 'xn----8sbaaq9apcnab3aji.xn--p1ai', 'localhost']
-
-# Для работы через HTTPS
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-
-# Настройки CORS
-CORS_ALLOWED_ORIGINS = [
-    "https://xn----8sbaaq9apcnab3aji.xn--p1ai",
-    "https://www.xn----8sbaaq9apcnab3aji.xn--p1ai",
-    "https://api.xn----8sbaaq9apcnab3aji.xn--p1ai",
-    "https://localhost"
-]
-
-CSRF_TRUSTED_ORIGINS = [
-    "https://xn----8sbaaq9apcnab3aji.xn--p1ai",
-    "https://www.xn----8sbaaq9apcnab3aji.xn--p1ai",
-    "https://api.xn----8sbaaq9apcnab3aji.xn--p1ai",
-]
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
