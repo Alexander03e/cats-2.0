@@ -49,7 +49,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://xn----8sbaaq9apcnab3aji.xn--p1ai",
     "https://www.xn----8sbaaq9apcnab3aji.xn--p1ai",
     "https://api.xn----8sbaaq9apcnab3aji.xn--p1ai",
-    "localhost"
+    "https://localhost"
 ]
 
 CSRF_TRUSTED_ORIGINS = [
