@@ -26,7 +26,6 @@ export const NewsPage = () => {
             onOk: async () => {
                 try {
                     await deleteNew.mutateAsync(id);
-                    message.success('Новость успешно удалена');
                 } catch {
                     message.error('Ошибка при удалении новости');
                 }
@@ -59,7 +58,7 @@ export const NewsPage = () => {
                 if (!data) return;
 
                 return (
-                    <Flex gap={12} justify={'space-around'}>
+                    <Flex gap={12} justify={'right'}>
                         <AntButton
                             onClick={() => handleDelete(data.id)}
                             type={'primary'}

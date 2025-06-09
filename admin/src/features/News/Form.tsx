@@ -38,7 +38,8 @@ export const NewsForm = ({ initialValues, isEdit }: IProps) => {
                         values.cover_image[0].url,
                         values.cover_image[0].name || 'cover_image',
                     );
-                    formData.append('cover_image', coverImageBlob);
+                    const ext = values.cover_image?.[0]?.url?.split('.')?.pop();
+                    formData.append('cover_image', coverImageBlob, `image-new-${values.id}.${ext}`);
                 }
             }
 

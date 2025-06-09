@@ -40,7 +40,7 @@ export const ProjectForm = ({ initialValues, isEdit }: IProps) => {
                         values.cover_image[0].name || 'cover_image',
                     );
                     const ext = values.cover_image?.[0]?.url?.split('.')?.pop();
-                    formData.append('image', coverImageBlob, `image-vacancy-${values.id}.${ext}`);
+                    formData.append('image', coverImageBlob, `image-project-${values.id}.${ext}`);
                 }
             }
 

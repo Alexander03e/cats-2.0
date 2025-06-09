@@ -58,7 +58,7 @@ export const VacanciesPage = () => {
             title: 'Название',
             align: 'start',
             dataIndex: 'title',
-            width: 150,
+            width: 200,
             key: 'title',
         },
         {
@@ -100,12 +100,12 @@ export const VacanciesPage = () => {
         {
             title: '',
             align: 'center',
-            width: 40,
+            width: 100,
             render: (_value, data) => {
                 if (!data) return;
 
                 return (
-                    <Flex gap={12} justify={'space-around'}>
+                    <Flex gap={12} justify={'right'}>
                         <AntButton
                             onClick={() => handleDelete(data.id)}
                             type={'primary'}

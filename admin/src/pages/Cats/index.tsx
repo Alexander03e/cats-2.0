@@ -82,7 +82,7 @@ export const CatsPage = () => {
                 if (!data) return;
 
                 return (
-                    <Flex gap={12} justify={'space-around'}>
+                    <Flex gap={12} justify={'right'}>
                         <AntButton
                             onClick={() => handleDelete(data.id)}
                             type={'primary'}
