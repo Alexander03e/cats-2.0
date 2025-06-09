@@ -7,6 +7,7 @@ import { Button as AppButton } from '@/Components/Button';
 import { $api } from '@/Shared/api';
 import { EProjectStatus, IProjectItem } from '@/Shared/types/projects.ts';
 import { getProjectTranslate } from '@/Features/Project/getProjectStatus.tsx';
+import { createFileFromUrl } from '@/Shared/utils/createFileFromUrl.ts';
 
 const { TextArea } = Input;
 
@@ -18,12 +19,6 @@ interface IProps {
 export const ProjectForm = ({ initialValues, isEdit }: IProps) => {
     const [form] = Form.useForm<IProjectItem>();
     const [loading, setLoading] = useState(false);
-
-    const createFileFromUrl = async (url: string, fileName: string) => {
-        const response = await fetch(url);
-        const blob = await response.blob();
-        return new File([blob], fileName, { type: blob.type });
-    };
 
     const onFinish = async (values: any) => {
         try {
@@ -78,6 +73,7 @@ export const ProjectForm = ({ initialValues, isEdit }: IProps) => {
 
     useEffect(() => {
         if (initialValues) {
+            console.log(initialValues);
             const coverImage = initialValues.cover_image
                 ? [
                       {

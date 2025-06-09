@@ -4,6 +4,7 @@ import { Button as AppButton } from '@/Components/Button';
 import { useEffect, useState } from 'react';
 import { $api } from '@/Shared/api';
 import { IVacancyItem, EVacancyOpenedStatus } from '@/Shared/types/vacancies.ts';
+import { createFileFromUrl } from '@/Shared/utils/createFileFromUrl.ts';
 
 interface IProps {
     initialData?: IVacancyItem;
@@ -13,13 +14,6 @@ interface IProps {
 export const VacancyForm = ({ initialData, isEdit }: IProps) => {
     const [form] = Form.useForm<IVacancyItem>();
     const [loading, setLoading] = useState(false);
-
-    const createFileFromUrl = async (url: string, fileName: string) => {
-        const response = await fetch(url);
-        const blob = await response.blob();
-
-        return new File([blob], fileName, { type: blob.type });
-    };
 
     const onFinish = async (values: IVacancyItem) => {
         try {

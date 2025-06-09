@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query';
 import { catsQueries } from '@/Shared/api/cats.ts';
 import size from 'lodash/size';
 import { AttributeModal } from '@/Features/Cat/AttributeModal.tsx';
+import { createFileFromUrl } from '@/Shared/utils/createFileFromUrl.ts';
 
 const { TextArea } = Input;
 
@@ -47,12 +48,6 @@ export const CatForm = ({ initialData, isEdit }: IProps) => {
     );
 
     const catAttributes = attributesToOptions(attributesData);
-
-    const createFileFromUrl = async (url: string, fileName: string) => {
-        const response = await fetch(url);
-        const blob = await response.blob();
-        return new File([blob], fileName, { type: blob.type });
-    };
 
     const onFinish = async (values: any) => {
         try {

@@ -7,6 +7,7 @@ import 'react-quill-new/dist/quill.snow.css';
 import { Button as AppButton } from '@/Components/Button';
 import { $api } from '@/Shared/api';
 import { INewsItem } from '@/Shared/types/news.ts';
+import { createFileFromUrl } from '@/Shared/utils/createFileFromUrl.ts';
 
 const { TextArea } = Input;
 
@@ -19,12 +20,6 @@ export const NewsForm = ({ initialValues, isEdit }: IProps) => {
     const [form] = Form.useForm<INewsItem>();
     const [loading, setLoading] = React.useState(false);
     const [fileList] = useState([]);
-
-    const createFileFromUrl = async (url: string, fileName: string) => {
-        const response = await fetch(url);
-        const blob = await response.blob();
-        return new File([blob], fileName, { type: blob.type });
-    };
 
     const onFinish = async (values: any) => {
         try {
