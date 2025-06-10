@@ -9,8 +9,10 @@ from .models import CatAttribute
 from .serializers import CatAttributeSerializer
 from django.core.mail import send_mail
 
-# EMAIL_HOST_USER = 'krisanon24082017@gmail.com'
-EMAIL_HOST_USER = 'alexander034e@gmail.com'
+EMAIL_HOST_USER = 'krisanon24082017@gmail.com'
+
+
+# EMAIL_HOST_USER = 'alexander034e@gmail.com'
 
 
 class CatViewSet(viewsets.ModelViewSet):
@@ -74,9 +76,9 @@ class CatViewSet(viewsets.ModelViewSet):
                 recipient_list=[EMAIL_HOST_USER],
                 fail_silently=False,
             )
-            # Обновляем статус кошки
-            cat.status = 'RESERVED'
-            cat.save()
+            # # Обновляем статус кошки
+            # cat.status = 'RESERVED'
+            # cat.save()
 
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
