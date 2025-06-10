@@ -42,6 +42,7 @@ export const VacanciesPage = () => {
             <div className={styles.content}>
                 {map(vacancies, (item, index) => (
                     <MediaCard
+                        imgSrc={item.image}
                         title={item.title}
                         description={`Опубликована: ${dayjs(item.created_at).format('DD.MM.YYYY')}<br /> ${item.description}`}
                         key={`home-news-item-${index}`}

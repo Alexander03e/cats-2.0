@@ -29,7 +29,7 @@ export const VacancyDetails = () => {
         <Details className={styles.wrapper}>
             {isMobile && <MobileTitle onBack={handleBack} title={'Ко всем вакансиям'} />}
 
-            <Details.Image images={['/images/mock-cat.png']} />
+            <Details.Image images={[data?.image || '/images/mock-cat.png']} />
             <Details.Info title={data?.title}>
                 <p>Опубликована: {dayjs(data?.created_at).format('DD.MM.YYYY')}</p> <br />
                 {data?.description}

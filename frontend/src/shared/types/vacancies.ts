@@ -6,6 +6,7 @@ export enum EVacancyStatus {
 export interface IVacancyItem {
     id: number;
     title: string;
+    image?: string;
     description: string;
     status: EVacancyStatus;
     created_at: string;
