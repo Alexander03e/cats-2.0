@@ -6,7 +6,8 @@ from .serializers import VacancySerializer, ApplicationSerializer
 
 from django.core.mail import send_mail
 
-EMAIL_HOST_USER = 'krisanon24082017@gmail.com'
+# EMAIL_HOST_USER = 'krisanon24082017@gmail.com'
+EMAIL_HOST_USER = 'alexander034e@gmail.com'
 
 
 class VacancyViewSet(viewsets.ModelViewSet):
