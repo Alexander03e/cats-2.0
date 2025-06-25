@@ -11,6 +11,11 @@ export const Help = () => {
     const isMobile = useMobile();
 
     const navigate = useNavigate();
+
+    const navigateToHelp = () => {
+        navigate(PATHS.HELP);
+    };
+
     return (
         <Section id={ANCHORS.HELP} contentClass={styles.grid} title={title}>
             <div className={styles.mainImg}>
@@ -41,7 +46,7 @@ export const Help = () => {
                         <p>Стать хозяином и открыть свой дом для четвероногого друга</p>
                     </div>
 
-                    <Button variant={'yellow'} size={'small'}>
+                    <Button onClick={navigateToHelp} variant={'yellow'} size={'small'}>
                         Хочу помочь
                     </Button>
                 </div>
@@ -50,7 +55,7 @@ export const Help = () => {
                         <h5>Помочь вещами</h5>
                         <p>Стать хозяином и открыть свой дом для четвероногого друга</p>
                     </div>
-                    <Button variant={'yellow'} size={'small'}>
+                    <Button onClick={navigateToHelp} variant={'yellow'} size={'small'}>
                         Хочу помочь
                     </Button>
                 </div>

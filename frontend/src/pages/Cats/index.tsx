@@ -3,7 +3,7 @@ import { Section } from '@/Components/Section';
 import map from 'lodash/map';
 import { CatCard } from '@/Components/CatCard';
 import { useNavigate } from 'react-router-dom';
-import { PATHS } from '@/Shared/consts';
+import { PATHS, UNAVAILABLE_CATS } from '@/Shared/consts';
 import { useQuery } from '@tanstack/react-query';
 import { catsQueries } from '@/Shared/api/cats.ts';
 import { getBackendImage } from '@/Shared/utils/getImage.ts';
@@ -19,6 +19,7 @@ import { useMobile } from '@/Shared/hooks/useMobile.ts';
 import SVG from 'react-inlinesvg';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
+import { includes } from 'lodash';
 
 export const CatsPage = () => {
     const [searchValue, setSearchValue] = useState('');
@@ -37,7 +38,7 @@ export const CatsPage = () => {
     const navigate = useNavigate();
 
     const searchedValues = useMemo(() => {
-        const items = data?.results;
+        const items = filter(data?.results, item => !includes(UNAVAILABLE_CATS, item.status));
         if (!searchValue) return items;
 
         return filter(items, item => item.name.toLowerCase()?.includes(searchValue.toLowerCase()));

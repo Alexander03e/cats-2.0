@@ -4,11 +4,13 @@ import { CatCard } from '@/Components/CatCard';
 import styles from './OurCats.module.scss';
 import slice from 'lodash/slice';
 import { useNavigate } from 'react-router-dom';
-import { PATHS } from '@/Shared/consts';
+import { PATHS, UNAVAILABLE_CATS } from '@/Shared/consts';
 import { Button } from '@/Components/Button';
 import { useQuery } from '@tanstack/react-query';
 import { catsQueries } from '@/Shared/api/cats.ts';
 import { getBackendImage } from '@/Shared/utils/getImage.ts';
+import filter from 'lodash/filter';
+import { includes } from 'lodash';
 
 const LastItem = () => {
     const navigate = useNavigate();
@@ -37,18 +39,25 @@ export const OurCats = () => {
     return (
         <Section title={title}>
             <div className={styles.cards}>
-                {map(slice(data?.results, 0, 3), (item, index) => (
-                    <CatCard
-                        imgClass={styles.catImg}
-                        onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
-                        status={item.status}
-                        className={styles.card}
-                        title={item.name}
-                        description={item?.short_description}
-                        img={getBackendImage(item?.photos?.[0])}
-                        key={`our-cats-item-${index}`}
-                    />
-                ))}
+                {map(
+                    slice(
+                        filter(data?.results, item => !includes(UNAVAILABLE_CATS, item.status)),
+                        0,
+                        3,
+                    ),
+                    (item, index) => (
+                        <CatCard
+                            imgClass={styles.catImg}
+                            onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
+                            status={item.status}
+                            className={styles.card}
+                            title={item.name}
+                            description={item?.short_description}
+                            img={getBackendImage(item?.photos?.[0])}
+                            key={`our-cats-item-${index}`}
+                        />
+                    ),
+                )}
                 <LastItem />
             </div>
         </Section>

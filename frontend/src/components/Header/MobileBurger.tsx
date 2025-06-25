@@ -2,11 +2,11 @@ import styles from './Header.module.scss';
 import { Link } from '@/Components/Link';
 import { ANCHORS, PATHS } from '@/Shared/consts';
 import { NavLink } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { forwardRef, useCallback, useEffect, useImperativeHandle, useState } from 'react';
 import SVG from 'react-inlinesvg';
 import { AnimatePresence, motion } from 'framer-motion';
 
-export const MobileBurger = () => {
+export const MobileBurger = forwardRef((_, ref) => {
     const [isOpen, setIsOpen] = useState(false);
     useEffect(() => {
         if (isOpen) {
@@ -15,6 +15,10 @@ export const MobileBurger = () => {
             document.body.style.overflow = '';
         }
     }, [isOpen]);
+
+    useImperativeHandle(ref, () => ({
+        close: () => setIsOpen(false),
+    }));
 
     const handleNavigationClick = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
         if (e.target instanceof HTMLAnchorElement || e.target instanceof HTMLButtonElement) {
@@ -72,4 +76,4 @@ export const MobileBurger = () => {
             </AnimatePresence>
         </>
     );
-};
+});

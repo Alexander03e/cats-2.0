@@ -1,4 +1,5 @@
 import { ISystemInfo } from '@/Shared/types';
+import { ECatStatus } from '@/Shared/types/cats.ts';
 
 export const PATHS = {
     HOME: '/',
@@ -63,3 +64,5 @@ export const DEFAULT_SYSTEM_INFO = {
     vk_link: 'https://vk.com/priutsamara',
     telegram_link: 'https://t.me/kotodom_samara',
 } as ISystemInfo;
+
+export const UNAVAILABLE_CATS = [ECatStatus.UNAVAILABLE, ECatStatus.ADOPTED];

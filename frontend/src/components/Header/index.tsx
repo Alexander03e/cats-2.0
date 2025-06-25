@@ -7,14 +7,19 @@ import { Link } from '@/Components/Link';
 import { Dropdown } from '@/Components/Dropdown';
 import { useMobile } from '@/Shared/hooks/useMobile.ts';
 import { MobileBurger } from '@/Components/Header/MobileBurger.tsx';
+import { useRef } from 'react';
 
 export const Header = () => {
     const isMobile = useMobile(1200);
-    console.log(isMobile);
+
+    const burgerRef = useRef(null);
+
     return (
         <header className={styles.wrapper}>
             <div className={styles.logo}>
-                <NavLink to={PATHS.HOME}>
+                {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
+                {/*@ts-expect-error*/}
+                <NavLink onClick={() => burgerRef?.current?.close()} to={PATHS.HOME}>
                     <SVG src={'/icons/logo.svg'} />
                 </NavLink>
             </div>
@@ -52,7 +57,7 @@ export const Header = () => {
                 <Link className={styles.helpLink} mode={'react'} href={PATHS.HELP}>
                     <Button className={styles.headerBtn}>Хочу помочь!</Button>
                 </Link>
-                {isMobile && <MobileBurger />}
+                {isMobile && <MobileBurger ref={burgerRef} />}
             </div>
         </header>
     );
