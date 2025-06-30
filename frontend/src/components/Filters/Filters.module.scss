@@ -145,3 +145,10 @@
     cursor: pointer;
     position: relative;
 }
+
+.mobileButtons {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

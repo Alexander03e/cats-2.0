@@ -19,7 +19,7 @@ import { useMobile } from '@/Shared/hooks/useMobile.ts';
 import SVG from 'react-inlinesvg';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
-import { includes } from 'lodash';
+import { includes, split, values } from 'lodash';
 
 export const CatsPage = () => {
     const [searchValue, setSearchValue] = useState('');
@@ -32,6 +32,7 @@ export const CatsPage = () => {
     const params = clearObj(filters);
     const { data, isLoading, isFetching, isError } = useQuery(catsQueries.list(params));
 
+    console.log(filters);
     const handleFiltersChange = (obj: Record<string, string>) => {
         setFilters(obj);
     };
@@ -47,6 +48,8 @@ export const CatsPage = () => {
     useEffect(() => {
         document.body.style.overflow = openedFilers ? 'hidden' : 'auto';
     }, [openedFilers]);
+
+    const filtersSize = size(map(values(filters), item => split(item, ',')).flat());
 
     if (isError) {
         return <Error />;
@@ -72,36 +75,43 @@ export const CatsPage = () => {
                 <>
                     <button className={styles.filtersBtn} onClick={() => setOpenedFilters(true)}>
                         <SVG src={'/icons/filters.svg'} />
-                        <p>Фильтры</p>
+                        <p>
+                            Фильтры{' '}
+                            {filtersSize > 0 && (
+                                <span className={styles.counter}>{filtersSize}</span>
+                            )}
+                        </p>
                     </button>
 
                     <AnimatePresence>
-                        {openedFilers && (
-                            <motion.div
-                                initial={{ x: '-100%' }}
-                                animate={{ x: 0 }}
-                                exit={{ x: '-100%' }}
-                                transition={{ duration: 0.3 }}
-                                className={cn(styles.mobileFilters, {
-                                    [styles.opened]: openedFilers,
-                                })}
-                            >
-                                <div className={styles.filtersTop}>
-                                    <p>Фильтры</p>
-                                    <button onClick={() => setOpenedFilters(false)}>
-                                        <SVG src={'/icons/close.svg'} />
-                                    </button>
-                                </div>
-                                <Filters
-                                    loading={isFetching}
-                                    onFilter={handleFiltersChange}
-                                    onSearch={setSearchValue}
-                                    className={styles.filters}
-                                    title={'Поиск по кличке'}
-                                    filters={data?.filters}
-                                />
-                            </motion.div>
-                        )}
+                        <motion.div
+                            initial={{ x: '-100%' }}
+                            animate={{ x: openedFilers ? 0 : '-100%' }}
+                            exit={{ x: '-100%' }}
+                            transition={{ duration: 0.3 }}
+                            className={cn(styles.mobileFilters, {
+                                [styles.opened]: openedFilers,
+                            })}
+                        >
+                            <div className={styles.filtersTop}>
+                                <p>Фильтры</p>
+                                <button onClick={() => setOpenedFilters(false)}>
+                                    <SVG src={'/icons/close.svg'} />
+                                </button>
+                            </div>
+                            <Filters
+                                isMobile
+                                onSubmitClick={() => {
+                                    setOpenedFilters(false);
+                                }}
+                                loading={isFetching}
+                                onFilter={handleFiltersChange}
+                                onSearch={setSearchValue}
+                                className={styles.filters}
+                                title={'Поиск по кличке'}
+                                filters={data?.filters}
+                            />
+                        </motion.div>
                     </AnimatePresence>
                 </>
             )}
