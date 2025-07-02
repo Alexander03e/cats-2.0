@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 from authentication.urls import router as authRouter
 from cats.urls import router as catsRouter
 from rest_framework import permissions
+
+from projects.views import MoneySupportView
 from stories.urls import router as storiesRouter
 from news.urls import router as newsRouter
 from drf_yasg.views import get_schema_view
@@ -53,6 +55,7 @@ urlpatterns = [
     path('projects/', include("projects.urls")),
     path('vacancies/', include("vacancies.urls")),
     path('payments/', include('payments.urls')),
+    path('money-support/', MoneySupportView.as_view(), name='money-support'),
 ]
 
 if settings.DEBUG:

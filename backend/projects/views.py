@@ -4,10 +4,9 @@ from .models import Project, Donation
 from .serializers import ProjectSerializer, DonationSerializer
 from rest_framework.response import Response
 import json
-from django.http import HttpResponse
 from yookassa import Configuration, Payment
-from yookassa.domain.notification import WebhookNotificationEventType, WebhookNotificationFactory
-from yookassa.domain.common import SecurityHelper
+from rest_framework.views import APIView
+from rest_framework import status
 
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -51,3 +50,40 @@ class DonationViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return Donation.objects.filter(project_id=self.kwargs.get('project_pk'))
+
+
+
+class MoneySupportView(APIView):
+    def post(self, request):
+        name = request.data.get('name')
+        amount = request.data.get('amount')
+        message = request.data.get('message', '')
+        redirect_url = request.data.get('redirectUrl', 'https://котодом-самара.рф')
+
+        if not name or not amount:
+            return Response(
+                {"error": "Name and amount are required."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        try:
+            # Create payment in YooKassa
+            payment = Payment.create({
+                "amount": {
+                    "value": str(amount),
+                    "currency": "RUB"
+                },
+                "confirmation": {
+                    "type": "redirect",
+                    "return_url": redirect_url
+                },
+                "description": f"Support donation from {name}: {message}"
+            })
+
+            confirmation_url = payment.confirmation.confirmation_url
+            return Response({"confirmation_url": confirmation_url}, status=status.HTTP_201_CREATED)
+        except Exception as e:
+            return Response(
+                {"error": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
