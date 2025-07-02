@@ -2,6 +2,9 @@ import { Section } from '@/Components/Section';
 import styles from './HowToHelp.module.scss';
 import { ReactNode } from 'react';
 import { Button } from '@/Components/Button';
+import { HelpPopup } from '@/Components/HelpPopup';
+import { useNavigate } from 'react-router-dom';
+import { PATHS } from '@/Shared/consts';
 
 interface ICardProps {
     title: string;
@@ -20,29 +23,37 @@ const Card = ({ Button, desc, title }: ICardProps) => {
 
 export const HowToHelp = () => {
     const title = 'Как нам можно <span data-accent="true">помочь?</span>';
+    const navigate = useNavigate();
+
+    const navigateToSupport = () => navigate(PATHS.SUPPORT_MONEY);
+    const navigateToDeveloping = () => navigate(PATHS.IN_DEVELOP);
 
     return (
         <Section title={title} contentClass={styles.content}>
             <Card
                 title={'Помочь вещами'}
                 desc={
-                    'Корм, лекарства, наполнители, пелёнки и так далее.\n' +
-                    '\n' +
-                    'Полный список нужд можете уточнить у администратора.'
+                    'Если у вас есть ненужные вещи, которые нам могут пригодиться, или вы хотите сами выбрать, что отправить, ознакомьтесь со списком нужд.'
                 }
-                Button={<Button>Связаться</Button>}
+                Button={
+                    <HelpPopup
+                        renderTrigger={({ onClick }) => (
+                            <Button onClick={onClick}>Связаться</Button>
+                        )}
+                    />
+                }
             />
             <Card
                 title={'Финансовая помощь'}
                 desc={
-                    'Помогая нам обеспечить питомцев всем необходимым: кормом, ветеринарными услугами и местами для их пристройства.'
+                    'Помогая нам обеспечить животных всем нужным: питанием, ветеринарной помощью и местами для их размещения.'
                 }
-                Button={<Button>Хочу помочь</Button>}
+                Button={<Button onClick={navigateToSupport}>Хочу помочь</Button>}
             />
             <Card
                 title={'Перевод по СБП'}
                 desc={'Нажмите кнопку отправить, отсканируйте QR код и переведите любую сумму.'}
-                Button={<Button>Отправить</Button>}
+                Button={<Button onClick={navigateToDeveloping}>Отправить</Button>}
             />
         </Section>
     );

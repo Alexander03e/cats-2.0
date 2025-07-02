@@ -1,12 +1,20 @@
 import styles from './Empty.module.scss';
 import SVG from 'react-inlinesvg';
+import { ReactNode } from 'react';
 
-export const Empty = () => {
+interface IProps {
+    title?: string;
+    children?: ReactNode;
+}
+
+export const Empty = ({ title, children }: IProps) => {
     return (
         <div className={styles.wrapper}>
-            <h3>Ничего не найдено :(</h3>
+            <h3>{title || `Ничего не найдено :(`}</h3>
 
             <SVG src={'/icons/empty.svg'} />
+
+            {children}
         </div>
     );
 };

@@ -13,6 +13,16 @@ html {
     //scroll-behavior: smooth;
 }
 
+
+.ReactModal__Overlay {
+  background: rgba(0, 0, 0, 0.7) !important
+}
+
+.ReactModalPortal {
+    z-index: 999;
+    position: relative;
+}
+
 // INPUT AUTOFILL FIX
 input, textarea {
     &:-webkit-autofill {

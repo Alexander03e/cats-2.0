@@ -40,3 +40,14 @@
         }
     }
 }
+
+.backBtn {
+    height: fit-content;
+    display: inline-flex;
+    align-self: center;
+
+    svg {
+        width: 32px;
+        height: 32px;
+    }
+}

@@ -43,7 +43,10 @@ export const Help = () => {
                 <div className={cn(styles.gridItem, styles.money)}>
                     <div className={styles.top}>
                         <h5>Помочь финансово</h5>
-                        <p>Стать хозяином и открыть свой дом для четвероногого друга</p>
+                        <p>
+                            Помогая нам обеспечить животных всем нужным: питанием, ветеринарной
+                            помощью и местами для их размещения.
+                        </p>
                     </div>
 
                     <Button onClick={navigateToHelp} variant={'yellow'} size={'small'}>
@@ -53,7 +56,10 @@ export const Help = () => {
                 <div className={cn(styles.gridItem, styles.stuff)}>
                     <div className={styles.top}>
                         <h5>Помочь вещами</h5>
-                        <p>Стать хозяином и открыть свой дом для четвероногого друга</p>
+                        <p>
+                            Если у вас есть ненужные вещи, которые нам могут пригодиться, или вы
+                            хотите сами выбрать, что отправить, ознакомьтесь со списком нужд.
+                        </p>
                     </div>
                     <Button onClick={navigateToHelp} variant={'yellow'} size={'small'}>
                         Хочу помочь
@@ -62,7 +68,10 @@ export const Help = () => {
                 <div className={cn(styles.gridItem, styles.question)}>
                     <div className={styles.top}>
                         <h5>У вас есть вопрос?</h5>
-                        <p>Стать хозяином и открыть свой дом для четвероногого друга</p>
+                        <p>
+                            Если у вас есть вопросы о поддержке животных или нашей организации, не
+                            стесняйтесь связаться с нами.
+                        </p>
                     </div>
                     <Button onClick={() => navigate(PATHS.CONTACTS)} size={'small'}>
                         Связаться

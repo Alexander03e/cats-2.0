@@ -17,6 +17,8 @@ import { NewsDetails } from '@/Pages/NewsDetails';
 import { HistoryPage } from '@/Pages/History';
 import { HistoryDetails } from '@/Pages/HistoryDetails';
 import { DonationPage } from '@/Pages/DonationPage';
+import { MoneySupport } from '@/Pages/MoneySupport';
+import { InDevelop } from '@/Components/InDevelop';
 
 export const AppRoutes = () => {
     // Роутинг приложения
@@ -27,7 +29,10 @@ export const AppRoutes = () => {
             <Route element={<Layout />}>
                 <Route path={PATHS.HOME} element={<HomePage />} />
                 <Route path={PATHS.CONTACTS} element={<ContactsPage />} />
+                <Route path={PATHS.SUPPORT_MONEY} element={<MoneySupport />} />
+                <Route path={PATHS.IN_DEVELOP} element={<InDevelop />} />
                 <Route path={PATHS.HELP} element={<HowToHelp />} />
+
                 {/* Истории успеха*/}
                 <Route path={PATHS.HISTORY} element={<HistoryPage />} />
                 <Route path={PATHS.HISTORY_DETAILS.INDEX} element={<HistoryDetails />} />

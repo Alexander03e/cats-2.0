@@ -7,6 +7,8 @@ export const PATHS = {
     DROPPED: '/dropped',
     TAKE_CAT: '/take-cat',
     HELP: '/help',
+    SUPPORT_MONEY: '/money-support',
+    IN_DEVELOP: '/developing',
     FAQ: '/faq',
     ABOUT: '/about',
     CONTACTS: '/contacts',

@@ -38,26 +38,32 @@ export const NewsPage = () => {
                 <Empty />
             ) : (
                 <div className={styles.content}>
-                    {map(visibleItems, (item, index) => (
-                        <CatCard
-                            title={item.title}
-                            img={item.cover_image_url}
-                            description={item.description}
-                            className={styles.card}
-                            bottomClass={styles.cardBottom}
-                            contentClass={styles.cardContent}
-                            key={`news-card-${index}`}
-                            bottomSlot={
-                                <Button
-                                    onClick={() => navigate(PATHS.NEWS_DETAILS.ABSOLUTE(item.id))}
-                                    fullWidth
-                                    variant={'light'}
-                                >
-                                    Читать
-                                </Button>
-                            }
-                        />
-                    ))}
+                    {map(
+                        [...visibleItems, ...visibleItems, ...visibleItems, ...visibleItems],
+                        (item, index) => (
+                            <CatCard
+                                title={item.title}
+                                img={item.cover_image_url}
+                                description={item.description}
+                                imgClass={styles.imgItem}
+                                className={styles.card}
+                                bottomClass={styles.cardBottom}
+                                contentClass={styles.cardContent}
+                                key={`news-card-${index}`}
+                                bottomSlot={
+                                    <Button
+                                        onClick={() =>
+                                            navigate(PATHS.NEWS_DETAILS.ABSOLUTE(item.id))
+                                        }
+                                        fullWidth
+                                        variant={'light'}
+                                    >
+                                        Читать
+                                    </Button>
+                                }
+                            />
+                        ),
+                    )}
                 </div>
             )}
             {size(data) > visibleCount && (

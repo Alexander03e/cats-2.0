@@ -14,7 +14,7 @@ export const FaqItem = ({ body, title }: IFaqItemProps) => {
             className={styles.wrapper}
             renderHeader={({ isActive, toggle }) => (
                 <div className={cn(styles.header, { [styles.active]: isActive })} onClick={toggle}>
-                    <h6>{title}</h6>
+                    <h6 style={{ marginRight: '10px' }}>{title}</h6>
                     <div className={styles.icon}>
                         <SVG src={'/icons/plus.svg'} />
                     </div>

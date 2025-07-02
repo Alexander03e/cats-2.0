@@ -7,6 +7,7 @@
     margin-bottom: 16px;
 
     .card {
+        min-height: 620px;
         & > div {
             height: 100%;
         }
@@ -22,7 +23,8 @@
     }
 
     .cardBottom {
-        padding-block: 48px 0 !important;
+        padding-block: 0!important;
+        margin-top: 10px;
     }
 
     @media screen and (max-width: 1200px) {
@@ -31,6 +33,10 @@
 
     @media screen and (max-width: 768px) {
         grid-template-columns: 1fr;
+
+        .card {
+            min-height: 500px;
+        }
 
         .cardBottom {
             button {

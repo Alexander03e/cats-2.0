@@ -6,7 +6,7 @@
 
     .card, .lastItem {
 
-        aspect-ratio: 370/ 470;
+        aspect-ratio: 3 / 4;
         max-width: calc(100% / 4 - 20px) !important;
         height: 100%;
     }
@@ -34,7 +34,7 @@
         }
     }
 
-    @media screen and (max-width: 450px) {
+    @media screen and (max-width: 560px) {
         gap: 10px !important;
         .card, .lastItem {
             max-width: 100% !important;
