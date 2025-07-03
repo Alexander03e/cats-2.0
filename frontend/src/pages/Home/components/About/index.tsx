@@ -5,7 +5,7 @@ export const About = () => {
         <div id={'#about'} className={styles.wrapper}>
             <div className={styles.text}>
                 <h1>
-                    <span>КотоДом</span> — частный приют в Самаре
+                    <span>КотоДом</span> — частный приют в&nbsp;Самаре
                 </h1>
                 <p>
                     <strong>«КотоДом» — это независимый благотворительный проект из Самары,</strong>{' '}
