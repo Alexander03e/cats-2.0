@@ -12,6 +12,10 @@
     &:not(&.isProject) {
         aspect-ratio: initial!important;
 
+        .content {
+            height: 40%;
+        }
+
         .img {
             height: 350px;
         }

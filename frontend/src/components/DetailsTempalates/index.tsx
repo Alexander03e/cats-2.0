@@ -108,7 +108,7 @@ Details.Image = ({ images, needBackendSuffixImg }: IImageProps) => {
             {imagesIsArray && (
                 <div className={styles.arrayImage}>
                     <div className={styles.mainImage}>
-                        <img style={{ objectFit: 'contain' }} src={currentImage} />
+                        <img src={currentImage} />
                     </div>
 
                     <div className={styles.scrollWrapper}>

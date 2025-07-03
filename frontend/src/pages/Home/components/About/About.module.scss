@@ -1,6 +1,6 @@
 .wrapper {
     display: flex;
-    padding: 51.5px 137px;
+    padding: 51.5px 20px 51.5px 137px;
     gap: 20px;
     background: var(--light-accent-color);
     margin-inline: calc(-1 * var(--container-padding));
@@ -39,8 +39,8 @@
         .img {
             width: 473px;
             height: 530px;
-            margin-top: 146px;
-            margin-right: 166px;
+            margin-top: 100px;
+            margin-right: 100px;
 
             img {
                 width: 100%;
@@ -56,8 +56,8 @@
         position: absolute;
         top: 0;
         right: 0;
-        width: 362px;
-        height: 352px;
+        width: 300px;
+        height: 290px;
 
         svg {
             width: 100%;
@@ -112,7 +112,7 @@
         .image {
 
             .img {
-                width: 300px;
+                width: 100%;
                 margin-top: 82px;
                 padding: 0!important;
                 height: 350px;
