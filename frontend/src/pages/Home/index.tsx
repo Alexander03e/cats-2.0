@@ -5,6 +5,7 @@ import { Help } from '@/Pages/Home/components/Help';
 import { News } from '@/Pages/Home/components/News';
 import { FAQ } from '@/Pages/Home/components/FAQ';
 import { HomeSlider } from '@/Pages/Home/components/Slider';
+import { About } from '@/Pages/Home/components/About';
 
 export const HomePage = () => {
     return (
@@ -15,6 +16,7 @@ export const HomePage = () => {
             <Help />
             <News />
             <FAQ />
+            <About />
         </div>
     );
 };

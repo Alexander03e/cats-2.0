@@ -40,7 +40,9 @@ export const Header = () => {
                                 <Link mode={'react'} href={PATHS.NEWS}>
                                     Новости
                                 </Link>
-                                <Link mode={'hash'}>О приюте</Link>
+                                <Link mode={'hash'} href={'#about'}>
+                                    О приюте
+                                </Link>
                             </div>
                         }
                     >

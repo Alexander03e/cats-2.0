@@ -84,7 +84,7 @@
     position: fixed;
     background-color: white;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     left: 0;
     overflow: auto;
     z-index: 999;
@@ -135,6 +135,7 @@
     color: white;
     font-size: 8px;
     display: inline-flex;
+    transform: translateY(-2px);
     align-items: center;
     justify-content: center;
     width: 16px;

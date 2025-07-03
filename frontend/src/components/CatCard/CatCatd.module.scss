@@ -9,6 +9,35 @@
     box-shadow: 0px 0px 15.9px 0px rgba(229, 229, 229, 1);
     aspect-ratio: 3 / 4;
 
+    &:not(&.isProject) {
+        aspect-ratio: initial!important;
+
+        .img {
+            height: 350px;
+        }
+        .description {
+            //height: 60px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -webkit-line-clamp: 4;
+            min-height: 80px;
+            -webkit-box-orient: vertical;
+            display: -webkit-box;
+
+        }
+
+        @media screen and (max-width: 768px) {
+            .description {
+                -webkit-line-clamp: 3;
+                min-height: initial;
+            }
+
+            .img {
+                height: 313px;
+            }
+        }
+    }
+
     &.isProject {
         .content {
             gap: 20px !important;
