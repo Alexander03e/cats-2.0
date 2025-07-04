@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styles from './ProjectsPage.module.scss';
 import { Section } from '@/Components/Section';
 import map from 'lodash/map';
@@ -12,12 +13,19 @@ import size from 'lodash/size';
 import { Empty } from '@/Components/Empty';
 import filter from 'lodash/filter';
 import { EProjectStatus } from '@/Shared/types/projects.ts';
+import { Button } from '@/Components/Button';
 
 export const ProjectsPage = () => {
     const title = 'Наши <span data-accent="true">проекты</span>';
     const { data: initialData, isLoading } = useQuery(projectQueries.list());
     const navigate = useNavigate();
     const data = filter(initialData, item => item.status !== EProjectStatus.END);
+
+    const [visibleCount, setVisibleCount] = useState(6);
+
+    const handleShowMore = () => {
+        setVisibleCount(prevCount => prevCount + 6);
+    };
 
     if (isLoading) {
         return <Loader />;
@@ -34,7 +42,7 @@ export const ProjectsPage = () => {
     return (
         <Section title={title}>
             <div className={styles.content}>
-                {map(data, (item, index) => (
+                {map(data.slice(0, visibleCount), (item, index) => (
                     <CatCard
                         isProject
                         className={styles.card}
@@ -53,6 +61,11 @@ export const ProjectsPage = () => {
                     />
                 ))}
             </div>
+            {visibleCount < size(data) && (
+                <Button variant={'light'} className={styles.showMoreBtn} onClick={handleShowMore}>
+                    Показать ещё
+                </Button>
+            )}
         </Section>
     );
 };

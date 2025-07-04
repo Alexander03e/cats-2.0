@@ -20,19 +20,19 @@ import SVG from 'react-inlinesvg';
 import cn from 'classnames';
 import { AnimatePresence, motion } from 'framer-motion';
 import { includes, split, values } from 'lodash';
+import { Button } from '@/Components/Button';
 
 export const CatsPage = () => {
     const [searchValue, setSearchValue] = useState('');
     const title = 'Наши <span data-accent="true">подопечные</span>';
     const [openedFilers, setOpenedFilters] = useState(false);
     const isMobile = useMobile();
-
     const [filters, setFilters] = useState<Record<string, string>>({});
+    const [visibleCount, setVisibleCount] = useState(6);
 
     const params = clearObj(filters);
     const { data, isLoading, isFetching, isError } = useQuery(catsQueries.list(params));
 
-    console.log(filters);
     const handleFiltersChange = (obj: Record<string, string>) => {
         setFilters(obj);
     };
@@ -44,6 +44,10 @@ export const CatsPage = () => {
 
         return filter(items, item => item.name.toLowerCase()?.includes(searchValue.toLowerCase()));
     }, [data, searchValue]);
+
+    const handleShowMore = () => {
+        setVisibleCount(prevCount => prevCount + 6); // Increase visible items by 6
+    };
 
     useEffect(() => {
         document.body.style.overflow = openedFilers ? 'hidden' : 'auto';
@@ -116,23 +120,44 @@ export const CatsPage = () => {
                 </>
             )}
 
-            <div className={styles.content}>
-                {size(searchedValues) > 0 ? (
-                    map(searchedValues, item => (
-                        <CatCard
-                            onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
-                            status={item.status}
-                            className={styles.card}
-                            title={item.name}
-                            description={item?.short_description}
-                            img={getBackendImage(item?.photos?.[0])}
-                            key={`our-cats-item-${item.id}`}
-                        />
-                    ))
-                ) : (
-                    <Empty />
-                )}
-            </div>
+            {size(searchedValues) > 0 ? (
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: 12,
+                    }}
+                >
+                    <div className={styles.content}>
+                        <>
+                            {map(searchedValues.slice(0, visibleCount), item => (
+                                <CatCard
+                                    onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
+                                    status={item.status}
+                                    className={styles.card}
+                                    title={item.name}
+                                    description={item?.short_description}
+                                    img={getBackendImage(item?.photos?.[0])}
+                                    key={`our-cats-item-${item.id}`}
+                                />
+                            ))}
+                        </>
+                    </div>
+                    {visibleCount < size(searchedValues) && (
+                        <Button
+                            style={{ margin: '0 auto' }}
+                            variant={'light'}
+                            className={styles.showMoreBtn}
+                            onClick={handleShowMore}
+                        >
+                            Показать ещё
+                        </Button>
+                    )}
+                </div>
+            ) : (
+                <Empty />
+            )}
         </Section>
     );
 };

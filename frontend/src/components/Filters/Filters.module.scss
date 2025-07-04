@@ -152,3 +152,8 @@
     flex-direction: column;
     gap: 4px;
 }
+
+.resetBtnClick {
+    background: transparent!important;
+    border: 3px solid var(--accent-color)
+}

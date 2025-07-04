@@ -191,10 +191,14 @@ export const Filters = ({
                         ))}
                 </div>
                 <div className={styles.mobileButtons}>
-                    <Button onClick={handleResetAll} variant='default'>
+                    <Button onClick={handleApplyFilters}>Применить</Button>
+                    <Button
+                        className={styles.resetBtnClick}
+                        onClick={handleResetAll}
+                        variant='light'
+                    >
                         Сбросить
                     </Button>
-                    <Button onClick={handleApplyFilters}>Применить</Button>
                 </div>
             </div>
         );

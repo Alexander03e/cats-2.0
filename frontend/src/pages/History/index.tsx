@@ -14,12 +14,20 @@ import { Loader } from '@/Components/Loader';
 import dayjs from 'dayjs';
 import { Empty } from '@/Components/Empty';
 
+import { useState } from 'react';
+import { Button } from '@/Components/Button';
+
 export const HistoryPage = () => {
     const title = 'Уже <span data-accent="true">дома</span>';
     const { data, isLoading } = useQuery(catsQueries.list());
     const navigate = useNavigate();
 
     const filteredData = filter(data?.results, { status: ECatStatus.ADOPTED });
+    const [visibleCount, setVisibleCount] = useState(6);
+
+    const handleShowMore = () => {
+        setVisibleCount(prevCount => prevCount + 6);
+    };
 
     if (isLoading) {
         return <Loader />;
@@ -36,7 +44,7 @@ export const HistoryPage = () => {
     return (
         <Section title={title}>
             <div className={styles.content}>
-                {map(filteredData, (item, index) => (
+                {map(filteredData.slice(0, visibleCount), (item, index) => (
                     <CatCard
                         onClick={() => navigate(PATHS.CATS_DETAILS.ABSOLUTE(item.id))}
                         status={ECatStatus.AVAILABLE}
@@ -51,6 +59,16 @@ export const HistoryPage = () => {
                         title={item.name}
                     />
                 ))}
+                {visibleCount < size(filteredData) && (
+                    <Button
+                        style={{ margin: '0 auto' }}
+                        variant={'light'}
+                        className={styles.showMoreBtn}
+                        onClick={handleShowMore}
+                    >
+                        Показать ещё
+                    </Button>
+                )}
             </div>
         </Section>
     );
